@@ -1,0 +1,17 @@
+{
+  "name": "firestore-upload",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "expo": "^53.0.19",
+    "firebase-admin": "^13.4.0",
+    "native-notify": "^4.0.9"
+  }
+}
