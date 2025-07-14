@@ -1,3 +1,4 @@
+// src/main.js
 import React, { StrictMode, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -8,9 +9,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './index.css';
 import './i18n';
-import {AuthProvider} from "./context/AuthContext.jsx"
-
-
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 // ✅ Setup AOS inside a wrapper component
 const AppInitializer = () => {
@@ -21,13 +20,18 @@ const AppInitializer = () => {
   return <App />;
 };
 
-// ✅ Final render including AuthProvider
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
-      <AuthProvider/>
-        <AppInitializer />
-      <AuthProvider/>
-    </BrowserRouter>
-  </StrictMode>
-);
+const container = document.getElementById('root');
+
+if (container) {
+  createRoot(container).render(
+    <StrictMode>
+      <BrowserRouter>
+        <AuthProvider>
+          <AppInitializer />
+        </AuthProvider>
+      </BrowserRouter>
+    </StrictMode>
+  );
+} else {
+  console.error("❌ No root element found in index.html");
+}

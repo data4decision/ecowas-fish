@@ -36,9 +36,9 @@ export default function AdminDashboard({ user }) {
 
   return (
     <AdminLayout user={user}>
-      <h1 className="text-2xl font-bold mb-6">Admin Dashboard</h1>
+      <h1 className=" text-2xl font-bold mb-6 ml-25">Admin Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
         <div className="bg-white shadow p-5 rounded-xl">
           <h2 className="font-semibold text-gray-600">Countries Monitored</h2>
           <p className="text-3xl font-bold text-[#0b0b5c]">

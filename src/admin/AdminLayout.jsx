@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AdminSidebar from './AdminSidebar'; // Make sure this is your custom admin sidebar
-import AdminNavbar from './AdminNavbar';   // The custom navbar we just built
+import AdminSidebar from './AdminSidebar'; 
+import AdminNavbar from './AdminNavbar';   
 
 export default function AdminLayout({ user, children }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -43,7 +43,7 @@ export default function AdminLayout({ user, children }) {
 
       {/* Main Content */}
       <main
-        className={`flex-1 p-4 overflow-x-hidden mt-16 transition-all duration-300 ${
+        className={`flex-1 p-4 overflow-x-hidden mt-16 transition-all duration-300 ml-20 ${
           sidebarOpen
             ? collapsed
               ? "md:ml-20"

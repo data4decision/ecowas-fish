@@ -54,7 +54,7 @@ export default function AdminNavbar({ user, collapsed, sidebarOpen, setSidebarOp
       <div className="text-[#0b0b5c] ml-20 font-semibold text-lg sm:block">
         Welcome {user?.firstName && user?.surname 
           ? `${user.firstName} ${user.surname}` 
-          : user?.email?.split('@')[0] || 'Admin'}
+          : user?.surname?.split('@')[0] || 'Admin'}
       </div>
 
       {/* Avatar & Dropdown */}
@@ -67,7 +67,7 @@ export default function AdminNavbar({ user, collapsed, sidebarOpen, setSidebarOp
             {getInitial()}
           </div>
           <span className="hidden sm:inline text-sm font-medium text-[#0b0b5c]">
-            {user?.email || 'Admin'}
+            {user?.surname || 'Admin'}
           </span>
         </button>
 
