@@ -1,30 +1,18 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+// Firebase Core
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth, db } from './firebase/firebase';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { getMessaging, getToken } from 'firebase/messaging';
+import { initMessaging } from './firebase/firebase';
 
+// Admin Pages
 import AdminLogin from './admin/AdminLogin';
 import AdminSignup from './admin/AdminSignup';
 import AdminDashboard from './admin/AdminDashboard';
-import ClientLogin from './client/ClientLogin';
-import ClientSignup from './client/ClientSignup';
-import ClientDashboard from './client/ClientDashboard';
-import LandingPage from './pages/LandingPage';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth, db } from './firebase/firebase';
-import { doc, getDoc } from 'firebase/firestore';
-import ForgotPassword from './components/ForgotPassword';
-import ResetPassword from './components/ResetPassword';
 import CreateDashboardData from './admin/CreateDashboardData';
-import DashboardWrapper from './components/DashboardWrapper';
-
-// 🆕 Import Admin Feature Pages
-import AllCountriesPage from './admin/AllCountriesPage';
-import ManageSubmissions from './admin/ManageSubmissions';
-import EditEntries from './admin/EditEntries';
-import PushUpdates from './admin/PushUpdates';
-import MasterReports from './admin/MasterReports';
-
-// 🆕 Import Full Admin Pages (for Sidebar Links)
 import AdminUpload from './admin/AdminUpload';
 import AdminDownloads from './admin/AdminDownloads';
 import AdminTrends from './admin/AdminTrends';
@@ -33,10 +21,42 @@ import AdminReports from './admin/AdminReports';
 import AdminNotifications from './admin/AdminNotifications';
 import AdminHelp from './admin/AdminHelp';
 import AdminSettings from './admin/AdminSettings';
+import AllCountriesPage from './admin/AllCountriesPage';
+import ManageSubmissions from './admin/ManageSubmissions';
+import EditEntries from './admin/EditEntries';
+import PushUpdates from './admin/PushUpdates';
+import MasterReports from './admin/MasterReports';
+
+// Client Pages
+import ClientLogin from './client/ClientLogin';
+import ClientSignup from './client/ClientSignup';
+import ClientDashboard from './client/ClientDashboard';
+import ClientUpload from './client/ClientUpload';
+import ClientDownloads from './client/ClientDownload';
+import ClientTrends from './client/ClientTrends';
+import ClientKPI from './client/ClientKPI';
+import ClientReportHistory from './client/ClientReportHistory';
+import ClientNotifications from './client/ClientNotifications';
+import ClientHelp from './client/ClientHelp';
+import ClientSettings from './client/ClientSettings';
+
+// Shared
+import LandingPage from './pages/LandingPage';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+import DashboardLayout from './components/DashboardLayout';
+
+const vapidKey = 'BANzLQZTvsath-AQDPOSDCHYHtfZoxADuAL_uksk6tT57iIBl6JXVJVPLQ2N1Z6rD5hg9kl4nigqQFZ3TZYZ3yk';
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    initMessaging((token) => {
+      console.log("FCM Token from initMessaging:", token);
+    });
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -45,7 +65,22 @@ export default function App() {
           const userDocRef = doc(db, 'users', currentUser.uid);
           const userDoc = await getDoc(userDocRef);
           const userData = userDoc.exists() ? userDoc.data() : {};
-          setUser({ ...currentUser, ...userData });
+          const fullUser = { ...currentUser, ...userData };
+          setUser(fullUser);
+
+          try {
+            const messaging = getMessaging();
+            const token = await getToken(messaging, { vapidKey });
+            if (token) {
+              console.log('✅ FCM Token:', token);
+              await setDoc(userDocRef, { fcmToken: token }, { merge: true });
+            } else {
+              console.warn('❌ No FCM token retrieved. Check permissions.');
+            }
+          } catch (err) {
+            console.error('🔔 FCM Token Error:', err);
+          }
+
         } catch (error) {
           console.error('Error fetching user data:', error);
           setUser(null);
@@ -53,6 +88,7 @@ export default function App() {
       } else {
         setUser(null);
       }
+
       setLoading(false);
     });
 
@@ -70,24 +106,14 @@ export default function App() {
 
   return (
     <Routes>
-      {/* 🌍 Landing Page */}
+      {/* Public Routes */}
       <Route path="/" element={<LandingPage />} />
-
-      {/* 🔐 Admin Auth Routes */}
       <Route path="/admin/login" element={<AdminLogin />} />
       <Route path="/admin/signup" element={<AdminSignup />} />
 
-      {/* 🧑‍💼 Admin Dashboard + Core Features */}
-      <Route
-        path="/admin/dashboard"
-        element={user?.role === 'admin' ? <AdminDashboard user={user} /> : <Navigate to="/admin/login" />}
-      />
-      <Route
-        path="/admin/create-dashboard-data"
-        element={user?.role === 'admin' ? <CreateDashboardData /> : <Navigate to="/admin/login" />}
-      />
-
-      {/* 📊 Admin Sidebar Pages */}
+      {/* Admin Protected Routes */}
+      <Route path="/admin/dashboard" element={user?.role === 'admin' ? <AdminDashboard user={user} /> : <Navigate to="/admin/login" />} />
+      <Route path="/admin/create-dashboard-data" element={user?.role === 'admin' ? <CreateDashboardData /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/upload" element={user?.role === 'admin' ? <AdminUpload /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/downloads" element={user?.role === 'admin' ? <AdminDownloads /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/trends" element={user?.role === 'admin' ? <AdminTrends /> : <Navigate to="/admin/login" />} />
@@ -96,41 +122,36 @@ export default function App() {
       <Route path="/admin/notifications" element={user?.role === 'admin' ? <AdminNotifications /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/help" element={user?.role === 'admin' ? <AdminHelp /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/settings" element={user?.role === 'admin' ? <AdminSettings /> : <Navigate to="/admin/login" />} />
-
-      {/* 🛠️ Admin Functional Pages */}
       <Route path="/admin/all-countries" element={user?.role === 'admin' ? <AllCountriesPage /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/manage-submissions" element={user?.role === 'admin' ? <ManageSubmissions /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/edit-entries" element={user?.role === 'admin' ? <EditEntries /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/push-updates" element={user?.role === 'admin' ? <PushUpdates /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/master-reports" element={user?.role === 'admin' ? <MasterReports /> : <Navigate to="/admin/login" />} />
 
-      {/* 🌐 Client Country-Specific Routes */}
+      {/* Client Auth Routes */}
       <Route path=":countryCode">
         <Route path="login" element={<ClientLogin />} />
         <Route path="signup" element={<ClientSignup />} />
-        <Route
-          path="dashboard"
-          element={
-            user?.role === 'client' && user?.country?.toLowerCase() === user?.country?.toLowerCase()
-              ? <ClientDashboard user={user} />
-              : <Navigate to={`/${user?.country?.toLowerCase() || 'ng'}/login`} />
-          }
-        />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />
+
+        {/* Client Protected Routes with Layout */}
+        {user?.role === 'client' && user?.countryCode?.toLowerCase() && (
+          <Route element={<DashboardLayout user={user} />}>
+            <Route path="dashboard" element={<ClientDashboard user={user} />} />
+            <Route path="upload" element={<ClientUpload user={user} />} />
+            <Route path="downloads" element={<ClientDownloads user={user} />} />
+            <Route path="trends" element={<ClientTrends user={user} />} />
+            <Route path="kpi" element={<ClientKPI user={user} />} />
+            <Route path="report-history" element={<ClientReportHistory user={user} />} />
+            <Route path="notifications" element={<ClientNotifications user={user} />} />
+            <Route path="help" element={<ClientHelp user={user} />} />
+            <Route path="settings" element={<ClientSettings user={user} />} />
+          </Route>
+        )}
       </Route>
 
-      {/* 🧭 General Dashboard Route for Clients */}
-      <Route
-        path="dashboard"
-        element={
-          user?.role === 'client'
-            ? <DashboardWrapper user={user} />
-            : <Navigate to={`/${user?.country?.toLowerCase() || 'ng'}/login`} />
-        }
-      />
-
-      {/* 🚧 Catch-All: Redirect unknown routes to Landing */}
+      {/* Catch All */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

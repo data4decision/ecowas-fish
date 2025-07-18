@@ -2,6 +2,10 @@
 // import BeninDashboard from './countries/BeninDashboard'
 // import NigeriaDashboard from './countries/NigeriaDashboard'
 
+import CompareView from "../components/CompareView"
+import CountryComparisonChart from "../components/CountryComparisonChart"
+import DashboardWelcomeSection from "../components/DashboardWelcomeSection"
+
 // const ClientDashboard = () => {
 //   return (
 //     <div><BeninDashboard/>
@@ -13,14 +17,16 @@
 // export default ClientDashboard
 
 
-import NigeriaDashboard from './countries/NigeriaDashboard'
+
 
 
 
 const ClientDashboard = () => {
   return (
-    <div><NigeriaDashboard/>
-    
+    <div>
+    <DashboardWelcomeSection/>
+    <CountryComparisonChart/>
+    <CompareView/>
     </div>
   )
 }

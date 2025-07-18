@@ -1,10 +1,11 @@
+// src/client/ClientSignup.jsx
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 
-export default function ClientSignup() {
+const ClientSignup = () => {
   const navigate = useNavigate();
   const { countryCode } = useParams();
   const [surname, setSurname] = useState('');
@@ -12,7 +13,7 @@ export default function ClientSignup() {
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [phone, setPhone] = useState(''); 
+  const [phone, setPhone] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -175,4 +176,6 @@ export default function ClientSignup() {
       </form>
     </div>
   );
-}
+};
+
+export default ClientSignup; // Ensure default export

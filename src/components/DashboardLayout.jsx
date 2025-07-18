@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './DashboardSidebar';
 import Navbar from './DashboardNavbar';
 
-export default function DashboardLayout({ user, children }) {
+export default function DashboardLayout({ user }) {
   const [collapsed, setCollapsed] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -21,7 +22,8 @@ export default function DashboardLayout({ user, children }) {
   }, []);
 
   return (
-    <div>
+    <div className="min-h-screen flex bg-white">
+      {/* Sidebar */}
       <Sidebar
         user={user}
         collapsed={collapsed}
@@ -29,24 +31,26 @@ export default function DashboardLayout({ user, children }) {
         sidebarOpen={sidebarOpen}
         setSidebarOpen={setSidebarOpen}
       />
-      <Navbar
-        user={user}
-        collapsed={collapsed}
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
-      <main
-            className={`flex-1 p-4 ml-17 overflow-x-hidden mt-16 transition-all duration-300 ${
-              sidebarOpen
-                ? collapsed
-                  ? "md:ml-20"
-                  : "md:ml-64"
-                : "md:ml-0"
-            }`}
-          >
-            {children}
-          </main>
 
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col w-full">
+        {/* Navbar */}
+        <Navbar
+          user={user}
+          collapsed={collapsed}
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+        />
+
+        {/* Page Content */}
+        <main
+          className={`p-4 mt-16 transition-all duration-300 overflow-x-hidden ${
+            sidebarOpen ? (collapsed ? "md:ml-20" : "md:ml-64") : "md:ml-0"
+          }`}
+        >
+          <Outlet /> {/* This renders the nested route content */}
+        </main>
+      </div>
     </div>
   );
 }
