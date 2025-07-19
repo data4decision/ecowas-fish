@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom'; // ✅ Required for rendering nested route components
 import Sidebar from './DashboardSidebar';
 import Navbar from './DashboardNavbar';
 
@@ -48,7 +48,8 @@ export default function DashboardLayout({ user }) {
             sidebarOpen ? (collapsed ? "md:ml-20" : "md:ml-64") : "md:ml-0"
           }`}
         >
-          <Outlet /> {/* This renders the nested route content */}
+          {/* ✅ This is the key part that renders whichever nested route is matched under DashboardLayout */}
+          <Outlet /> 
         </main>
       </div>
     </div>

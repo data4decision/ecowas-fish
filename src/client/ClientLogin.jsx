@@ -118,7 +118,7 @@ export default function ClientLogin() {
           <p>
             Don’t have an account?{' '}
             <span
-              onClick={() => navigate(`/${urlCountry.toLowerCase() || 'ng'}/signup`)}
+              onClick={() => navigate(`/${countryCode.toLowerCase() || 'ng'}/signup`)}
               className="cursor-pointer text-[#f47b20] underline"
             >
               Sign Up
@@ -126,7 +126,7 @@ export default function ClientLogin() {
           </p>
           <p className="mt-2">
             <span
-              onClick={() => navigate(`/${urlCountry.toLowerCase() || 'ng'}/forgot-password`)}
+              onClick={() => navigate(`/${countryCode.toLowerCase() || 'ng'}/forgot-password`)}
               className="cursor-pointer text-[#0b0b5c] underline"
             >
               Forgot Password?

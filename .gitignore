@@ -24,3 +24,8 @@ dist-ssr
 *.sw?
 firestore-upload/serviceAccountKey.json
 firestore-upload/serviceAccountKey.json
+server/backend/firebase/serviceAccountKey.json
+server/serviceAccount.json
+server/sendNotification.json
+backend/firebase/serviceAccountKey.json
+

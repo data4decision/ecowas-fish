@@ -21,15 +21,16 @@ export default function Sidebar({
     navigate("/admin/login");
   };
 
+  // Default to 'nigeria' if user.countryCode not available
   const countryPath = user?.countryCode?.toLowerCase?.() || "nigeria";
 
   const navItems = [
     { label: "Dashboard", icon: Home, to: `/${countryPath}/dashboard` },
     { label: "Upload Data", icon: Upload, to: `/${countryPath}/upload` },
     { label: "Download Data", icon: Download, to: `/${countryPath}/downloads` },
-    { label: "Monthly Trends", icon: LineChart, to: `/${countryPath}/trends` },
-    { label: "KPI Analysis", icon: BarChart2, to: `/${countryPath}/kpi-analysis` },
-    { label: "Report History", icon: FileText, to: `/${countryPath}/reports` },
+    { label: "Yearly Trends", icon: LineChart, to: `/${countryPath}/trends` }, // ✅ renamed label
+    { label: "KPI Analysis", icon: BarChart2, to: `/${countryPath}/kpi` },     // ✅ fixed route
+    { label: "Report History", icon: FileText, to: `/${countryPath}/report-history` }, // ✅ fixed route
     { label: "Notifications", icon: Bell, to: `/${countryPath}/notifications` },
     { label: "Help & Support", icon: HelpCircle, to: `/${countryPath}/help` },
     { label: "Settings", icon: Settings, to: `/${countryPath}/settings` }
