@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 // Firebase Core
@@ -128,30 +128,35 @@ export default function App() {
       <Route path="/admin/push-updates" element={user?.role === 'admin' ? <PushUpdates /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/master-reports" element={user?.role === 'admin' ? <MasterReports /> : <Navigate to="/admin/login" />} />
 
-      {/* Client Auth Routes */}
+      {/* Client Auth + Protected Routes */}
       <Route path=":countryCode">
+        {/* Public client routes */}
         <Route path="login" element={<ClientLogin />} />
         <Route path="signup" element={<ClientSignup />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />
 
-        {/* Client Protected Routes with Layout */}
-        {user?.role === 'client' && user?.countryCode?.toLowerCase() && (
-          <Route element={<DashboardLayout user={user} />}>
-            <Route path="dashboard" element={<ClientDashboard user={user} />} />
-            <Route path="upload" element={<ClientUpload user={user} />} />
-            <Route path="downloads" element={<ClientDownloads user={user} />} />
-            <Route path="trends" element={<ClientTrends user={user} />} />
-            <Route path="kpi" element={<ClientKPI user={user} />} />
-            <Route path="report-history" element={<ClientReportHistory user={user} />} />
-            <Route path="notifications" element={<ClientNotifications user={user} />} />
-            <Route path="help" element={<ClientHelp user={user} />} />
-            <Route path="settings" element={<ClientSettings user={user} />} />
-          </Route>
-        )}
+        {/* Protected client routes */}
+        <Route
+          element={
+            user?.role === 'client' && user?.countryCode?.toLowerCase()
+              ? <DashboardLayout user={user} />
+              : <Navigate to={`/${user?.countryCode?.toLowerCase() || 'ng'}/login`} />
+          }
+        >
+          <Route path="dashboard" element={<ClientDashboard user={user} />} />
+          <Route path="upload" element={<ClientUpload user={user} />} />
+          <Route path="downloads" element={<ClientDownloads user={user} />} />
+          <Route path="trends" element={<ClientTrends user={user} />} />
+          <Route path="kpi" element={<ClientKPI user={user} />} />
+          <Route path="report-history" element={<ClientReportHistory user={user} />} />
+          <Route path="notifications" element={<ClientNotifications user={user} />} />
+          <Route path="help" element={<ClientHelp user={user} />} />
+          <Route path="settings" element={<ClientSettings user={user} />} />
+        </Route>
       </Route>
 
-      {/* Catch All */}
+      {/* Catch-all */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
