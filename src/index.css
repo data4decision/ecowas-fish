@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+
+
+html {
+  transition: background 0.3s, color 0.3s;
+}
+
+body {
+  @apply bg-white text-black dark:bg-[#1e1e2f] dark:text-white;
+}

@@ -1,37 +1,39 @@
-// src/components/FeaturesSection.jsx
 import React from 'react';
 import { FaGlobeAfrica, FaLock, FaChartLine, FaUsersCog } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
 const features = [
   {
     icon: <FaGlobeAfrica size={40} className="text-accent" />,
-    title: 'Country-specific Dashboards',
-    description: 'Each ECOWAS nation gets a dedicated dashboard to manage and review fisheries data effectively.',
+    titleKey: 'features.country_specific_dashboards', // Using translation key
+    descriptionKey: 'features.country_specific_dashboards_desc', // Using translation key
   },
   {
     icon: <FaLock size={40} className="text-accent" />,
-    title: 'Secure Data Uploads',
-    description: 'Robust authentication and secure cloud storage to ensure data integrity and privacy.',
+    titleKey: 'features.secure_data_uploads',
+    descriptionKey: 'features.secure_data_uploads_desc',
   },
   {
     icon: <FaChartLine size={40} className="text-accent" />,
-    title: 'Real-time Analytics',
-    description: 'Instant insights to track patterns, trends, and performance metrics across the region.',
+    titleKey: 'features.real_time_analytics',
+    descriptionKey: 'features.real_time_analytics_desc',
   },
   {
     icon: <FaUsersCog size={40} className="text-accent" />,
-    title: 'Centralized Oversight',
-    description: 'Admin panel for monitoring, managing permissions, and regional coordination.',
+    titleKey: 'features.centralized_oversight',
+    descriptionKey: 'features.centralized_oversight_desc',
   },
 ];
 
 export default function FeaturesSection() {
+  const { t } = useTranslation(); // Access translation function
+
   return (
     <section className="py-16 bg-gray-100" id="features">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Platform Features</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">{t('features.platform_features')}</h2> {/* Translated header */}
         <p className="text-gray-600 mb-12">
-          Designed to make data-driven fisheries governance simple, secure, and scalable.
+          {t('features.description')} {/* Translated description */}
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -41,8 +43,8 @@ export default function FeaturesSection() {
               className="bg-white p-6 rounded shadow hover:shadow-lg transition-transform transform hover:-translate-y-1"
             >
               <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-semibold text-primary mb-2">{feature.title}</h3>
-              <p className="text-gray-600 text-sm">{feature.description}</p>
+              <h3 className="text-xl font-semibold text-primary mb-2">{t(feature.titleKey)}</h3> {/* Translated title */}
+              <p className="text-gray-600 text-sm">{t(feature.descriptionKey)}</p> {/* Translated description */}
             </div>
           ))}
         </div>

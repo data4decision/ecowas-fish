@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import countryCodes from '../../data/countryCodes.json';
+import LanguageSwitcher from '../../components/LanguageSwitcher'; // Import LanguageSwitcher component
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { t } = useTranslation(); // Access translation function
 
   return (
     <nav className="bg-[#0b0b5c] text-white shadow-md px-6 py-4 md:flex justify-between">
@@ -12,7 +15,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="https://www.data4decision.org/" className="text-xl font-bold flex items-center">
           <img src="/logo.png" alt="Logo" className="inline-block w-8 mr-2" />
-          Data4Decision International
+          {t('navbar.company_name')} {/* Translated company name */}
         </a>
 
         {/* Hamburger menu for mobile */}
@@ -55,7 +58,7 @@ export default function Navbar() {
             rel="noopener noreferrer"
             className="hover:text-[#f47b20] block"
           >
-            About
+            {t('navbar.about')} {/* Translated About */}
           </a>
         </li>
         <li className="relative">
@@ -63,7 +66,7 @@ export default function Navbar() {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="hover:text-[#f47b20] block w-full text-left"
           >
-            Countries ▾
+            {t('navbar.countries')} ▾ {/* Translated Countries */}
           </button>
           {dropdownOpen && (
             <ul className="absolute z-50 bg-white text-[#0b0b5c] shadow-lg rounded-md w-52 mt-2">
@@ -90,7 +93,7 @@ export default function Navbar() {
         </li>
         <li>
           <Link to="/admin/login" className="hover:text-[#f47b20] block">
-            Admin Login
+            {t('navbar.admin_login')} {/* Translated Admin Login */}
           </Link>
         </li>
         <li>
@@ -98,8 +101,13 @@ export default function Navbar() {
             href="#get-started"
             className="bg-[#f47b20] text-white px-4 py-2 rounded hover:bg-opacity-90 transition block text-center"
           >
-            Get Started
+            {t('navbar.get_started')} {/* Translated Get Started */}
           </a>
+        </li>
+
+        {/* Language Switcher in Navbar */}
+        <li className="ml-6">
+          <LanguageSwitcher /> {/* Language switcher component */}
         </li>
       </ul>
     </nav>

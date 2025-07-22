@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 import fisheriesData from "../data/fisheriesData.json";
 
 export default function AdminKpiCards() {
+  const { t } = useTranslation(); // Access translation function
   const [kpis, setKpis] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
   const [yearOptions, setYearOptions] = useState([]);
@@ -42,16 +44,16 @@ export default function AdminKpiCards() {
     const indicatorAvg = avg(data.map(d => d[indicator]));
 
     setKpis([
-      { title: "Total ECOWAS Countries", value: totalCountries },
-      { title: "Years of Data Covered", value: yearsCovered },
-      { title: "Selected Year", value: selectedYear },
-      { title: "Avg Total Fish Catch (MT/year)", value: formatNumber(totalFishCatch) },
-      { title: "Avg Post-Harvest Loss Rate (%)", value: `${postHarvestLoss.toFixed(2)}%` },
-      { title: "Total Registered Fishers", value: formatNumber(totalRegisteredFishers) },
-      { title: "Countries with Digital Reporting (%)", value: `${digitalReporting.toFixed(2)}%` },
-      { title: "Avg Enforcement Capacity Score", value: enforcementScore.toFixed(2) },
-      { title: "Avg Budget Execution Rate (%)", value: `${budgetExecRate.toFixed(2)}%` },
-      { title: `Avg ${indicator}`, value: formatNumber(indicatorAvg) }
+      { title: t('admin_kpi.total_ecowas_countries'), value: totalCountries },
+      { title: t('admin_kpi.years_covered'), value: yearsCovered },
+      { title: t('admin_kpi.selected_year'), value: selectedYear },
+      { title: t('admin_kpi.avg_total_fish_catch'), value: formatNumber(totalFishCatch) },
+      { title: t('admin_kpi.avg_post_harvest_loss'), value: `${postHarvestLoss.toFixed(2)}%` },
+      { title: t('admin_kpi.total_registered_fishers'), value: formatNumber(totalRegisteredFishers) },
+      { title: t('admin_kpi.digital_reporting'), value: `${digitalReporting.toFixed(2)}%` },
+      { title: t('admin_kpi.avg_enforcement_capacity'), value: enforcementScore.toFixed(2) },
+      { title: t('admin_kpi.avg_budget_execution'), value: `${budgetExecRate.toFixed(2)}%` },
+      { title: t('admin_kpi.avg_indicator', { indicator }), value: formatNumber(indicatorAvg) }
     ]);
   }, [selectedYear, indicator]);
 
@@ -73,7 +75,7 @@ export default function AdminKpiCards() {
     <div className="w-full px-4 py-6">
       {/* Header & Filters */}
       <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
-        <h2 className="text-2xl font-bold text-[#0b0b5c]">Admin Dashboard Overview</h2>
+        <h2 className="text-2xl font-bold text-[#0b0b5c]">{t('admin_kpi.dashboard_overview')}</h2> {/* Translated Header */}
 
         <div className="flex gap-4 flex-wrap">
           <select
@@ -83,7 +85,7 @@ export default function AdminKpiCards() {
           >
             {yearOptions.map((year) => (
               <option key={year} value={year}>
-                Year: {year}
+                {t('admin_kpi.year')}: {year}
               </option>
             ))}
           </select>

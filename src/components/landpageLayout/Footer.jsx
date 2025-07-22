@@ -1,21 +1,24 @@
-// src/components/Footer.jsx
+import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 export default function Footer() {
+  const { t } = useTranslation(); // Access translation function
+
   return (
     <footer className="bg-[#0b0b5c] text-white py-8">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Company Info */}
         <div>
-          <h3 className="text-xl font-bold mb-2">Data4Decision Intionational</h3>
+          <h3 className="text-xl font-bold mb-2">{t('footer.company_name')}</h3> {/* Translated company name */}
           <p className="text-sm text-gray-200">
-            Advancing sustainable fisheries management through data-driven solutions across West Africa.
+            {t('footer.company_description')} {/* Translated company description */}
           </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Quick Links</h4>
+          <h4 className="text-lg font-semibold mb-3">{t('footer.quick_links')}</h4> {/* Translated section title */}
           <ul className="space-y-2 text-sm">
             <li>
               <a
@@ -24,7 +27,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="hover:text-accent transition-colors"
               >
-                Contact
+                {t('footer.contact')} {/* Translated link text */}
               </a>
             </li>
             <li>
@@ -32,7 +35,7 @@ export default function Footer() {
                 href="#"
                 className="hover:text-accent transition-colors"
               >
-                Privacy Policy
+                {t('footer.privacy_policy')} {/* Translated link text */}
               </a>
             </li>
             <li>
@@ -40,7 +43,7 @@ export default function Footer() {
                 href="#"
                 className="hover:text-accent transition-colors"
               >
-                Terms of Use
+                {t('footer.terms_of_use')} {/* Translated link text */}
               </a>
             </li>
           </ul>
@@ -48,7 +51,7 @@ export default function Footer() {
 
         {/* Social Media */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Follow Us</h4>
+          <h4 className="text-lg font-semibold mb-3">{t('footer.follow_us')}</h4> {/* Translated section title */}
           <div className="flex space-x-4">
             <a
               href="https://web.facebook.com/profile.php?id=61577387353286"
@@ -82,10 +85,8 @@ export default function Footer() {
       </div>
 
       <div className="text-center bg-black text-gray-400 text-sm mt-9 p-3">
-        &copy; {new Date().getFullYear()} Data4Decision International. All rights reserved.
-      </div>
+        &copy; {new Date().getFullYear()} {t('footer.company_name')}. {t('footer.all_rights_reserved')}
+      </div> {/* Translated copyright text */}
     </footer>
-    
-    
   );
 }

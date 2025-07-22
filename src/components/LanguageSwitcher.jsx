@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -10,25 +9,17 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex gap-2 mt-4">
-      <button
-        onClick={() => changeLanguage('en')}
-        className="px-3 py-1 bg-blue-500 text-white rounded"
+    <div className="mt-4">
+      {/* Language Dropdown */}
+      <select
+        onChange={(e) => changeLanguage(e.target.value)}
+        className="px-4 py-2 mb-3 bg-[#f47b25] text-white rounded"
+        defaultValue={i18n.language}
       >
-        EN
-      </button>
-      <button
-        onClick={() => changeLanguage('fr')}
-        className="px-3 py-1 bg-green-500 text-white rounded"
-      >
-        FR
-      </button>
-      <button
-        onClick={() => changeLanguage('pt')}
-        className="px-3 py-1 bg-red-500 text-white rounded"
-      >
-        PT
-      </button>
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="pt">Português</option>
+      </select>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase/firebase';
+import { useTranslation } from 'react-i18next';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -10,11 +11,9 @@ const AdminLogin = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
-  // Basic email format validation
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  // Admin email must contain '_d4d' in the local part (before @)
   const isAdminEmail = (email) => /^[^\s@]+_d4d@[^\s@]+\.[^\s@]+$/.test(email.toLowerCase());
 
   const handleLogin = async (e) => {
@@ -23,19 +22,19 @@ const AdminLogin = () => {
     setLoading(true);
 
     if (!email || !password) {
-      setError('Please fill in all fields.');
+      setError(t('admin_login_page.errors.empty_fields'));
       setLoading(false);
       return;
     }
 
     if (!isValidEmail(email)) {
-      setError('Invalid email format.');
+      setError(t('admin_login_page.errors.invalid_email'));
       setLoading(false);
       return;
     }
 
     if (!isAdminEmail(email)) {
-      setError('Incorrect email or password.');
+      setError(t('admin_login_page.errors.incorrect'));
       setLoading(false);
       return;
     }
@@ -52,14 +51,14 @@ const AdminLogin = () => {
           navigate('/admin/dashboard');
         } else {
           await auth.signOut();
-          setError('Access denied. Unauthorized role.');
+          setError(t('admin_login_page.errors.access_denied'));
         }
       } else {
         await auth.signOut();
-        setError('User not found.');
+        setError(t('admin_login_page.errors.not_found'));
       }
     } catch (err) {
-      setError('Incorrect email or password.');
+      setError(t('admin_login_page.errors.incorrect'));
       console.error('Login error:', err.code, err.message);
     } finally {
       setLoading(false);
@@ -73,7 +72,7 @@ const AdminLogin = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4">
       <form onSubmit={handleLogin} className="bg-white shadow-md border border-[#f47b20] rounded px-8 pt-6 pb-8 w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-6 text-center text-[#0b0b5c]">Admin Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center text-[#0b0b5c]">{t('admin_login_page.title')}</h2>
         {error && <p className="text-red-600 text-sm mb-4 text-center">{error}</p>}
         {loading && (
           <div className="flex justify-center mb-4">
@@ -84,7 +83,7 @@ const AdminLogin = () => {
         <div className="mb-4">
           <input
             type="email"
-            placeholder="Enter admin email"
+            placeholder={t('admin_login_page.email_placeholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value.trim())}
             className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#f47b20]"
@@ -94,7 +93,7 @@ const AdminLogin = () => {
         <div className="mb-6">
           <input
             type="password"
-            placeholder="Enter password"
+            placeholder={t('admin_login_page.password_placeholder')}
             value={password}
             onChange={(e) => setPassword(e.target.value.trim())}
             className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-[#f47b20]"
@@ -107,7 +106,7 @@ const AdminLogin = () => {
           className="w-full bg-[#0b0b5c] text-white p-3 rounded hover:bg-[#f47b20] disabled:bg-gray-400"
           disabled={loading}
         >
-          {loading ? 'Logging In...' : 'Login'}
+          {loading ? t('admin_login_page.logging_in') : t('admin_login_page.login_button')}
         </button>
 
         <div className="text-center mt-4 text-sm">
@@ -116,16 +115,16 @@ const AdminLogin = () => {
               onClick={handleForgotPassword}
               className="text-[#0b0b5c] cursor-pointer underline hover:text-[#f47b20]"
             >
-              Forgot password?
+              {t('admin_login_page.forgot_password')}
             </span>
           </p>
           <p className="mt-2">
-            Don’t have an account?{' '}
+            {t('admin_login_page.no_account')}{' '}
             <span
               onClick={() => navigate('/admin/signup')}
               className="text-[#0b0b5c] cursor-pointer underline hover:text-[#f47b20]"
             >
-              Sign up
+              {t('admin_login_page.signup')}
             </span>
           </p>
         </div>
