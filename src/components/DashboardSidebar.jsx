@@ -1,5 +1,3 @@
-
-
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   Home, Upload, Download, BarChart2, LineChart, FileText,
@@ -7,6 +5,7 @@ import {
 } from "lucide-react";
 import logoImg from "../assets/logo.png";
 import { auth } from "../firebase/firebase";
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar({
   user,
@@ -16,6 +15,7 @@ export default function Sidebar({
   setSidebarOpen,
   isMobile
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -23,19 +23,18 @@ export default function Sidebar({
     navigate("/admin/login");
   };
 
-  // Default to 'nigeria' if user.countryCode not available
   const countryPath = user?.countryCode?.toLowerCase?.() || "nigeria";
 
   const navItems = [
-    { label: "Dashboard", icon: Home, to: `/${countryPath}/dashboard` },
-    { label: "Upload Data", icon: Upload, to: `/${countryPath}/upload` },
-    { label: "Download Data", icon: Download, to: `/${countryPath}/downloads` },
-    { label: "Yearly Trends", icon: LineChart, to: `/${countryPath}/trends` }, // ✅ renamed label
-    { label: "KPI Analysis", icon: BarChart2, to: `/${countryPath}/kpi` },     // ✅ fixed route
-    { label: "Report History", icon: FileText, to: `/${countryPath}/report-history` }, // ✅ fixed route
-    { label: "Notifications", icon: Bell, to: `/${countryPath}/notifications` },
-    { label: "Help & Support", icon: HelpCircle, to: `/${countryPath}/help` },
-    { label: "Settings", icon: Settings, to: `/${countryPath}/settings` }
+    { label: t("sidebar.dashboard"), icon: Home, to: `/${countryPath}/dashboard` },
+    { label: t("sidebar.upload"), icon: Upload, to: `/${countryPath}/upload` },
+    { label: t("sidebar.download"), icon: Download, to: `/${countryPath}/downloads` },
+    { label: t("sidebar.yearly_trends"), icon: LineChart, to: `/${countryPath}/trends` },
+    { label: t("sidebar.kpi_analysis"), icon: BarChart2, to: `/${countryPath}/kpi` },
+    { label: t("sidebar.report_history"), icon: FileText, to: `/${countryPath}/report-history` },
+    { label: t("sidebar.notifications"), icon: Bell, to: `/${countryPath}/notifications` },
+    { label: t("sidebar.help"), icon: HelpCircle, to: `/${countryPath}/help` },
+    { label: t("sidebar.settings"), icon: Settings, to: `/${countryPath}/settings` }
   ];
 
   const linkClass = ({ isActive }) =>
@@ -59,10 +58,7 @@ export default function Sidebar({
             </span>
           )}
         </div>
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="text-[#0b0b5c]"
-        >
+        <button onClick={() => setCollapsed(!collapsed)} className="text-[#0b0b5c]">
           {collapsed ? <ChevronsRight size={20} /> : <ChevronsLeft size={20} />}
         </button>
       </div>
@@ -82,7 +78,7 @@ export default function Sidebar({
           className="flex items-center gap-3 w-full px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-100 rounded"
         >
           <LogOut size={18} />
-          {!collapsed && <span>Logout</span>}
+          {!collapsed && <span>{t("sidebar.logout")}</span>}
         </button>
       </div>
     </aside>

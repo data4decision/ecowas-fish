@@ -1,0 +1,293 @@
+{
+  "welcome": "Welcome to my website",
+  "description": "This is a description",
+  "button_english": "English",
+  "button_portuguese": "Português",
+  "button_french": "Français",
+
+  "hero_heading": "Empowering Fisheries Data for Sustainable Development in ECOWAS.",
+  "hero_description": "Track, analyze, and manage country-level fisheries data in one unified platform.",
+  "get_started": "Get Started",
+  "explore_countries": "Explore Countries",
+
+  "features": {
+    "platform_features": "Platform Features",
+    "description": "Designed to make data-driven fisheries governance simple, secure, and scalable.",
+    "country_specific_dashboards": "Country-specific Dashboards",
+    "country_specific_dashboards_desc": "Each ECOWAS nation gets a dedicated dashboard to manage and review fisheries data effectively.",
+    "secure_data_uploads": "Secure Data Uploads",
+    "secure_data_uploads_desc": "Robust authentication and secure cloud storage to ensure data integrity and privacy.",
+    "real_time_analytics": "Real-time Analytics",
+    "real_time_analytics_desc": "Instant insights to track patterns, trends, and performance metrics across the region.",
+    "centralized_oversight": "Centralized Oversight",
+    "centralized_oversight_desc": "Admin panel for monitoring, managing permissions, and regional coordination."
+  },
+
+  "flag_grid": {
+    "explore_ecowas_countries": "Explore ECOWAS Countries",
+    "select_country": "Select a country below to access its fisheries dashboard"
+  },
+
+  "stories": {
+    "title": "Success Stories",
+    "description": "Real impact across ECOWAS nations",
+    "ghana_feedback": "Ghana improved monthly fisheries reporting accuracy by 40% within six months using the platform.",
+    "nigeria_feedback": "The dashboard enabled real-time oversight and eliminated reporting delays across multiple states.",
+    "senegal_feedback": "Our local teams now submit verified catch data weekly, improving compliance and insights."
+  },
+
+  "footer": {
+    "company_name": "Data4Decision International",
+    "company_description": "Advancing sustainable fisheries management through data-driven solutions across West Africa.",
+    "quick_links": "Quick Links",
+    "contact": "Contact",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_use": "Terms of Use",
+    "follow_us": "Follow Us",
+    "all_rights_reserved": "All rights reserved"
+  },
+
+  "navbar": {
+    "company_name": "Data4Decision International",
+    "about": "About",
+    "countries": "Countries",
+    "admin_login": "Admin Login",
+    "get_started": "Get Started",
+     "welcome": "Welcome {{name}}",
+  "profile": "Profile",
+  "logout": "Logout"
+  },
+
+  "admin_kpi": {
+    "dashboard_overview": "Admin Dashboard Overview",
+    "year": "Year",
+    "total_ecowas_countries": "Total ECOWAS Countries",
+    "years_covered": "Years of Data Covered",
+    "selected_year": "Selected Year",
+    "avg_total_fish_catch": "Avg Total Fish Catch (MT/year)",
+    "avg_post_harvest_loss": "Avg Post-Harvest Loss Rate (%)",
+    "total_registered_fishers": "Total Registered Fishers",
+    "digital_reporting": "Countries with Digital Reporting (%)",
+    "avg_enforcement_capacity": "Avg Enforcement Capacity Score",
+    "avg_budget_execution": "Avg Budget Execution Rate (%)",
+    "avg_indicator": "Avg {{indicator}}"
+  },
+
+  "admin_login_page": {
+    "title": "Admin Login",
+    "email_placeholder": "Enter admin email",
+    "password_placeholder": "Enter password",
+    "login_button": "Login",
+    "logging_in": "Logging In...",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don’t have an account?",
+    "signup": "Sign up",
+    "errors": {
+      "empty_fields": "Please fill in all fields.",
+      "invalid_email": "Invalid email format.",
+      "incorrect": "Incorrect email or password.",
+      "access_denied": "Access denied. Unauthorized role.",
+      "not_found": "User not found."
+    }
+  },
+
+  "client_trends": {
+    "title": "Yearly Trends",
+    "export_csv": "Export CSV",
+    "export_pdf": "Export PDF",
+    "download_png": "Download PNG",
+    "reset_filters": "Reset Filters",
+    "indicator_category": "Indicator Category",
+    "indicators": "Indicators",
+    "year_range": "Year Range",
+    "showing_years": "Showing years: 2000 to {{year}}",
+    "toggle_group": "Toggle {{group}}",
+    "report_title": "Fisheries Trends Report – {{country}}",
+    "report_indicators": "Indicators: {{indicators}}",
+    "report_exported": "Exported: {{date}}",
+    "loading": "Loading..."
+  },
+
+  "indicators": {
+    "% compliance with licensing": "% compliance with licensing",
+    "% contribution of fisheries to food security": "% contribution of fisheries to food security",
+    "% of catch processed locally": "% of catch processed locally",
+    "% of fishers accessing credit/finance": "% of fishers accessing credit/finance",
+    "% of fishers registered/licensed": "% of fishers registered/licensed",
+    "% of fishers trained on sustainable practices": "% of fishers trained on sustainable practices",
+    "% of fishing trips monitored (MCS coverage)": "% of fishing trips monitored (MCS coverage)",
+    "% of illegal, unreported, unregulated (IUU) catch": "% of illegal, unreported, unregulated (IUU) catch",
+    "% of informal/unregistered fishers": "% of informal/unregistered fishers",
+    "% of sustainable fishing zones enforced": "% of sustainable fishing zones enforced",
+    "% of women in post-harvest/value chain roles": "% of women in post-harvest/value chain roles",
+    "Access to credit/loans for fishers": "Access to credit/loans for fishers",
+    "Access to extension or advisory services": "Access to extension or advisory services",
+    "Access to fish transport/logistics": "Access to fish transport/logistics",
+    "Adoption of climate-smart fishing practices (%)": "Adoption of climate-smart fishing practices (%)",
+    "Algal bloom incidence": "Algal bloom incidence",
+    "Average income of fishers": "Average income of fishers",
+    "Budget allocation to capture fisheries": "Budget allocation to capture fisheries",
+    "CPUE (Catch per Unit Effort)": "CPUE (Catch per Unit Effort)",
+    "Catch of non-target species (bycatch rate)": "Catch of non-target species (bycatch rate)",
+    "Catch per unit effort (CPUE, kg/hour)": "Catch per unit effort (CPUE, kg/hour)",
+    "Certification status of landed fish": "Certification status of landed fish",
+    "Change in catch volume by species/year": "Change in catch volume by species/year",
+    "Changes in migratory species patterns": "Changes in migratory species patterns",
+    "Cold chain access (%)": "Cold chain access (%)",
+    "Community involvement in resource management": "Community involvement in resource management",
+    "Community-based monitoring presence": "Community-based monitoring presence",
+    "Compliance with mesh size regulations (%)": "Compliance with mesh size regulations (%)",
+    "Conflict incidence among user groups": "Conflict incidence among user groups",
+    "Coral reef bleaching events": "Coral reef bleaching events",
+    "Coverage of inland fishing regulations": "Coverage of inland fishing regulations",
+    "Data harmonization with regional platforms": "Data harmonization with regional platforms",
+    "Digital data collection systems in place": "Digital data collection systems in place",
+    "Enforcement capacity score": "Enforcement capacity score",
+    "Existence of national fisheries database": "Existence of national fisheries database",
+    "Fish stock status": "Fish stock status",
+    "Fisheries budget execution rate (%)": "Fisheries budget execution rate (%)",
+    "Fishers' dependency on fisheries (%)": "Fishers' dependency on fisheries (%)",
+    "Fishing days per year (per vessel)": "Fishing days per year (per vessel)",
+    "Flood/drought impact on inland fisheries": "Flood/drought impact on inland fisheries",
+    "Functioning landing sites": "Functioning landing sites",
+    "Funding for co-management initiatives": "Funding for co-management initiatives",
+    "Illegal gear use incidence": "Illegal gear use incidence",
+    "Impact of pollution on inland fisheries": "Impact of pollution on inland fisheries",
+    "Inclusion of gender in fisheries policy": "Inclusion of gender in fisheries policy",
+    "Inland fish consumption per capita (kg/year)": "Inland fish consumption per capita (kg/year)",
+    "Inland fish production (MT/year)": "Inland fish production (MT/year)",
+    "Inland fisheries policy/plan exists": "Inland fisheries policy/plan exists",
+    "Job diversity in fisheries value chain": "Job diversity in fisheries value chain",
+    "Level of illegal activities reported": "Level of illegal activities reported",
+    "Level of participation in fisher organizations": "Level of participation in fisher organizations",
+    "Level of women's participation in management": "Level of women's participation in management",
+    "Local processing infrastructure in place": "Local processing infrastructure in place",
+    "Monitoring of fishing activities": "Monitoring of fishing activities",
+    "Number of fishing cooperatives": "Number of fishing cooperatives",
+    "Number of inland fishing vessels": "Number of inland fishing vessels",
+    "Number of registered fishers": "Number of registered fishers",
+    "Participation of youth in fisheries": "Participation of youth in fisheries",
+    "Post-harvest loss rate (%)": "Post-harvest loss rate (%)",
+    "Presence of extension/advisory services": "Presence of extension/advisory services",
+    "Proportion of women with access to credit/finance": "Proportion of women with access to credit/finance",
+    "Proportion of youth in fisher organizations": "Proportion of youth in fisher organizations",
+    "Proportion of youth with access to credit/finance": "Proportion of youth with access to credit/finance",
+    "Proportion of youth with training": "Proportion of youth with training",
+    "Proportion trained in sustainable practices": "Proportion trained in sustainable practices",
+    "Representation of women in fisher org leadership": "Representation of women in fisher org leadership",
+    "Resource conflict incidents reported": "Resource conflict incidents reported",
+    "Revenue generated from inland fisheries": "Revenue generated from inland fisheries",
+    "River/lake pollution levels": "River/lake pollution levels",
+    "Sex-disaggregated fisher registration": "Sex-disaggregated fisher registration",
+    "Stakeholder consultation frequency": "Stakeholder consultation frequency",
+    "Stock assessment conducted": "Stock assessment conducted",
+    "Total fish catch (MT/year)": "Total fish catch (MT/year)",
+    "Use of ecosystem-based management approaches": "Use of ecosystem-based management approaches",
+    "Use of mobile phones in fisheries": "Use of mobile phones in fisheries",
+    "Use of traditional knowledge in decision making": "Use of traditional knowledge in decision making",
+    "Value chain actors with access to credit": "Value chain actors with access to credit",
+    "Value of inland fish production (USD/year)": "Value of inland fish production (USD/year)",
+    "Water governance index (WGI)": "Water governance index (WGI)",
+    "Water level fluctuation impact": "Water level fluctuation impact"
+  },
+  "indicator_groups": {
+  "All": "All",
+  "Economic": "Economic",
+  "Catch": "Catch",
+  "Post-harvest": "Post-harvest"
+},
+  "signup": {
+    "title": "Client Sign Up",
+    "surname": "Surname",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "password": "Password",
+    "phone": "Phone Number (e.g., {{prefix}}...)",
+    "submit": "Sign Up",
+    "loading": "Signing Up...",
+    "login_prompt": "Already have an account?",
+    "login_link": "Login",
+    "errors": {
+      "required": "All fields are required.",
+      "invalid_email": "Please enter a valid email address.",
+      "short_password": "Password must be at least 6 characters.",
+      "invalid_country": "This signup is for {{country}} only. Please use a {{prefix}} phone number.",
+      "signup_failed": "Signup failed: {{message}}"
+    }
+  },
+  "login": {
+  "title": "Login",
+  "email_placeholder": "Enter email",
+  "password_placeholder": "Enter password",
+  "button": "Login",
+  "loading": "Logging in...",
+  "no_account": "Don’t have an account?",
+  "signup": "Sign Up",
+  "forgot_password": "Forgot Password?",
+  "success": "Login successful!",
+  "errors": {
+    "required": "Email and password are required.",
+    "invalid_email": "Please enter a valid email address.",
+    "not_found": "User profile not found in Firestore.",
+    "access_denied": "Access denied. Your account is not authorized for this country.",
+    "login_failed": "Login failed: {{message}}"
+  }
+},
+"dashboard": {
+  "welcome": "Welcome, {{name}} 👋",
+  "for": "Dashboard for",
+  "last_upload": "Last Upload",
+  "last_download": "Last Download",
+  "total_uploads": "Total Uploads",
+  "months_covered": "Months Covered",
+  "report_types": "Report Types",
+  "loading": "Loading...",
+  "no_uploads": "No uploads yet",
+  "user": "User"
+},
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "upload": "Upload Data",
+    "download": "Download Data",
+    "yearly_trends": "Yearly Trends",
+    "kpi_analysis": "KPI Analysis",
+    "report_history": "Report History",
+    "notifications": "Notifications",
+    "help": "Help & Support",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "client_upload": {
+  "title": "Client Upload",
+  "placeholders": {
+    "title": "Title",
+    "country": "Country",
+    "email": "Email"
+  },
+  "drag_or_click": "Drag and drop a file here, or click to select",
+  "drop_here": "Drop the file here...",
+  "uploading": "Uploading...",
+  "invalid_file": "Invalid file type",
+  "select_file": "Please select a file",
+  "success": "✅ Upload successful!",
+  "no_url": "❌ Upload failed. No URL returned.",
+  "network_error": "❌ Upload failed. Check network.",
+  "upload_btn": "Upload",
+  "email_subject": "Upload received:",
+  "email_message": "Dear user,\n\nYour file titled \"{{title}}\" has been successfully uploaded and is under review.\n\nThank you.\n- ECOWAS Fisheries Team",
+  "modal": {
+    "title": "Upload Successful 🎉",
+    "body": "Thank you for submitting your report. You'll receive an email confirmation shortly.",
+    "close_btn": "Close"
+  }
+}
+
+  
+
+  
+}
+
+
+
+

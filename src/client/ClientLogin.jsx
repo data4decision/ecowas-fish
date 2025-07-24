@@ -3,10 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth, db } from '../firebase/firebase';
 import { doc, getDoc } from 'firebase/firestore';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 export default function ClientLogin() {
-  const { countryCode = '' } = useParams(); // fallback to empty string
+  const { countryCode = '' } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -15,8 +19,7 @@ export default function ClientLogin() {
 
   const authInstance = getAuth();
 
-  const isValidEmail = (email) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,12 +27,12 @@ export default function ClientLogin() {
     setMessage('');
 
     if (!email || !password) {
-      setError('Email and password are required.');
+      setError(t('login.errors.required'));
       return;
     }
 
     if (!isValidEmail(email)) {
-      setError('Please enter a valid email address.');
+      setError(t('login.errors.invalid_email'));
       return;
     }
 
@@ -43,7 +46,7 @@ export default function ClientLogin() {
       const userSnap = await getDoc(userRef);
 
       if (!userSnap.exists()) {
-        setError('User profile not found in Firestore.');
+        setError(t('login.errors.not_found'));
         await signOut(authInstance);
         return;
       }
@@ -53,42 +56,42 @@ export default function ClientLogin() {
       const firestoreCountry = userData?.countryCode || userData?.country || '';
       const urlCountry = countryCode || '';
 
-      console.log("✅ Firestore user country:", firestoreCountry);
-      console.log("🌍 URL countryCode:", urlCountry);
-
       if (
         userData?.role === 'client' &&
         firestoreCountry.toLowerCase() === urlCountry.toLowerCase()
       ) {
-        setMessage('Login successful!');
+        setMessage(t('login.success'));
         navigate(`/${urlCountry.toLowerCase()}/dashboard`);
       } else {
-        setError('Access denied. Your account is not authorized for this country.');
+        setError(t('login.errors.access_denied'));
         await signOut(authInstance);
       }
 
     } catch (err) {
       console.error('❌ Login error:', err);
-      setError(`Login failed: ${err.message}`);
+      setError(t('login.errors.login_failed', { message: err.message }));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white text-[#0b0b5c] px-4">
+    <div className="relative min-h-screen flex items-center justify-center bg-white text-[#0b0b5c] px-4">
+      <div className="absolute top-4 right-4">
+        <LanguageSwitcher />
+      </div>
       <form
         onSubmit={handleLogin}
         className="bg-white shadow-md border border-[#f47b20] rounded px-8 pt-6 pb-8 w-full max-w-md"
       >
-        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">{t('login.title')}</h2>
         {message && <p className="text-green-600 mb-3">{message}</p>}
         {error && <p className="text-red-600 mb-3">{error}</p>}
 
         <div className="mb-4">
           <input
             type="email"
-            placeholder="Enter email"
+            placeholder={t('login.email_placeholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value.trim())}
             required
@@ -98,7 +101,7 @@ export default function ClientLogin() {
         <div className="mb-4">
           <input
             type="password"
-            placeholder="Enter password"
+            placeholder={t('login.password_placeholder')}
             value={password}
             onChange={(e) => setPassword(e.target.value.trim())}
             required
@@ -111,17 +114,17 @@ export default function ClientLogin() {
           className="bg-[#0b0b5c] text-white py-2 px-4 rounded hover:bg-[#f47b20] w-full mb-4 disabled:bg-gray-400"
           disabled={loading}
         >
-          {loading ? 'Logging In...' : 'Login'}
+          {loading ? t('login.loading') : t('login.button')}
         </button>
 
         <div className="text-center text-sm">
           <p>
-            Don’t have an account?{' '}
+            {t('login.no_account')}{' '}
             <span
               onClick={() => navigate(`/${countryCode.toLowerCase() || 'ng'}/signup`)}
               className="cursor-pointer text-[#f47b20] underline"
             >
-              Sign Up
+              {t('login.signup')}
             </span>
           </p>
           <p className="mt-2">
@@ -129,7 +132,7 @@ export default function ClientLogin() {
               onClick={() => navigate(`/${countryCode.toLowerCase() || 'ng'}/forgot-password`)}
               className="cursor-pointer text-[#0b0b5c] underline"
             >
-              Forgot Password?
+              {t('login.forgot_password')}
             </span>
           </p>
         </div>

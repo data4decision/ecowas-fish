@@ -1,4 +1,3 @@
-// ✅ DashboardWelcomeSection.jsx
 import React from 'react';
 import {
   CloudUpload,
@@ -6,8 +5,11 @@ import {
   CalendarDays,
   FileText
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function DashboardWelcomeSection({ user, country, stats, loading }) {
+  const { t } = useTranslation();
+
   const {
     lastUploadDate,
     lastDownloadDate,
@@ -17,20 +19,22 @@ export default function DashboardWelcomeSection({ user, country, stats, loading 
   } = stats || {};
 
   const formatDate = (date) =>
-    date ? new Date(date).toLocaleDateString('en-GB', {
+    date ? new Date(date).toLocaleDateString(undefined, {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
-    }) : 'No uploads yet';
+    }) : t('dashboard.no_uploads');
 
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-6 bg-white rounded shadow-md">
       <div className="mb-6">
         <h2 className="text-2xl font-semibold text-[#0b0b5c]">
-          Welcome, {user?.displayName?.split(' ')[0] || user?.email?.split('@')[0] || 'User'} 👋
+          {t('dashboard.welcome', {
+            name: user?.displayName?.split(' ')[0] || user?.email?.split('@')[0] || t('dashboard.user')
+          })}
         </h2>
         <p className="text-sm text-gray-600 mt-1">
-          Dashboard for <span className="font-medium text-[#f47b20]">{country}</span>
+          {t('dashboard.for')} <span className="font-medium text-[#f47b20]">{country}</span>
         </p>
       </div>
 
@@ -38,9 +42,9 @@ export default function DashboardWelcomeSection({ user, country, stats, loading 
         <div className="flex items-center gap-3 p-4 border border-gray-100 bg-gray-50 rounded">
           <CloudUpload className="text-[#f47b20]" size={20} />
           <div>
-            <p className="text-sm text-gray-500">Last Upload</p>
+            <p className="text-sm text-gray-500">{t('dashboard.last_upload')}</p>
             <p className="font-medium text-[#0b0b5c]">
-              {loading ? 'Loading...' : formatDate(lastUploadDate)}
+              {loading ? t('dashboard.loading') : formatDate(lastUploadDate)}
             </p>
           </div>
         </div>
@@ -48,18 +52,30 @@ export default function DashboardWelcomeSection({ user, country, stats, loading 
         <div className="flex items-center gap-3 p-4 border border-gray-100 bg-gray-50 rounded">
           <CloudDownload className="text-[#f47b20]" size={20} />
           <div>
-            <p className="text-sm text-gray-500">Last Download</p>
+            <p className="text-sm text-gray-500">{t('dashboard.last_download')}</p>
             <p className="font-medium text-[#0b0b5c]">
-              {loading ? 'Loading...' : formatDate(lastDownloadDate)}
+              {loading ? t('dashboard.loading') : formatDate(lastDownloadDate)}
             </p>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <StatCard icon={<CloudUpload size={22} className="text-white" />} label="Total Uploads" value={loading ? '...' : totalUploads} />
-        <StatCard icon={<CalendarDays size={22} className="text-white" />} label="Months Covered" value={loading ? '...' : monthsCovered} />
-        <StatCard icon={<FileText size={22} className="text-white" />} label="Report Types" value={loading ? '...' : reportTypes} />
+        <StatCard
+          icon={<CloudUpload size={22} className="text-white" />}
+          label={t('dashboard.total_uploads')}
+          value={loading ? '...' : totalUploads}
+        />
+        <StatCard
+          icon={<CalendarDays size={22} className="text-white" />}
+          label={t('dashboard.months_covered')}
+          value={loading ? '...' : monthsCovered}
+        />
+        <StatCard
+          icon={<FileText size={22} className="text-white" />}
+          label={t('dashboard.report_types')}
+          value={loading ? '...' : reportTypes}
+        />
       </div>
     </section>
   );

@@ -1,0 +1,82 @@
+{
+  "welcome": "Welcome to my website",
+  "description": "This is a description",
+  "button_english": "English",
+  "button_portuguese": "Português",
+  "button_french": "Français",
+  "hero_heading": "Empowering Fisheries Data for Sustainable Development in ECOWAS.",
+  "hero_description": "Track, analyze, and manage country-level fisheries data in one unified platform.",
+  "get_started": "Get Started",
+  "explore_countries": "Explore Countries",
+  "features": {
+    "platform_features": "Platform Features",
+    "description": "Designed to make data-driven fisheries governance simple, secure, and scalable.",
+    "country_specific_dashboards": "Country-specific Dashboards",
+    "country_specific_dashboards_desc": "Each ECOWAS nation gets a dedicated dashboard to manage and review fisheries data effectively.",
+    "secure_data_uploads": "Secure Data Uploads",
+    "secure_data_uploads_desc": "Robust authentication and secure cloud storage to ensure data integrity and privacy.",
+    "real_time_analytics": "Real-time Analytics",
+    "real_time_analytics_desc": "Instant insights to track patterns, trends, and performance metrics across the region.",
+    "centralized_oversight": "Centralized Oversight",
+    "centralized_oversight_desc": "Admin panel for monitoring, managing permissions, and regional coordination."
+  },
+  "flag_grid": {
+    "explore_ecowas_countries": "Explore ECOWAS Countries",
+    "select_country": "Select a country below to access its fisheries dashboard"
+  },
+  "stories": {
+    "title": "Success Stories",
+    "description": "Real impact across ECOWAS nations",
+    "ghana_feedback": "Ghana improved monthly fisheries reporting accuracy by 40% within six months using the platform.",
+    "nigeria_feedback": "The dashboard enabled real-time oversight and eliminated reporting delays across multiple states.",
+    "senegal_feedback": "Our local teams now submit verified catch data weekly, improving compliance and insights."
+  },
+  "footer": {
+    "company_name": "Data4Decision International",
+    "company_description": "Advancing sustainable fisheries management through data-driven solutions across West Africa.",
+    "quick_links": "Quick Links",
+    "contact": "Contact",
+    "privacy_policy": "Privacy Policy",
+    "terms_of_use": "Terms of Use",
+    "follow_us": "Follow Us",
+    "all_rights_reserved": "All rights reserved"
+  },
+  "navbar": {
+    "company_name": "Data4Decision International",
+    "about": "About",
+    "countries": "Countries",
+    "admin_login": "Admin Login",
+    "get_started": "Get Started"
+  },
+  "admin_kpi": {
+    "dashboard_overview": "Admin Dashboard Overview",
+    "year": "Year",
+    "total_ecowas_countries": "Total ECOWAS Countries",
+    "years_covered": "Years of Data Covered",
+    "selected_year": "Selected Year",
+    "avg_total_fish_catch": "Avg Total Fish Catch (MT/year)",
+    "avg_post_harvest_loss": "Avg Post-Harvest Loss Rate (%)",
+    "total_registered_fishers": "Total Registered Fishers",
+    "digital_reporting": "Countries with Digital Reporting (%)",
+    "avg_enforcement_capacity": "Avg Enforcement Capacity Score",
+    "avg_budget_execution": "Avg Budget Execution Rate (%)",
+    "avg_indicator": "Avg {{indicator}}"
+  },
+  "admin_login_page": {
+    "title": "Admin Login",
+    "email_placeholder": "Enter admin email",
+    "password_placeholder": "Enter password",
+    "login_button": "Login",
+    "logging_in": "Logging In...",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don’t have an account?",
+    "signup": "Sign up",
+    "errors": {
+      "empty_fields": "Please fill in all fields.",
+      "invalid_email": "Invalid email format.",
+      "incorrect": "Incorrect email or password.",
+      "access_denied": "Access denied. Unauthorized role.",
+      "not_found": "User not found."
+    }
+  }
+}

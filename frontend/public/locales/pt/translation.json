@@ -1,0 +1,82 @@
+{
+  "welcome": "Bem-vindo ao meu site",
+  "description": "Esta é uma descrição",
+  "button_english": "Inglês",
+  "button_portuguese": "Português",
+  "button_french": "Francês",
+  "hero_heading": "Empoderando os Dados de Pesca para o Desenvolvimento Sustentável na CEDEAO.",
+  "hero_description": "Rastreie, analise e gerencie dados pesqueiros em nível de país em uma plataforma unificada.",
+  "get_started": "Começar",
+  "explore_countries": "Explorar Países",
+  "features": {
+    "platform_features": "Recursos da Plataforma",
+    "description": "Projetado para tornar a governança de pesca baseada em dados simples, segura e escalável.",
+    "country_specific_dashboards": "Painéis Específicos por País",
+    "country_specific_dashboards_desc": "Cada nação da CEDEAO recebe um painel dedicado para gerenciar e revisar os dados de pesca de forma eficaz.",
+    "secure_data_uploads": "Envios de Dados Seguros",
+    "secure_data_uploads_desc": "Autenticação robusta e armazenamento seguro em nuvem para garantir a integridade e a privacidade dos dados.",
+    "real_time_analytics": "Análises em Tempo Real",
+    "real_time_analytics_desc": "Insights instantâneos para acompanhar padrões, tendências e métricas de desempenho em toda a região.",
+    "centralized_oversight": "Supervisão Centralizada",
+    "centralized_oversight_desc": "Painel de administração para monitorar, gerenciar permissões e coordenar a região."
+  },
+  "flag_grid": {
+    "explore_ecowas_countries": "Explorar Países da CEDEAO",
+    "select_country": "Selecione um país abaixo para acessar o painel de pesca"
+  },
+  "stories": {
+    "title": "Histórias de Sucesso",
+    "description": "Impacto real em nações da CEDEAO",
+    "ghana_feedback": "Gana melhorou a precisão dos relatórios mensais de pesca em 40% em seis meses usando a plataforma.",
+    "nigeria_feedback": "O painel permitiu supervisão em tempo real e eliminou atrasos nos relatórios em vários estados.",
+    "senegal_feedback": "Nossas equipes locais agora enviam dados verificados de captura semanalmente, melhorando a conformidade e os insights."
+  },
+  "footer": {
+    "company_name": "Data4Decision Internacional",
+    "company_description": "Avançando na gestão sustentável da pesca por meio de soluções baseadas em dados em toda a África Ocidental.",
+    "quick_links": "Links Rápidos",
+    "contact": "Contato",
+    "privacy_policy": "Política de Privacidade",
+    "terms_of_use": "Termos de Uso",
+    "follow_us": "Siga-nos",
+    "all_rights_reserved": "Todos os direitos reservados"
+  },
+  "navbar": {
+    "company_name": "Data4Decision Internacional",
+    "about": "Sobre",
+    "countries": "Países",
+    "admin_login": "Login do Administrador",
+    "get_started": "Começar"
+  },
+  "admin_kpi": {
+    "dashboard_overview": "Visão Geral do Painel de Administração",
+    "year": "Ano",
+    "total_ecowas_countries": "Total de Países da CEDEAO",
+    "years_covered": "Anos de Dados Cobertos",
+    "selected_year": "Ano Selecionado",
+    "avg_total_fish_catch": "Média de Captura Total de Peixes (MT/ano)",
+    "avg_post_harvest_loss": "Média da Taxa de Perda Pós-Colheita (%)",
+    "total_registered_fishers": "Total de Pescadores Registrados",
+    "digital_reporting": "Países com Relatórios Digitais (%)",
+    "avg_enforcement_capacity": "Média da Capacidade de Fiscalização",
+    "avg_budget_execution": "Média da Taxa de Execução Orçamentária (%)",
+    "avg_indicator": "Média de {{indicator}}"
+  },
+  "admin_login_page": {
+    "title": "Login do Administrador",
+    "email_placeholder": "Digite o e-mail do administrador",
+    "password_placeholder": "Digite a senha",
+    "login_button": "Entrar",
+    "logging_in": "Entrando...",
+    "forgot_password": "Esqueceu a senha?",
+    "no_account": "Não tem uma conta?",
+    "signup": "Cadastre-se",
+    "errors": {
+      "empty_fields": "Por favor, preencha todos os campos.",
+      "invalid_email": "Formato de e-mail inválido.",
+      "incorrect": "E-mail ou senha incorretos.",
+      "access_denied": "Acesso negado. Papel não autorizado.",
+      "not_found": "Usuário não encontrado."
+    }
+  }
+}

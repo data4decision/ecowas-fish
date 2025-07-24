@@ -1,0 +1,214 @@
+{
+  "welcome": "Bem-vindo ao meu site",
+  "description": "Esta é uma descrição",
+  "button_english": "Inglês",
+  "button_portuguese": "Português",
+  "button_french": "Francês",
+
+  "hero_heading": "Aproveitando os dados da pesca para o desenvolvimento sustentável na CEDEAO.",
+  "hero_description": "Acompanhe, analise e gerencie dados de pesca em nível nacional em uma plataforma unificada.",
+  "get_started": "Começar",
+  "explore_countries": "Explorar países",
+
+  "features": {
+    "platform_features": "Recursos da Plataforma",
+    "description": "Projetado para tornar a governança da pesca baseada em dados simples, segura e escalável.",
+    "country_specific_dashboards": "Painéis específicos por país",
+    "country_specific_dashboards_desc": "Cada país da CEDEAO possui um painel dedicado para gerenciar e visualizar eficientemente os dados de pesca.",
+    "secure_data_uploads": "Uploads de dados seguros",
+    "secure_data_uploads_desc": "Autenticação robusta e armazenamento em nuvem seguro para garantir a integridade e confidencialidade dos dados.",
+    "real_time_analytics": "Análises em tempo real",
+    "real_time_analytics_desc": "Informações instantâneas para acompanhar padrões, tendências e indicadores em toda a região.",
+    "centralized_oversight": "Supervisão Centralizada",
+    "centralized_oversight_desc": "Painel administrativo para monitorar, gerenciar permissões e coordenar a região."
+  },
+
+  "flag_grid": {
+    "explore_ecowas_countries": "Explorar os países da CEDEAO",
+    "select_country": "Selecione um país abaixo para acessar seu painel de pesca"
+  },
+
+  "stories": {
+    "title": "Histórias de Sucesso",
+    "description": "Impacto real nos países da CEDEAO",
+    "ghana_feedback": "Gana melhorou a precisão dos seus relatórios mensais de pesca em 40% em seis meses utilizando a plataforma.",
+    "nigeria_feedback": "O painel permitiu supervisão em tempo real e eliminou atrasos nos relatórios em vários estados.",
+    "senegal_feedback": "Nossas equipes locais agora enviam dados de captura verificados semanalmente, melhorando a conformidade e as análises."
+  },
+
+  "footer": {
+    "company_name": "Data4Decision International",
+    "company_description": "Avançando a gestão sustentável da pesca com soluções baseadas em dados na África Ocidental.",
+    "quick_links": "Links rápidos",
+    "contact": "Contato",
+    "privacy_policy": "Política de Privacidade",
+    "terms_of_use": "Termos de Uso",
+    "follow_us": "Siga-nos",
+    "all_rights_reserved": "Todos os direitos reservados"
+  },
+
+  "navbar": {
+    "company_name": "Data4Decision International",
+    "about": "Sobre",
+    "countries": "Países",
+    "admin_login": "Login do Admin",
+    "get_started": "Começar",
+  "welcome": "Bem-vindo {{name}}",
+  "profile": "Perfil",
+  "logout": "Sair"
+},
+
+  "admin_kpi": {
+    "dashboard_overview": "Visão Geral do Painel Administrativo",
+    "year": "Ano",
+    "total_ecowas_countries": "Total de Países da CEDEAO",
+    "years_covered": "Anos Abrangidos",
+    "selected_year": "Ano Selecionado",
+    "avg_total_fish_catch": "Média da Captura Total de Peixes (MT/ano)",
+    "avg_post_harvest_loss": "Média da Perda Pós-Colheita (%)",
+    "total_registered_fishers": "Total de Pescadores Registrados",
+    "digital_reporting": "Países com Relatórios Digitais (%)",
+    "avg_enforcement_capacity": "Capacidade Média de Fiscalização",
+    "avg_budget_execution": "Média de Execução do Orçamento (%)",
+    "avg_indicator": "Média de {{indicator}}"
+  },
+
+  "admin_login_page": {
+    "title": "Login do Administrador",
+    "email_placeholder": "Digite o e-mail do administrador",
+    "password_placeholder": "Digite a senha",
+    "login_button": "Entrar",
+    "logging_in": "Fazendo login...",
+    "forgot_password": "Esqueceu a senha?",
+    "no_account": "Não tem uma conta?",
+    "signup": "Inscrever-se",
+    "errors": {
+      "empty_fields": "Por favor, preencha todos os campos.",
+      "invalid_email": "Formato de e-mail inválido.",
+      "incorrect": "E-mail ou senha incorretos.",
+      "access_denied": "Acesso negado. Função não autorizada.",
+      "not_found": "Usuário não encontrado."
+    }
+  },
+
+  "client_trends": {
+    "title": "Tendências Anuais",
+    "export_csv": "Exportar CSV",
+    "export_pdf": "Exportar PDF",
+    "download_png": "Baixar PNG",
+    "reset_filters": "Redefinir Filtros",
+    "indicator_category": "Categoria de Indicador",
+    "indicators": "Indicadores",
+    "year_range": "Intervalo de anos",
+    "showing_years": "Mostrando anos: 2000 a {{year}}",
+    "toggle_group": "Alternar {{group}}",
+    "report_title": "Relatório de Tendências da Pesca – {{country}}",
+    "report_indicators": "Indicadores: {{indicators}}",
+    "report_exported": "Exportado: {{date}}",
+    "loading": "Carregando..."
+  },
+  "indicator_groups": {
+  "All": "Todos",
+  "Economic": "Econômico",
+  "Catch": "Captura",
+  "Post-harvest": "Pós-colheita"
+},
+  "signup": {
+    "title": "Cadastro do Cliente",
+    "surname": "Sobrenome",
+    "firstName": "Primeiro Nome",
+    "lastName": "Último Nome",
+    "email": "E-mail",
+    "password": "Senha",
+    "phone": "Número de telefone (ex.: {{prefix}}...)",
+    "submit": "Cadastrar",
+    "loading": "Cadastrando...",
+    "login_prompt": "Já tem uma conta?",
+    "login_link": "Entrar",
+    "errors": {
+      "required": "Todos os campos são obrigatórios.",
+      "invalid_email": "Por favor, insira um endereço de e-mail válido.",
+      "short_password": "A senha deve ter pelo menos 6 caracteres.",
+      "invalid_country": "Este cadastro é apenas para {{country}}. Use um número {{prefix}}.",
+      "signup_failed": "Falha no cadastro: {{message}}"
+    }
+  },
+  "login": {
+  "title": "Login",
+  "email_placeholder": "Digite o e-mail",
+  "password_placeholder": "Digite a senha",
+  "button": "Entrar",
+  "loading": "Entrando...",
+  "no_account": "Não tem uma conta?",
+  "signup": "Cadastrar-se",
+  "forgot_password": "Esqueceu a senha?",
+  "success": "Login bem-sucedido!",
+  "errors": {
+    "required": "E-mail e senha são obrigatórios.",
+    "invalid_email": "Por favor, insira um e-mail válido.",
+    "not_found": "Perfil do usuário não encontrado no Firestore.",
+    "access_denied": "Acesso negado. Sua conta não está autorizada para este país.",
+    "login_failed": "Falha no login: {{message}}"
+  }
+},
+
+"dashboard": {
+  "welcome": "Bem-vindo, {{name}} 👋",
+  "for": "Painel de controle de",
+  "last_upload": "Último envio",
+  "last_download": "Último download",
+  "total_uploads": "Total de envios",
+  "months_covered": "Meses cobertos",
+  "report_types": "Tipos de relatórios",
+  "loading": "Carregando...",
+  "no_uploads": "Nenhum envio ainda",
+  "user": "Usuário"
+},
+  "sidebar": {
+  "dashboard": "Painel de controle",
+  "upload": "Carregar dados",
+  "download": "Baixar dados",
+  "yearly_trends": "Tendências anuais",
+  "kpi_analysis": "Análise de KPIs",
+  "report_history": "Histórico de relatórios",
+  "notifications": "Notificações",
+  "help": "Ajuda e suporte",
+  "settings": "Configurações",
+  "logout": "Sair"
+},
+"client_upload": {
+  "title": "Envio do Cliente",
+  "placeholders": {
+    "title": "Título",
+    "country": "País",
+    "email": "E-mail"
+  },
+  "drag_or_click": "Arraste e solte um arquivo aqui, ou clique para selecionar",
+  "drop_here": "Solte o arquivo aqui...",
+  "uploading": "Carregando...",
+  "invalid_file": "Tipo de arquivo inválido",
+  "select_file": "Por favor, selecione um arquivo",
+  "success": "✅ Envio realizado com sucesso!",
+  "no_url": "❌ Falha no envio. Nenhuma URL retornada.",
+  "network_error": "❌ Falha no envio. Verifique sua conexão.",
+  "upload_btn": "Enviar",
+  "email_subject": "Envio recebido:",
+  "email_message": "Prezado usuário,\n\nSeu arquivo intitulado \"{{title}}\" foi carregado com sucesso e está em revisão.\n\nObrigado.\n- Equipe de Pescas da CEDEAO",
+  "modal": {
+    "title": "Envio bem-sucedido 🎉",
+    "body": "Obrigado por enviar seu relatório. Você receberá um e-mail de confirmação em breve.",
+    "close_btn": "Fechar"
+  }
+}
+
+}
+
+
+
+
+
+
+
+
+
+
