@@ -91,16 +91,17 @@ export default function AdminKpiCards() {
           </select>
 
           <select
-            className="border rounded-lg px-3 py-2 text-sm text-[#0b0b5c]"
-            value={indicator || ""}
-            onChange={(e) => setIndicator(e.target.value)}
-          >
-            {indicators.map((ind, i) => (
-              <option key={i} value={ind}>
-                {ind}
-              </option>
-            ))}
-          </select>
+  className="border rounded-lg px-3 py-2 text-sm text-[#0b0b5c]"
+  value={indicator || ""}
+  onChange={(e) => setIndicator(e.target.value)}
+>
+  {indicators.map((ind, i) => (
+    <option key={i} value={ind}>
+      {t(ind, { ns: 'indicator' })}
+    </option>
+  ))}
+</select>
+
         </div>
       </div>
 

@@ -14,18 +14,16 @@ import { ArrowUpRight, ArrowDownRight } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { CSVLink } from "react-csv";
-// import SocioEconomicCharts from "../components/SocioEconomicCharts";
-
-// import EnvironmentalResilience from "../components/EnvironmentalResilience";
+import { useTranslation } from "react-i18next";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
 const KPI_FIELDS = [
-  { key: "Total fish catch (MT/year)", label: "Total Fish Catch (MT)", category: "Catch" },
-  { key: "% contribution of fisheries to food security", label: "% Contribution to Food Security", category: "Social" },
-  { key: "Number of active fishing vessels", label: "Active Fishing Vessels", category: "Catch" },
-  { key: "Number of active fisher cooperatives", label: "Fisher Cooperatives", category: "Economic" },
-  { key: "% of fishers trained on sustainable practices", label: "% Sustainable Zones Enforced", category: "Environmental" },
+  { key: "Total fish catch (MT/year)", category: "Catch" },
+  { key: "% contribution of fisheries to food security", category: "Social" },
+  { key: "Number of active fishing vessels", category: "Catch" },
+  { key: "Number of active fisher cooperatives", category: "Economic" },
+  { key: "% of fishers trained on sustainable practices", category: "Environmental" },
 ];
 
 const countryMap = {
@@ -51,6 +49,8 @@ export default function ClientKPI({ user }) {
   const [selectedYear, setSelectedYear] = useState(null);
   const [compareAvg, setCompareAvg] = useState(false);
   const [category, setCategory] = useState("All");
+  const { t } = useTranslation();
+
   const rawCode = user?.countryCode?.toLowerCase() || "ng";
   const mappedCode = countryMap[rawCode] || rawCode;
 
@@ -104,10 +104,10 @@ export default function ClientKPI({ user }) {
 
   const handleExportPDF = () => {
     const doc = new jsPDF();
-    doc.text("Fisheries KPI Report", 14, 12);
-    doc.text(`Country: ${mappedCode.toUpperCase()} | Year: ${selectedYear}`, 14, 20);
-    const tableData = KPI_FIELDS.map(({ key, label }) => [label, selectedData[key] ?? 0]);
-    autoTable(doc, { head: [["Indicator", "Value"]], body: tableData, startY: 30 });
+    doc.text(t("client_kpi.title"), 14, 12);
+    doc.text(`${t("client_kpi.category")}: ${mappedCode.toUpperCase()} | ${t("client_kpi.select_year")}: ${selectedYear}`, 14, 20);
+    const tableData = KPI_FIELDS.map(({ key }) => [t(`client_kpi.indicators.${key}`), selectedData[key] ?? 0]);
+    autoTable(doc, { head: [[t("client_kpi.indicators.Indicator"), t("client_kpi.indicators.Value")]], body: tableData, startY: 30 });
     doc.save("kpi-report.pdf");
   };
 
@@ -116,29 +116,34 @@ export default function ClientKPI({ user }) {
   return (
     <div className="p-4">
       <div className="flex flex-wrap gap-4 mb-4 items-center">
-        <label>Select Year: <select value={selectedYear} onChange={e => setSelectedYear(+e.target.value)} className="ml-1 border rounded p-1">{years.map(y => <option key={y}>{y}</option>)}</select></label>
-        <label>Category:
-          <select value={category} onChange={e => setCategory(e.target.value)} className="ml-1 border rounded p-1">
-            <option>All</option>
-            <option>Catch</option>
-            <option>Social</option>
-            <option>Economic</option>
-            <option>Environmental</option>
+        <label>{t("client_kpi.select_year")}:
+          <select value={selectedYear} onChange={e => setSelectedYear(+e.target.value)} className="ml-1 border rounded p-1">
+            {years.map(y => <option key={y}>{y}</option>)}
           </select>
         </label>
+        <label>{t("client_kpi.category")}:
+  <select value={category} onChange={e => setCategory(e.target.value)} className="ml-1 border rounded p-1">
+    <option value="All">{t("client_kpi.categories.All")}</option>
+    <option value="Catch">{t("client_kpi.categories.Catch")}</option>
+    <option value="Social">{t("client_kpi.categories.Social")}</option>
+    <option value="Economic">{t("client_kpi.categories.Economic")}</option>
+    <option value="Environmental">{t("client_kpi.categories.Environmental")}</option>
+  </select>
+</label>
+
         <label className="flex items-center gap-1">
-          <input type="checkbox" checked={compareAvg} onChange={() => setCompareAvg(!compareAvg)} /> Compare to Avg:
+          <input type="checkbox" checked={compareAvg} onChange={() => setCompareAvg(!compareAvg)} /> {t("client_kpi.compare_avg")}:
         </label>
-        <button className="bg-blue-600 text-white px-3 py-1 rounded" onClick={handleExportPDF}>Export PDF</button>
+        <button className="bg-blue-600 text-white px-3 py-1 rounded" onClick={handleExportPDF}>{t("client_kpi.export_pdf")}</button>
         <CSVLink
-          data={filteredFields.map(({ key, label }) => ({ Indicator: label, Value: selectedData[key] ?? 0 }))}
+          data={filteredFields.map(({ key }) => ({ Indicator: t(`client_kpi.indicators.${key}`), Value: selectedData[key] ?? 0 }))}
           filename={`kpi-report-${mappedCode}-${selectedYear}.csv`}
           className="bg-green-600 text-white px-3 py-1 rounded"
-        >Export CSV</CSVLink>
+        >{t("client_kpi.export_csv")}</CSVLink>
       </div>
 
       <div className="grid md:grid-cols-3 gap-4">
-        {filteredFields.map(({ key, label, category }, idx) => {
+        {filteredFields.map(({ key, category }, idx) => {
           const current = selectedData[key] ?? 0;
           const previous = previousData[key] ?? 0;
           const change = getChange(current, previous);
@@ -147,19 +152,16 @@ export default function ClientKPI({ user }) {
 
           return (
             <div key={key} className="bg-white rounded-xl shadow p-4 h-full">
-              <h4 className="text-sm font-medium text-gray-500">{label}</h4>
+              <h4 className="text-sm font-medium text-gray-500">{t(`client_kpi.indicators.${key}`)}</h4>
               <p className="text-2xl font-bold text-[#0b0b5c]">{current.toLocaleString()}</p>
-              {change !== null && <p className={`text-sm ${change >= 0 ? "text-green-600" : "text-red-600"}`}>{change >= 0 ? <ArrowUpRight className="inline w-4 h-4" /> : <ArrowDownRight className="inline w-4 h-4" />} {Math.abs(change)}% from {selectedYear - 1}</p>}
-              {compareAvg && <p className="text-xs text-gray-500">{(current - avg).toFixed(1)} vs avg ({avg.toFixed(1)})</p>}
+              {change !== null && <p className={`text-sm ${change >= 0 ? "text-green-600" : "text-red-600"}`}>{change >= 0 ? <ArrowUpRight className="inline w-4 h-4" /> : <ArrowDownRight className="inline w-4 h-4" />} {Math.abs(change)}% {t("client_kpi.change_from", { change: Math.abs(change), year: selectedYear - 1 })}</p>}
+              {compareAvg && <p className="text-xs text-gray-500">{t("client_kpi.avg_comparison", { diff: (current - avg).toFixed(1), avg: avg.toFixed(1) })}</p>}
               {renderSparkline(key, color)}
-              <p className="text-xs text-gray-400 mt-1">{category} KPI tracking fisheries performance over time.</p>
+              <p className="text-xs text-gray-400 mt-1">{t("client_kpi.kpi_description", { category })}</p>
             </div>
           );
         })}
-        
       </div>
-      {/* <SocioEconomicCharts/> */}
-      {/* <EnvironmentalResilience/> */}
     </div>
   );
 }

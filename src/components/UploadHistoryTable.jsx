@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { db } from "../firebase/firebase";
 import { collection, query, where, onSnapshot, doc, deleteDoc } from "firebase/firestore";
 import { saveAs } from "file-saver";
 
 export default function UploadHistoryTable({ user }) {
+  const { t } = useTranslation();
   const [uploads, setUploads] = useState([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -25,7 +27,7 @@ export default function UploadHistoryTable({ user }) {
   };
 
   const handleDelete = async (id) => {
-    const confirm = window.confirm("Are you sure you want to delete this file?");
+    const confirm = window.confirm(t("upload_table.confirm_delete"));
     if (confirm) {
       await deleteDoc(doc(db, "uploads", id));
     }
@@ -55,15 +57,15 @@ export default function UploadHistoryTable({ user }) {
             }}
             className="border px-3 py-1 rounded"
           >
-            <option value="">All Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
+            <option value="">{t("upload_table.all_status")}</option>
+            <option value="pending">{t("upload_table.pending")}</option>
+            <option value="approved">{t("upload_table.approved")}</option>
+            <option value="rejected">{t("upload_table.rejected")}</option>
           </select>
 
           <input
             type="text"
-            placeholder="Search by title"
+            placeholder={t("upload_table.search_placeholder")}
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -78,11 +80,11 @@ export default function UploadHistoryTable({ user }) {
         <table className="min-w-full divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-100 text-left text-[#0b0b5c]">
             <tr>
-              <th className="p-2">Title</th>
-              <th className="p-2">Country</th>
-              <th className="p-2">Status</th>
-              <th className="p-2">File</th>
-              <th className="p-2">Actions</th>
+              <th className="p-2">{t("upload_table.title")}</th>
+              <th className="p-2">{t("upload_table.country")}</th>
+              <th className="p-2">{t("upload_table.status")}</th>
+              <th className="p-2">{t("upload_table.file")}</th>
+              <th className="p-2">{t("upload_table.actions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -100,34 +102,38 @@ export default function UploadHistoryTable({ user }) {
                         : "bg-yellow-500"
                     }`}
                   >
-                    {upload.status}
+                    {t(`upload_table.${upload.status}`)}
                   </span>
                 </td>
                 <td className="p-2">
-                  {upload.url.includes(".pdf") ? "📕" :
-                   upload.url.includes(".docx") ? "📄" :
-                   upload.url.includes(".xlsx") ? "📊" :
-                   upload.url.includes(".png") || upload.url.includes(".jpg") ? "🖼️" :
-                   "📁"}
+                  {upload.url.includes(".pdf")
+                    ? "📕"
+                    : upload.url.includes(".docx")
+                    ? "📄"
+                    : upload.url.includes(".xlsx")
+                    ? "📊"
+                    : upload.url.includes(".png") || upload.url.includes(".jpg")
+                    ? "🖼️"
+                    : "📁"}
                 </td>
                 <td className="p-2 flex gap-2 flex-wrap">
                   <button
                     onClick={() => window.open(upload.url, "_blank")}
                     className="bg-gray-700 text-white px-2 py-1 rounded"
                   >
-                    Preview
+                    {t("upload_table.preview")}
                   </button>
                   <button
                     onClick={() => handleDownload(upload.url, upload.title)}
                     className="bg-blue-600 text-white px-2 py-1 rounded"
                   >
-                    Download
+                    {t("upload_table.download")}
                   </button>
                   <button
                     onClick={() => handleDelete(upload.id)}
                     className="bg-red-600 text-white px-2 py-1 rounded"
                   >
-                    Delete
+                    {t("upload_table.delete")}
                   </button>
                 </td>
               </tr>
@@ -135,7 +141,7 @@ export default function UploadHistoryTable({ user }) {
             {filteredUploads.length === 0 && (
               <tr>
                 <td colSpan="5" className="p-4 text-center text-gray-500">
-                  No uploads found.
+                  {t("upload_table.no_uploads")}
                 </td>
               </tr>
             )}
@@ -150,17 +156,17 @@ export default function UploadHistoryTable({ user }) {
             disabled={currentPage === 1}
             className="px-3 py-1 border rounded disabled:opacity-50"
           >
-            Prev
+            {t("upload_table.prev")}
           </button>
           <span className="text-[#0b0b5c] font-semibold">
-            Page {currentPage} of {totalPages}
+            {t("upload_table.page", { current: currentPage, total: totalPages })}
           </span>
           <button
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
             disabled={currentPage === totalPages}
             className="px-3 py-1 border rounded disabled:opacity-50"
           >
-            Next
+            {t("upload_table.next")}
           </button>
         </div>
       )}

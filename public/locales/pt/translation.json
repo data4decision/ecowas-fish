@@ -178,6 +178,7 @@
 },
 "client_upload": {
   "title": "Envio do Cliente",
+  "description": "Envie relatórios, imagens ou dados relacionados à pesca. Formatos aceitos: PDF, Word, Excel, JPG, PNG, GIF. Tamanho máximo: 10MB.",
   "placeholders": {
     "title": "Título",
     "country": "País",
@@ -185,30 +186,63 @@
   },
   "drag_or_click": "Arraste e solte um arquivo aqui, ou clique para selecionar",
   "drop_here": "Solte o arquivo aqui...",
-  "uploading": "Carregando...",
+  "uploading": "Enviando...",
   "invalid_file": "Tipo de arquivo inválido",
   "select_file": "Por favor, selecione um arquivo",
-  "success": "✅ Envio realizado com sucesso!",
+  "success": "✅ Envio bem-sucedido!",
   "no_url": "❌ Falha no envio. Nenhuma URL retornada.",
-  "network_error": "❌ Falha no envio. Verifique sua conexão.",
+  "network_error": "❌ Falha no envio. Verifique sua conexão de rede.",
   "upload_btn": "Enviar",
   "email_subject": "Envio recebido:",
-  "email_message": "Prezado usuário,\n\nSeu arquivo intitulado \"{{title}}\" foi carregado com sucesso e está em revisão.\n\nObrigado.\n- Equipe de Pescas da CEDEAO",
+  "email_message": "Caro usuário,\n\nSeu arquivo intitulado \"{{title}}\" foi enviado com sucesso e está sendo revisado.\n\nObrigado.\n- Equipe de Pesca da CEDEAO",
   "modal": {
     "title": "Envio bem-sucedido 🎉",
-    "body": "Obrigado por enviar seu relatório. Você receberá um e-mail de confirmação em breve.",
-    "close_btn": "Fechar"
+    "body": "Obrigado por enviar seu relatório. Você receberá uma confirmação por e-mail em breve.",
+    "close_btn": "Fechar",
+    "supported_formats": "Formatos suportados: PDF, DOCX, XLSX, JPG, PNG, GIF"
   }
+},
+"upload_table": {
+  "all_status": "Todos os status",
+  "pending": "Pendente",
+  "approved": "Aprovado",
+  "rejected": "Rejeitado",
+  "search_placeholder": "Pesquisar por título",
+  "title": "Título",
+  "country": "País",
+  "status": "Status",
+  "file": "Arquivo",
+  "actions": "Ações",
+  "preview": "Visualizar",
+  "download": "Baixar",
+  "delete": "Excluir",
+  "no_uploads": "Nenhum envio encontrado.",
+  "prev": "Anterior",
+  "next": "Próximo",
+  "page": "Página {{current}} de {{total}}",
+  "confirm_delete": "Tem certeza de que deseja excluir este arquivo?"
+},
+
+ "client_kpi": {
+  "title": "Relatório de Indicadores de Pesca",
+  "select_year": "Selecionar Ano",
+  "category": "Categoria",
+  "compare_avg": "Comparar com a média:",
+  "export_pdf": "Exportar PDF",
+  "export_csv": "Exportar CSV",
+  "categories": {
+    "All": "Todos",
+    "Catch": "Captura",
+    "Social": "Social",
+    "Economic": "Econômico",
+    "Environmental": "Ambiental"
+  },
+  "kpi_description": "Indicador {{category}} monitorando o desempenho da pesca ao longo do tempo.",
+  "change_from": "{{change}}% em relação a {{year}}",
+  "avg_comparison": "{{diff}} vs média ({{avg}})"
+},
+  "change_from": "{{change}}% em relação a {{year}}",
+  "vs_avg": "{{difference}} vs média ({{average}})",
+  "kpi_tracking": "Indicador {{category}} acompanhando o desempenho da pesca ao longo do tempo."
 }
-
-}
-
-
-
-
-
-
-
-
-
 

@@ -263,8 +263,9 @@
     "settings": "Paramètres",
     "logout": "Déconnexion"
   },
-  "client_upload": {
+ "client_upload": {
   "title": "Téléversement Client",
+  "description": "Téléversez des rapports, des images ou des données liées à la pêche. Formats acceptés : PDF, Word, Excel, JPG, PNG, GIF. Taille max : 10 Mo.",
   "placeholders": {
     "title": "Titre",
     "country": "Pays",
@@ -284,16 +285,37 @@
   "modal": {
     "title": "Téléversement réussi 🎉",
     "body": "Merci pour l’envoi de votre rapport. Vous recevrez bientôt une confirmation par e-mail.",
-    "close_btn": "Fermer"
+    "close_btn": "Fermer",
+    "supported_formats": "Formats pris en charge : PDF, DOCX, XLSX, JPG, PNG, GIF"
   }
+},
+"client_kpi": {
+  "title": "Rapport des Indicateurs Clés de Pêche",
+  "select_year": "Sélectionner l'année",
+  "category": "Catégorie",
+  "compare_avg": "Comparer à la moyenne :",
+  "export_pdf": "Exporter en PDF",
+  "export_csv": "Exporter en CSV",
+  "categories": {
+    "All": "Toutes",
+    "Catch": "Capture",
+    "Social": "Social",
+    "Economic": "Économique",
+    "Environmental": "Environnemental"
+  },
+  "indicators": {
+    "Total fish catch (MT/year)": "Capture totale de poisson (MT)",
+    "% contribution of fisheries to food security": "% de contribution des pêches à la sécurité alimentaire",
+    "Number of active fishing vessels": "Nombre de bateaux de pêche actifs",
+    "Number of active fisher cooperatives": "Nombre de coopératives de pêche actives",
+    "% of fishers trained on sustainable practices": "% de pêcheurs formés aux pratiques durables"
+  },
+  "kpi_description": "Indicateur {{category}} suivant la performance des pêches dans le temps.",
+  "change_from": "{{change}}% par rapport à {{year}}",
+  "avg_comparison": "{{diff}} vs moy. ({{avg}})"
+},
+  "change_from": "{{change}}% par rapport à {{year}}",
+  "vs_avg": "{{difference}} vs moyenne ({{average}})",
+  "kpi_tracking": "Indicateur {{category}} suivant les performances halieutiques dans le temps."
 }
-
-}
-
-
-
-
-
-
-
 

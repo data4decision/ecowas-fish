@@ -44,7 +44,7 @@ export default function DashboardLayout({ user }) {
 
         {/* Page Content */}
         <main
-          className={`p-4 mt-16 transition-all duration-300 overflow-x-hidden ${
+          className={`p-4 mt-16 ml-19 transition-all duration-300 overflow-x-hidden ${
             sidebarOpen ? (collapsed ? "md:ml-20" : "md:ml-64") : "md:ml-0"
           }`}
         >

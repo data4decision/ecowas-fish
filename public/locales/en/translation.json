@@ -260,6 +260,7 @@
   },
   "client_upload": {
   "title": "Client Upload",
+  "description": "Upload reports, images, or fisheries-related data. Accepted formats: PDF, Word, Excel, JPG, PNG, GIF. Max size: 10MB.",
   "placeholders": {
     "title": "Title",
     "country": "Country",
@@ -272,21 +273,48 @@
   "select_file": "Please select a file",
   "success": "✅ Upload successful!",
   "no_url": "❌ Upload failed. No URL returned.",
-  "network_error": "❌ Upload failed. Check network.",
+  "network_error": "❌ Upload failed. Please check your network connection.",
   "upload_btn": "Upload",
-  "email_subject": "Upload received:",
-  "email_message": "Dear user,\n\nYour file titled \"{{title}}\" has been successfully uploaded and is under review.\n\nThank you.\n- ECOWAS Fisheries Team",
+  "email_subject": "Upload Received:",
+  "email_message": "Dear user,\n\nYour file titled \"{{title}}\" has been uploaded successfully and is under review.\n\nThank you.\n- ECOWAS Fisheries Team",
   "modal": {
     "title": "Upload Successful 🎉",
-    "body": "Thank you for submitting your report. You'll receive an email confirmation shortly.",
-    "close_btn": "Close"
+    "body": "Thank you for submitting your report. You will receive an email confirmation soon.",
+    "close_btn": "Close",
+    "supported_formats": "Supported formats: PDF, DOCX, XLSX, JPG, PNG, GIF"
   }
+},
+"client_kpi": {
+  "title": "Fisheries KPI Report",
+  "select_year": "Select Year",
+  "category": "Category",
+  "compare_avg": "Compare to Avg:",
+  "export_pdf": "Export PDF",
+  "export_csv": "Export CSV",
+  "categories": {
+    "All": "All",
+    "Catch": "Catch",
+    "Social": "Social",
+    "Economic": "Economic",
+    "Environmental": "Environmental"
+  },
+  "indicators": {
+    "Total fish catch (MT/year)": "Total Fish Catch (MT)",
+    "% contribution of fisheries to food security": "% Contribution to Food Security",
+    "Number of active fishing vessels": "Active Fishing Vessels",
+    "Number of active fisher cooperatives": "Fisher Cooperatives",
+    "% of fishers trained on sustainable practices": "% Sustainable Zones Enforced"
+  },
+  "kpi_description": "{{category}} KPI tracking fisheries performance over time.",
+  "change_from": "{{change}}% from {{year}}",
+  "avg_comparison": "{{diff}} vs avg ({{avg}})"
+},
+  "change_from": "{{change}}% from {{year}}",
+  "vs_avg": "{{difference}} vs avg ({{average}})",
+  "kpi_tracking": "{{category}} KPI tracking fisheries performance over time."
 }
-
   
 
-  
-}
 
 
 
