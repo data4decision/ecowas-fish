@@ -12,6 +12,7 @@ i18n
     debug: true,
     supportedLngs: ['en', 'pt', 'fr'], // English, Portuguese, French
     ns: ['translation', 'indicators'], // Multiple namespaces
+    
     defaultNS: 'translation',
     interpolation: {
       escapeValue: false, // React already escapes

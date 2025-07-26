@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { useTranslation } from 'react-i18next'; // Import useTranslation hook
+import { useTranslation } from 'react-i18next';
 import fisheriesData from "../data/fisheriesData.json";
 
 export default function AdminKpiCards() {
-  const { t } = useTranslation(); // Access translation function
+  const { t, i18n } = useTranslation(); // include i18n to track language
   const [kpis, setKpis] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
   const [yearOptions, setYearOptions] = useState([]);
@@ -11,17 +11,15 @@ export default function AdminKpiCards() {
   const [indicators, setIndicators] = useState([]);
 
   useEffect(() => {
-    // Extract available years
     const years = [...new Set(fisheriesData.map(d => d.Year))].sort((a, b) => b - a);
     setYearOptions(years);
     setSelectedYear(years[0]);
 
-    // Extract all indicators dynamically
     const sample = fisheriesData[0];
     const keysToExclude = ["Year", "Country"];
     const extractedIndicators = Object.keys(sample).filter(k => !keysToExclude.includes(k));
     setIndicators(extractedIndicators);
-    setIndicator(extractedIndicators[0]); // Default selected
+    setIndicator(extractedIndicators[0]);
   }, []);
 
   useEffect(() => {
@@ -55,9 +53,8 @@ export default function AdminKpiCards() {
       { title: t('admin_kpi.avg_budget_execution'), value: `${budgetExecRate.toFixed(2)}%` },
       { title: t('admin_kpi.avg_indicator', { indicator }), value: formatNumber(indicatorAvg) }
     ]);
-  }, [selectedYear, indicator]);
+  }, [selectedYear, indicator, i18n.language]); // ✅ language reactive
 
-  // Helpers
   function avg(arr) {
     const nums = arr.filter(n => typeof n === "number" && !isNaN(n));
     return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : 0;
@@ -75,7 +72,7 @@ export default function AdminKpiCards() {
     <div className="w-full px-4 py-6">
       {/* Header & Filters */}
       <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
-        <h2 className="text-2xl font-bold text-[#0b0b5c]">{t('admin_kpi.dashboard_overview')}</h2> {/* Translated Header */}
+        <h2 className="text-2xl font-bold text-[#0b0b5c]">{t('admin_kpi.dashboard_overview')}</h2>
 
         <div className="flex gap-4 flex-wrap">
           <select
@@ -91,17 +88,16 @@ export default function AdminKpiCards() {
           </select>
 
           <select
-  className="border rounded-lg px-3 py-2 text-sm text-[#0b0b5c]"
-  value={indicator || ""}
-  onChange={(e) => setIndicator(e.target.value)}
->
-  {indicators.map((ind, i) => (
-    <option key={i} value={ind}>
-      {t(ind, { ns: 'indicator' })}
-    </option>
-  ))}
-</select>
-
+            className="border rounded-lg px-3 py-2 text-sm text-[#0b0b5c]"
+            value={indicator || ""}
+            onChange={(e) => setIndicator(e.target.value)}
+          >
+            {indicators.map((ind, i) => (
+              <option key={i} value={ind}>
+                {t(ind, { ns: 'indicator' })}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
 

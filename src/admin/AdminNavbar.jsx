@@ -2,8 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Menu, LogOut, User } from 'lucide-react';
 import { auth } from '../firebase/firebase';
 import { useNavigate } from 'react-router-dom';
-import LanguageSwitcher from '../components/LanguageSwitcher'; 
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '../components/LanguageSwitcher';
+
 export default function AdminNavbar({ user, collapsed, sidebarOpen, setSidebarOpen }) {
+  const { t } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -36,24 +39,30 @@ export default function AdminNavbar({ user, collapsed, sidebarOpen, setSidebarOp
   };
 
   return (
-   <header
-  className={`h-16 bg-white shadow-md flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 left-auto z-20 transition-all duration-300 ${
-    collapsed
-      ? 'md:w-[calc(100%-5rem)]'
-      : 'md:w-[calc(100%-16rem)]'
-  } w-full`}
->
+    <header
+      className={`h-16 bg-white shadow-md flex items-center justify-between px-4 md:px-6 fixed top-0 right-0 left-0 z-20 w-full transition-all duration-300`}
+      style={{ paddingLeft: sidebarWidth }}
+    >
+      {/* Left: Mobile Menu & Welcome Message */}
+      <div className="flex items-center gap-3 overflow-hidden ml-14 sm:ml-6 md:ml-8 truncate">
 
-      {/* Left: Welcome Message */}
-      <div className="text-[#0b0b5c] font-semibold text-base sm:text-lg truncate">
-        Welcome{' '}
-        {user?.firstName && user?.surname
-          ? `${user.firstName} ${user.surname}`
-          : user?.surname?.split('@')[0] || 'Admin'}
+        <button
+          className="md:hidden flex items-center justify-center text-[#0b0b5c]"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <Menu size={24} />
+        </button>
+       <div className="text-[#0b0b5c] font-semibold text-sm sm:text-base truncate">
+  {t('admin_navbar.welcome')}{' '}
+  {user?.firstName && user?.surname
+    ? `${user.firstName} ${user.surname}`
+    : user?.surname?.split('@')[0] || 'Admin'}
+</div>
+
       </div>
 
-      {/* Right: LanguageSwitcher + Avatar */}
-      <div className="flex items-center gap-3 flex-shrink-0">
+      {/* Right: Language + Avatar Dropdown */}
+      <div className="flex items-center gap-2 sm:gap-3">
         <LanguageSwitcher />
 
         <div className="relative" ref={dropdownRef}>
@@ -76,14 +85,14 @@ export default function AdminNavbar({ user, collapsed, sidebarOpen, setSidebarOp
                 onClick={() => console.log('View profile')}
               >
                 <User size={16} />
-                Profile
+                {t('admin_navbar.profile')}
               </button>
               <button
                 className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-100"
                 onClick={handleLogout}
               >
                 <LogOut size={16} />
-                Logout
+                {t('admin_navbar.logout')}
               </button>
             </div>
           )}

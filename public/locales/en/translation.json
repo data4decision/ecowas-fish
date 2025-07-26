@@ -311,8 +311,38 @@
 },
   "change_from": "{{change}}% from {{year}}",
   "vs_avg": "{{difference}} vs avg ({{average}})",
-  "kpi_tracking": "{{category}} KPI tracking fisheries performance over time."
+  "kpi_tracking": "{{category}} KPI tracking fisheries performance over time.",
+
+
+  "admin_navbar": {
+    "welcome": "Welcome",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  
+  "admin_sidebar": {
+    "dashboard": "Dashboard",
+    "upload_data": "Upload Data",
+    "download_data": "Download Data",
+    "monthly_trends": "Monthly Trends",
+    "kpi_analysis": "KPI Analysis",
+    "report_history": "Report History",
+    "notifications": "Notifications",
+    "help_support": "Help & Support",
+    "settings": "Settings",
+    "all_countries_data": "All Countries Data",
+    "manage_submissions": "Manage Submissions",
+    "edit_entries": "Edit Data Entries",
+    "push_updates": "Push Dashboard Updates",
+    "master_reports": "Download Master Reports",
+    "admin_tools": "Admin Tools",
+    "logout": "Logout"
+  }
+
+
 }
+
+
   
 
 

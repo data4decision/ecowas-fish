@@ -243,6 +243,13 @@
 },
   "change_from": "{{change}}% em relação a {{year}}",
   "vs_avg": "{{difference}} vs média ({{average}})",
-  "kpi_tracking": "Indicador {{category}} acompanhando o desempenho da pesca ao longo do tempo."
+  "kpi_tracking": "Indicador {{category}} acompanhando o desempenho da pesca ao longo do tempo.",
+
+  "admin_navbar": {
+    "welcome": "Bem-vindo",
+    "profile": "Perfil",
+    "logout": "Sair"
+  }
 }
+
 

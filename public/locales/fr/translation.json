@@ -79,8 +79,14 @@
       "invalid_email": "Format d'e-mail invalide.",
       "incorrect": "Email ou mot de passe incorrect.",
       "access_denied": "Accès refusé. Rôle non autorisé.",
-      "not_found": "Utilisateur non trouvé."
-    }
+      "not_found": "Utilisateur non trouvé.",
+        "welcome": "Bienvenue",
+  "admin": "Administrateur",
+  "profile": "Profil",
+  "logout": "Déconnexion"
+}
+
+    
   },
   "client_trends": {
     "title": "Tendances Annuelles",
@@ -316,6 +322,33 @@
 },
   "change_from": "{{change}}% par rapport à {{year}}",
   "vs_avg": "{{difference}} vs moyenne ({{average}})",
-  "kpi_tracking": "Indicateur {{category}} suivant les performances halieutiques dans le temps."
+  "kpi_tracking": "Indicateur {{category}} suivant les performances halieutiques dans le temps.",
+
+"admin_navbar": {
+    "welcome": "Bienvenue",
+    "profile": "Profil",
+    "logout": "Déconnexion"
+  },
+  
+  "admin_sidebar": {
+    "dashboard": "Tableau de bord",
+    "upload_data": "Téléverser des données",
+    "download_data": "Télécharger des données",
+    "monthly_trends": "Tendances mensuelles",
+    "kpi_analysis": "Analyse des KPI",
+    "report_history": "Historique des rapports",
+    "notifications": "Notifications",
+    "help_support": "Aide et support",
+    "settings": "Paramètres",
+    "all_countries_data": "Données de tous les pays",
+    "manage_submissions": "Gérer les soumissions",
+    "edit_entries": "Modifier les entrées",
+    "push_updates": "Publier les mises à jour",
+    "master_reports": "Télécharger les rapports maîtres",
+    "admin_tools": "Outils d'administration",
+    "logout": "Déconnexion"
+  }
 }
+
+
 
