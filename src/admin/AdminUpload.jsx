@@ -1,155 +1,149 @@
-// AdminUpload.jsx
-import React, { useEffect, useState } from "react";
-import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import React, { useState } from "react";
 import { db } from "../firebase/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import AdminLayout from "./AdminLayout";
-import { sendFCMNotification, sendEmailNotification, logAuditTrail } from "../utils/notifications";
-import PreviewModal from "./PreviewModal";
 
-export default function AdminUpload({ user }) {
-  const [uploads, setUploads] = useState([]);
-  const [filter, setFilter] = useState("pending");
-  const [search, setSearch] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
+const CLOUDINARY_UPLOAD_PRESET = "superkay";
+const CLOUDINARY_CLOUD_NAME = "dmuvs05yp";
+const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`;
 
-  useEffect(() => {
-    const unsub = onSnapshot(collection(db, "uploads"), (snapshot) => {
-      const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-      setUploads(data);
-    });
-    return () => unsub();
-  }, []);
+const ECOWAS_COUNTRIES = [
+  { code: "ALL", name: "All ECOWAS Countries" },
+  { code: "NG", name: "Nigeria" },
+  { code: "GH", name: "Ghana" },
+  { code: "BJ", name: "Benin" },
+  { code: "TG", name: "Togo" },
+  { code: "BF", name: "Burkina Faso" },
+  { code: "CI", name: "Côte d'Ivoire" },
+  { code: "GM", name: "Gambia" },
+  { code: "GN", name: "Guinea" },
+  { code: "GW", name: "Guinea-Bissau" },
+  { code: "LR", name: "Liberia" },
+  { code: "ML", name: "Mali" },
+  { code: "NE", name: "Niger" },
+  { code: "SN", name: "Senegal" },
+  { code: "SL", name: "Sierra Leone" },
+];
 
-  const handleStatusChange = async (uploadId, newStatus, email, title) => {
-    const uploadRef = doc(db, "uploads", uploadId);
-    await updateDoc(uploadRef, { status: newStatus });
+export default function AdminUpload() {
+  const [form, setForm] = useState({ title: "", country: "ALL" });
+  const [file, setFile] = useState(null);
+  const [progress, setProgress] = useState(0);
+  const [status, setStatus] = useState("");
 
-    const fallbackEmail = "noreply@ecowas.org";
-    const recipientEmail = email || fallbackEmail;
-
-    const subject = `Your file "${title}" has been ${newStatus}`;
-    const htmlMessage = `
-      <p>Hello,</p>
-      <p>Your file titled <strong>${title}</strong> has been <strong>${newStatus}</strong> by the ECOWAS Admin.</p>
-      <p>Thank you for using the ECOWAS Fisheries platform.</p>
-      <p style='color: gray;'>- ECOWAS Fisheries Dashboard</p>
-    `;
-
-    await sendEmailNotification(recipientEmail, subject, htmlMessage);
-    await sendFCMNotification(email, subject, "Your report update.");
-    await logAuditTrail({
-      action: `${newStatus.toUpperCase()} file`,
-      file: title,
-      admin: user?.email,
-      timestamp: new Date().toISOString()
-    });
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const normalizedFilter = (filter || '').toLowerCase();
-  const normalizedSearch = (search || '').toLowerCase();
+  const handleUpload = async () => {
+    if (!form.title || !form.country || !file) {
+      setStatus("Please fill all fields and choose a file.");
+      return;
+    }
 
-  const filteredUploads = uploads
-    .filter((u) => (u?.status || '').toLowerCase().includes(normalizedFilter))
-    .filter((u) => (u?.title || '').toLowerCase().includes(normalizedSearch));
+    setStatus("Uploading...");
 
-  const isImage = (url) => /\.(jpg|jpeg|png|gif|webp)$/i.test(url);
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", CLOUDINARY_URL);
+
+    xhr.upload.addEventListener("progress", (event) => {
+      if (event.lengthComputable) {
+        const percent = Math.round((event.loaded * 100.0) / event.total);
+        setProgress(percent);
+      }
+    });
+
+    xhr.onload = async () => {
+      const response = JSON.parse(xhr.responseText);
+      const url = response.secure_url;
+
+      try {
+        await addDoc(collection(db, "upload"), {
+          title: form.title,
+          url,
+          country: form.country,
+          uploadedBy: "admin_d4d@gmail.com", // You can replace with actual user auth
+          status: "approved",
+          timestamp: serverTimestamp(),
+        });
+
+        setStatus("File uploaded successfully!");
+        setForm({ title: "", country: "ALL" });
+        setFile(null);
+        setProgress(0);
+      } catch (error) {
+        console.error("Firestore Error:", error);
+        setStatus("Failed to save file to Firestore.");
+      }
+    };
+
+    xhr.onerror = () => {
+      setStatus("Cloudinary upload failed.");
+    };
+
+    xhr.send(formData);
+  };
 
   return (
-    <AdminLayout user={user}>
-      <h2 className="text-lg font-bold text-[#0b0b5c] mb-4">Manage Country Reports</h2>
+    <AdminLayout>
+      <div className="max-w-2xl mx-auto p-6 bg-white shadow rounded-lg">
+        <h2 className="text-xl font-semibold mb-4">Admin Upload</h2>
 
-      <div className="flex flex-wrap justify-between items-center gap-4 mb-4">
-        <select
-          className="border px-3 py-2 rounded"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="pending">Pending</option>
-          <option value="approved">Approved</option>
-          <option value="">All</option>
-        </select>
-
+        <label className="block mb-2 font-medium">Document Title</label>
         <input
           type="text"
-          placeholder="Search by title..."
-          className="border px-3 py-2 rounded w-64"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          className="w-full border p-2 rounded mb-4"
+          placeholder="Enter document title"
         />
+
+        <label className="block mb-2 font-medium">Select Country</label>
+        <select
+          name="country"
+          value={form.country}
+          onChange={handleChange}
+          className="w-full border p-2 rounded mb-4"
+        >
+          {ECOWAS_COUNTRIES.map((country) => (
+            <option key={country.code} value={country.code}>
+              {country.name}
+            </option>
+          ))}
+        </select>
+
+        <label className="block mb-2 font-medium">Choose File</label>
+        <input
+          type="file"
+          onChange={(e) => setFile(e.target.files[0])}
+          className="w-full mb-4"
+        />
+
+        {progress > 0 && (
+          <div className="w-full bg-gray-200 rounded mb-4">
+            <div
+              className="bg-blue-500 text-xs leading-none py-1 text-center text-white rounded"
+              style={{ width: `${progress}%` }}
+            >
+              {progress}%
+            </div>
+          </div>
+        )}
+
+        <button
+          onClick={handleUpload}
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          Upload File
+        </button>
+
+        {status && <p className="mt-4 text-sm text-gray-700">{status}</p>}
       </div>
-
-      <div className="overflow-x-auto">
-        <table className="min-w-full table-auto text-sm border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-3 py-2 border">Title</th>
-              <th className="px-3 py-2 border">Country</th>
-              <th className="px-3 py-2 border">Uploader</th>
-              <th className="px-3 py-2 border">Status</th>
-              <th className="px-3 py-2 border">File</th>
-              <th className="px-3 py-2 border">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUploads.map((upload) => (
-              <tr key={upload.id}>
-                <td className="border px-3 py-1">{upload.title}</td>
-                <td className="border px-3 py-1">{upload.country}</td>
-                <td className="border px-3 py-1">{upload.email}</td>
-                <td className="border px-3 py-1 capitalize">{upload.status}</td>
-                <td className="border px-3 py-1">
-                  {upload.url ? (
-                    isImage(upload.url) ? (
-                      <img src={upload.url} alt="Uploaded File" className="w-16 h-16 object-cover" />
-                    ) : (
-                      <p className="text-xs text-gray-600">📄 Document Uploaded</p>
-                    )
-                  ) : (
-                    <span className="text-red-500 text-xs">No File</span>
-                  )}
-                </td>
-                <td className="border px-3 py-1 flex gap-2 flex-wrap">
-                  <button
-                    className="bg-green-500 text-white px-2 py-1 rounded text-xs"
-                    onClick={() => handleStatusChange(upload.id, "approved", upload.email, upload.title)}
-                  >
-                    Approve
-                  </button>
-                  <button
-                    className="bg-red-500 text-white px-2 py-1 rounded text-xs"
-                    onClick={() => handleStatusChange(upload.id, "rejected", upload.email, upload.title)}
-                  >
-                    Reject
-                  </button>
-
-                  {upload.url && (
-                    <a
-                      href={upload.url}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-blue-600 text-white px-2 py-1 rounded text-xs"
-                    >
-                      Download
-                    </a>
-                  )}
-
-                  <button
-                    className="bg-gray-600 text-white px-2 py-1 rounded text-xs"
-                    onClick={() => setSelectedFile(upload)}
-                  >
-                    Preview
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-
-      {selectedFile && (
-        <PreviewModal file={selectedFile} onClose={() => setSelectedFile(null)} />
-      )}
     </AdminLayout>
   );
 }

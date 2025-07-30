@@ -202,26 +202,6 @@
     "supported_formats": "Formatos suportados: PDF, DOCX, XLSX, JPG, PNG, GIF"
   }
 },
-"upload_table": {
-  "all_status": "Todos os status",
-  "pending": "Pendente",
-  "approved": "Aprovado",
-  "rejected": "Rejeitado",
-  "search_placeholder": "Pesquisar por título",
-  "title": "Título",
-  "country": "País",
-  "status": "Status",
-  "file": "Arquivo",
-  "actions": "Ações",
-  "preview": "Visualizar",
-  "download": "Baixar",
-  "delete": "Excluir",
-  "no_uploads": "Nenhum envio encontrado.",
-  "prev": "Anterior",
-  "next": "Próximo",
-  "page": "Página {{current}} de {{total}}",
-  "confirm_delete": "Tem certeza de que deseja excluir este arquivo?"
-},
 
  "client_kpi": {
   "title": "Relatório de Indicadores de Pesca",
@@ -249,7 +229,82 @@
     "welcome": "Bem-vindo",
     "profile": "Perfil",
     "logout": "Sair"
+  },
+  
+  "upload_table": {
+    "title": "Título",
+    "country": "País",
+    "status": "Status",
+    "file": "Arquivo",
+    "actions": "Ações",
+    "pending": "Pendente",
+    "approved": "Aprovado",
+    "rejected": "Rejeitado",
+    "preview": "Visualizar",
+    "download": "Baixar",
+    "delete": "Excluir",
+    "confirm_delete": "Tem certeza de que deseja excluir este arquivo?",
+    "no_uploads": "Nenhum arquivo enviado.",
+    "all_status": "Todos os status",
+    "search_placeholder": "Pesquisar arquivo...",
+    "prev": "Anterior",
+    "next": "Próximo",
+    "page": "Página {{current}} de {{total}}"
+  },
+  "admin_download": {
+  "title": "Relatórios aprovados para download",
+  "search_placeholder": "Pesquisar por título...",
+  "title_column": "Título",
+  "country": "País",
+  "uploader": "Enviado por",
+  "status": "Status",
+  "file": "Arquivo",
+  "action": "Ação",
+  "download_btn": "Baixar",
+  "no_file": "Nenhum arquivo",
+  "no_approved": "Nenhum arquivo aprovado disponível.",
+  "status_map": {
+    "approved": "Aprovado",
+    "pending": "Pendente",
+    "rejected": "Rejeitado"
   }
+},
+"compare_view": {
+    "title": "Visualização Analítica Comparativa",
+    "select_indicator": "Selecionar Indicador(es)",
+    "select_year": "Selecionar Ano",
+    "select_countries": "Selecionar Países",
+    "multi_note": "Segure Ctrl/Cmd para selecionar múltiplos",
+    "download_csv": "Baixar CSV",
+    "export_png": "Exportar PNG",
+    "export_pdf": "Exportar PDF",
+    "country": "País",
+    "regional_average": "🌍 Média Regional",
+    "no_data": "Nenhum dado disponível para as opções selecionadas"
+  },
+  "admin_sidebar": {
+  "dashboard": "Painel de controle",
+  "upload_data": "Carregar dados",
+  "download_data": "Baixar dados",
+  "monthly_trends": "Tendências mensais",
+  "kpi_analysis": "Análise de KPIs",
+  "report_history": "Histórico de relatórios",
+  "notifications": "Notificações",
+  "help_support": "Ajuda e suporte",
+  "settings": "Configurações",
+  "all_countries_data": "Dados de todos os países",
+  "manage_submissions": "Gerenciar envios",
+  "edit_entries": "Editar entradas",
+  "push_updates": "Publicar atualizações",
+  "master_reports": "Baixar relatórios mestres",
+  "admin_tools": "Ferramentas administrativas",
+  "logout": "Sair"
 }
+
+
+
+}
+
+
 
 

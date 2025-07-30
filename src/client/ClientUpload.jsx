@@ -4,7 +4,6 @@ import { addDoc, collection } from "firebase/firestore";
 import emailjs from "@emailjs/browser";
 import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
-import UploadHistoryTable from "../components/UploadHistoryTable";
 
 const UPLOAD_PRESET = "superkay";
 const SERVICE_ID = "service_123abc";
@@ -130,7 +129,7 @@ export default function ClientUpload({ user }) {
           setStatus(t("client_upload.no_url"));
         }
       } catch (error) {
-        setStatus(t("client_upload.success"));
+        setStatus(t("client_upload.error"));
         console.error(error);
       }
     };
@@ -194,13 +193,11 @@ export default function ClientUpload({ user }) {
                 ? t("client_upload.drop_here")
                 : t("client_upload.drag_or_click")}
             </p>
-           <p className="text-xs text-gray-500 mt-2">
-  {t("client_upload.supported_formats", {
-    defaultValue: "Supported: PDF, DOCX, XLSX, JPG, PNG, GIF",
-  })}
-</p>
-
-            
+            <p className="text-xs text-gray-500 mt-2">
+              {t("client_upload.supported_formats", {
+                defaultValue: "Supported: PDF, DOCX, XLSX, JPG, PNG, GIF",
+              })}
+            </p>
           </div>
 
           {file && (
@@ -234,17 +231,15 @@ export default function ClientUpload({ user }) {
         {status && <p className="mt-4 text-sm text-gray-600 text-center">{status}</p>}
       </div>
 
-      <div className="w-full max-w-6xl mt-8 px-2">
-        <UploadHistoryTable user={user} />
-      </div>
-
       {successModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
           <div className="bg-white p-6 rounded-lg max-w-sm text-center shadow">
             <h3 className="text-lg font-semibold text-[#0b0b5c] mb-2">
               {t("client_upload.modal.title")}
             </h3>
-            <p className="text-sm mb-4 text-gray-700">{t("client_upload.modal.body")}</p>
+            <p className="text-sm mb-4 text-gray-700">
+              {t("client_upload.modal.body")}
+            </p>
             <button
               onClick={() => setSuccessModal(false)}
               className="mt-2 bg-[#f47b20] text-white px-4 py-2 rounded"

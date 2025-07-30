@@ -337,8 +337,58 @@
     "master_reports": "Download Master Reports",
     "admin_tools": "Admin Tools",
     "logout": "Logout"
+  },
+  "upload_table": {
+  "title": "Title",
+  "country": "Country",
+  "status": "Status",
+  "file": "File",
+  "actions": "Actions",
+  "all_status": "All Status",
+  "pending": "Pending",
+  "approved": "Approved",
+  "rejected": "Rejected",
+  "search_placeholder": "Search by title...",
+  "preview": "Preview",
+  "download": "Download",
+  "delete": "Delete",
+  "confirm_delete": "Are you sure you want to delete this file?",
+  "no_uploads": "No uploads found.",
+  "prev": "Previous",
+  "next": "Next",
+  "page": "Page {{current}} of {{total}}"
+},
+"admin_download": {
+  "title": "Approved Reports for Download",
+  "search_placeholder": "Search by title...",
+  "title_column": "Title",
+  "country": "Country",
+  "uploader": "Uploader",
+  "status": "Status",
+  "file": "File",
+  "action": "Action",
+  "download_btn": "Download",
+  "no_file": "No File",
+  "no_approved": "No approved files available.",
+  "status_map": {
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected"
   }
-
+},
+"compare_view": {
+    "title": "Comparative Analytics View",
+    "select_indicator": "Select Indicator(s)",
+    "select_year": "Select Year",
+    "select_countries": "Select Countries",
+    "multi_note": "Hold Ctrl/Cmd to select multiple",
+    "download_csv": "Download CSV",
+    "export_png": "Export PNG",
+    "export_pdf": "Export PDF",
+    "country": "Country",
+    "regional_average": "🌍 Regional Avg",
+    "no_data": "No data available for the selected options"
+  }
 
 }
 

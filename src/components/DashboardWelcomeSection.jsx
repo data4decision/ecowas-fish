@@ -19,30 +19,40 @@ export default function DashboardWelcomeSection({ user, country, stats, loading 
   } = stats || {};
 
   const formatDate = (date) =>
-    date ? new Date(date).toLocaleDateString(undefined, {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    }) : t('dashboard.no_uploads');
+    date
+      ? new Date(date).toLocaleDateString(undefined, {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        })
+      : t('dashboard.no_data');
 
   return (
     <section className="w-full px-4 sm:px-6 lg:px-8 py-6 bg-white rounded shadow-md">
+      {/* Welcome Section */}
       <div className="mb-6">
         <h2 className="text-2xl font-semibold text-[#0b0b5c]">
           {t('dashboard.welcome', {
-            name: user?.displayName?.split(' ')[0] || user?.email?.split('@')[0] || t('dashboard.user')
+            name:
+              user?.displayName?.split(' ')[0] ||
+              user?.email?.split('@')[0] ||
+              t('dashboard.user')
           })}
         </h2>
         <p className="text-sm text-gray-600 mt-1">
-          {t('dashboard.for')} <span className="font-medium text-[#f47b20]">{country}</span>
+          {t('dashboard.for')}{' '}
+          <span className="font-medium text-[#f47b20]">{country}</span>
         </p>
       </div>
 
+      {/* Upload & Download Dates */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div className="flex items-center gap-3 p-4 border border-gray-100 bg-gray-50 rounded">
           <CloudUpload className="text-[#f47b20]" size={20} />
           <div>
-            <p className="text-sm text-gray-500">{t('dashboard.last_upload')}</p>
+            <p className="text-sm text-gray-500">
+              {t('dashboard.last_upload')}
+            </p>
             <p className="font-medium text-[#0b0b5c]">
               {loading ? t('dashboard.loading') : formatDate(lastUploadDate)}
             </p>
@@ -52,7 +62,9 @@ export default function DashboardWelcomeSection({ user, country, stats, loading 
         <div className="flex items-center gap-3 p-4 border border-gray-100 bg-gray-50 rounded">
           <CloudDownload className="text-[#f47b20]" size={20} />
           <div>
-            <p className="text-sm text-gray-500">{t('dashboard.last_download')}</p>
+            <p className="text-sm text-gray-500">
+              {t('dashboard.last_download')}
+            </p>
             <p className="font-medium text-[#0b0b5c]">
               {loading ? t('dashboard.loading') : formatDate(lastDownloadDate)}
             </p>
@@ -60,6 +72,7 @@ export default function DashboardWelcomeSection({ user, country, stats, loading 
         </div>
       </div>
 
+      {/* Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <StatCard
           icon={<CloudUpload size={22} className="text-white" />}

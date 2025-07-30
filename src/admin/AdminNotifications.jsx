@@ -1,109 +1,174 @@
-import { useState } from 'react';
-import { db } from '../firebase/firebase';
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import axios from 'axios';
-import AdminLayout from './AdminLayout';
+import React, { useState } from "react";
+import { db } from "../firebase/firebase";
+import { addDoc, collection } from "firebase/firestore";
+import AdminLayout from "./AdminLayout";
 
-export default function AdminNotifications({ user }) {
-  const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
-  const [country, setCountry] = useState('all');
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+// Country name + code mapping
+const ECOWAS_COUNTRIES = [
+  { name: "Nigeria", code: "NG" },
+  { name: "Ghana", code: "GH" },
+  { name: "Benin", code: "BJ" },
+  { name: "Togo", code: "TG" },
+  { name: "Burkina Faso", code: "BF" },
+  { name: "Côte d'Ivoire", code: "CI" },
+  { name: "Gambia", code: "GM" },
+  { name: "Guinea", code: "GN" },
+  { name: "Guinea-Bissau", code: "GW" },
+  { name: "Liberia", code: "LR" },
+  { name: "Mali", code: "ML" },
+  { name: "Niger", code: "NE" },
+  { name: "Senegal", code: "SN" },
+  { name: "Sierra Leone", code: "SL" }
+];
 
-  const sendNotification = async () => {
-    setLoading(true);
-    setMessage('');
+export default function AdminNotificationForm() {
+  const [title, setTitle] = useState("");
+  const [message, setMessage] = useState("");
+  const [recipientType, setRecipientType] = useState("all");
+  const [selectedCountries, setSelectedCountries] = useState([]);
+  const [recipientEmail, setRecipientEmail] = useState("");
+  const [status, setStatus] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!title || !message || (recipientType === "country" && selectedCountries.length === 0)) {
+      return alert("Please fill in all required fields.");
+    }
+
+    const timestamp = new Date().toISOString();
 
     try {
-      let tokens = [];
-
-      const clientsRef = collection(db, 'clients'); // 🔁 Replace 'clients' with your preferred collection
-      const q = country === 'all'
-        ? query(clientsRef)
-        : query(clientsRef, where('country', '==', country));
-
-      const snapshot = await getDocs(q);
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        if (data.fcmToken) tokens.push(data.fcmToken);
-      });
-
-      if (tokens.length === 0) {
-        setMessage('🚫 No users found with FCM tokens.');
-        setLoading(false);
-        return;
-      }
-
-      for (let token of tokens) {
-        await axios.post('http://localhost:5000/send-notification', {
-          token,
+      if (recipientType === "all") {
+        await addDoc(collection(db, "notifications"), {
           title,
-          body,
+          message,
+          timestamp,
+          type: "all",
+          recipient: "all",
+          readBy: []
+        });
+      } else if (recipientType === "country") {
+        for (const country of selectedCountries) {
+          const matched = ECOWAS_COUNTRIES.find(c => c.name === country);
+          const code = matched?.code?.toLowerCase() || country.toLowerCase();
+
+          await addDoc(collection(db, "notifications"), {
+            title,
+            message,
+            timestamp,
+            type: "country",
+            recipient: code.trim(),
+            readBy: []
+          });
+        }
+      } else {
+        await addDoc(collection(db, "notifications"), {
+          title,
+          message,
+          timestamp,
+          type: "user",
+          recipient: recipientEmail.trim().toLowerCase(),
+          readBy: []
         });
       }
 
-      setMessage(`✅ Notification sent to ${tokens.length} user(s).`);
-    } catch (error) {
-      console.error('Error sending notification:', error);
-      setMessage('❌ Error sending notification');
+      setStatus("✅ Notification sent successfully.");
+      setTitle("");
+      setMessage("");
+      setSelectedCountries([]);
+      setRecipientEmail("");
+    } catch (err) {
+      console.error("Error sending notification:", err);
+      setStatus("❌ Error sending notification.");
     }
-
-    setLoading(false);
   };
 
   return (
-    <AdminLayout user={user}>
-      <h2 className="text-lg font-bold mb-4">Push Notifications</h2>
-
-      <div className="bg-white p-6 rounded shadow max-w-xl mx-auto">
-        <label className="block mb-2">
-          Target Country:
-          <select
-            value={country}
-            onChange={e => setCountry(e.target.value)}
-            className="mt-1 p-2 w-full border rounded"
-          >
-            <option value="all">All Countries</option>
-            <option value="Nigeria">Nigeria</option>
-            <option value="Ghana">Ghana</option>
-            <option value="Senegal">Senegal</option>
-            <option value="Togo">Togo</option>
-            {/* 🔁 Add all 15 ECOWAS countries here */}
-          </select>
-        </label>
-
-        <label className="block mt-4 mb-2">
-          Notification Title:
+    <AdminLayout>
+      <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded mt-10">
+        <h2 className="text-2xl font-semibold text-[#0b0b5c] mb-4">
+          Post New Notification
+        </h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="text"
+            placeholder="Title"
+            className="w-full border px-3 py-2 rounded"
             value={title}
-            onChange={e => setTitle(e.target.value)}
-            className="mt-1 p-2 w-full border rounded"
-            placeholder="e.g. New Report Available"
+            onChange={(e) => setTitle(e.target.value)}
+            required
           />
-        </label>
-
-        <label className="block mt-4 mb-2">
-          Notification Body:
           <textarea
-            value={body}
-            onChange={e => setBody(e.target.value)}
-            className="mt-1 p-2 w-full border rounded"
+            placeholder="Message"
+            className="w-full border px-3 py-2 rounded"
             rows={4}
-            placeholder="Write your message here..."
-          ></textarea>
-        </label>
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            required
+          />
 
-        <button
-          onClick={sendNotification}
-          disabled={loading}
-          className="mt-6 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          {loading ? 'Sending...' : 'Send Notification'}
-        </button>
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-700">Recipient Type</label>
+            <select
+              className="w-full border px-3 py-2 rounded"
+              value={recipientType}
+              onChange={(e) => {
+                setRecipientType(e.target.value);
+                setSelectedCountries([]);
+                setRecipientEmail("");
+              }}
+            >
+              <option value="all">All Users</option>
+              <option value="country">One or More Countries</option>
+              <option value="user">Specific User Email</option>
+            </select>
+          </div>
 
-        {message && <p className="mt-4 text-center text-sm">{message}</p>}
+          {recipientType === "country" && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Select Country/Countries
+              </label>
+              <select
+                multiple
+                className="w-full border px-3 py-2 rounded h-40"
+                value={selectedCountries}
+                onChange={(e) =>
+                  setSelectedCountries([...e.target.selectedOptions].map(opt => opt.value))
+                }
+                required
+              >
+                {ECOWAS_COUNTRIES.map((country) => (
+                  <option key={country.code} value={country.name}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+              <p className="text-xs text-gray-500 mt-1">Hold Ctrl (Windows) or ⌘ (Mac) to select multiple.</p>
+            </div>
+          )}
+
+          {recipientType === "user" && (
+            <input
+              type="email"
+              className="w-full border px-3 py-2 rounded"
+              placeholder="Recipient Email"
+              value={recipientEmail}
+              onChange={(e) => setRecipientEmail(e.target.value)}
+              required
+            />
+          )}
+
+          <button
+            type="submit"
+            className="bg-[#0b0b5c] text-white px-6 py-2 rounded hover:bg-[#f47b20]"
+          >
+            Send Notification
+          </button>
+        </form>
+
+        {status && <p className="text-sm mt-3 text-green-600">{status}</p>}
       </div>
     </AdminLayout>
   );

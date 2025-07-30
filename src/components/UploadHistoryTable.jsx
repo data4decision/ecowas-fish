@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { db } from "../firebase/firebase";
-import { collection, query, where, onSnapshot, doc, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  where,
+  onSnapshot,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { saveAs } from "file-saver";
 
 export default function UploadHistoryTable({ user }) {
@@ -18,7 +25,6 @@ export default function UploadHistoryTable({ user }) {
       const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
       setUploads(data);
     });
-
     return () => unsub();
   }, [user.email]);
 
@@ -47,8 +53,10 @@ export default function UploadHistoryTable({ user }) {
 
   return (
     <div className="mt-8">
+      {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
         <div className="flex gap-2">
+          {/* Status filter */}
           <select
             value={statusFilter}
             onChange={(e) => {
@@ -63,6 +71,7 @@ export default function UploadHistoryTable({ user }) {
             <option value="rejected">{t("upload_table.rejected")}</option>
           </select>
 
+          {/* Search input */}
           <input
             type="text"
             placeholder={t("upload_table.search_placeholder")}
@@ -76,6 +85,7 @@ export default function UploadHistoryTable({ user }) {
         </div>
       </div>
 
+      {/* Table */}
       <div className="overflow-x-auto border rounded">
         <table className="min-w-full divide-y divide-gray-200 text-sm">
           <thead className="bg-gray-100 text-left text-[#0b0b5c]">
@@ -149,6 +159,7 @@ export default function UploadHistoryTable({ user }) {
         </table>
       </div>
 
+      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-end mt-4 gap-3 items-center text-sm">
           <button

@@ -347,8 +347,65 @@
     "master_reports": "Télécharger les rapports maîtres",
     "admin_tools": "Outils d'administration",
     "logout": "Déconnexion"
+  },
+  
+  "upload_table": {
+    "title": "Titre",
+    "country": "Pays",
+    "status": "Statut",
+    "file": "Fichier",
+    "actions": "Actions",
+    "pending": "En attente",
+    "approved": "Approuvé",
+    "rejected": "Rejeté",
+    "preview": "Aperçu",
+    "download": "Télécharger",
+    "delete": "Supprimer",
+    "confirm_delete": "Êtes-vous sûr de vouloir supprimer ce fichier ?",
+    "no_uploads": "Aucun fichier téléchargé.",
+    "all_status": "Tous les statuts",
+    "search_placeholder": "Rechercher un fichier...",
+    "prev": "Précédent",
+    "next": "Suivant",
+    "page": "Page {{current}} sur {{total}}"
+  },
+  
+"admin_download": {
+  "title": "Rapports approuvés à télécharger",
+  "search_placeholder": "Rechercher par titre...",
+  "title_column": "Titre",
+  "country": "Pays",
+  "uploader": "Téléversé par",
+  "status": "Statut",
+  "file": "Fichier",
+  "action": "Action",
+  "download_btn": "Télécharger",
+  "no_file": "Aucun fichier",
+  "no_approved": "Aucun fichier approuvé disponible.",
+  "status_map": {
+    "approved": "Approuvé",
+    "pending": "En attente",
+    "rejected": "Rejeté"
   }
+},
+"compare_view": {
+    "title": "Vue Analytique Comparative",
+    "select_indicator": "Sélectionner les indicateurs",
+    "select_year": "Sélectionner l'année",
+    "select_countries": "Sélectionner les pays",
+    "multi_note": "Maintenez Ctrl/Cmd pour sélectionner plusieurs",
+    "download_csv": "Télécharger CSV",
+    "export_png": "Exporter PNG",
+    "export_pdf": "Exporter PDF",
+    "country": "Pays",
+    "regional_average": "🌍 Moyenne régionale",
+    "no_data": "Aucune donnée disponible pour les options sélectionnées"
+  }
+
+
 }
+
+
 
 
 
