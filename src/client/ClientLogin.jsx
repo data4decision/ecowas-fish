@@ -76,7 +76,7 @@ export default function ClientLogin() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-white text-[#0b0b5c] px-4">
+    <div className="relative min-h-screen flex items-center justify-center bg-[#0b0b5c] text-[#0b0b5c] px-4">
       <div className="absolute top-4 right-4">
         <LanguageSwitcher />
       </div>

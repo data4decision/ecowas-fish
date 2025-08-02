@@ -70,7 +70,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#0b0b5c] px-4">
       <form onSubmit={handleLogin} className="bg-white shadow-md border border-[#f47b20] rounded px-8 pt-6 pb-8 w-full max-w-md">
         <h2 className="text-2xl font-bold mb-6 text-center text-[#0b0b5c]">{t('admin_login_page.title')}</h2>
         {error && <p className="text-red-600 text-sm mb-4 text-center">{error}</p>}

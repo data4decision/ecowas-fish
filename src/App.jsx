@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 // Firebase Core
 import { onAuthStateChanged } from 'firebase/auth';
@@ -105,6 +106,8 @@ export default function App() {
   }
 
   return (
+    <>
+    <Toaster position="top-right" reverseOrder={false} />
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<LandingPage />} />
@@ -159,5 +162,6 @@ export default function App() {
       {/* Catch-all */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
+    </>
   );
 }

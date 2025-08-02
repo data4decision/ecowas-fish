@@ -106,7 +106,7 @@ const ClientSignup = () => {
   };
 
   return (
-  <div className="relative min-h-screen bg-white text-[#0b0b5c] px-4 flex items-center justify-center">
+  <div className="relative min-h-screen bg-[#0b0b5c] text-[#0b0b5c] px-4 flex items-center justify-center">
     {/* Language Switcher fixed to top-right corner */}
     <div className="absolute top-4 right-4">
       <LanguageSwitcher />

@@ -1,177 +1,383 @@
-import React, { useEffect, useState } from "react";
-import { doc, getDoc, setDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import React, { useEffect, useRef, useState } from "react";
+import Cropper from "react-easy-crop";
+import Modal from "react-modal";
+import { getCroppedImg } from "../utils/cropImage";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../context/AuthContext";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+import { exportToCSV } from "../utils/exportToCSV";
 import toast from "react-hot-toast";
+import axios from "axios";
+
+Modal.setAppElement("#root");
+
+const DEFAULT_AVATAR = "https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff";
 
 export default function ClientSettings() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { user } = useAuth();
+  const fileInputRef = useRef(null);
+
   const [form, setForm] = useState({
-    fullName: "",
+    firstName: "",
+    surname: "",
+    phone: "",
+    country: "",
+    profession: "",
+    education: "",
+    degrees: "",
     language: "en",
-    notifyUploads: true,
-    notifyUpdates: false,
+    notificationsEnabled: true,
+    profileImage: ""
   });
-  const [loading, setLoading] = useState(true);
+
+  const [preview, setPreview] = useState(DEFAULT_AVATAR);
+  const [uploading, setUploading] = useState(false);
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [cropModalOpen, setCropModalOpen] = useState(false);
+  const [fullImageModalOpen, setFullImageModalOpen] = useState(false);
 
   useEffect(() => {
-    if (user?.email) {
-      const fetchSettings = async () => {
-        const docRef = doc(db, "users", user.email);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const data = docSnap.data();
+    const fetchUserData = async () => {
+      if (user?.email) {
+        try {
+          const userDoc = await getDoc(doc(db, "users", user.email));
+          const data = userDoc.exists() ? userDoc.data() : {};
+
           setForm({
-            fullName: data.fullName || user.name || "",
+            firstName: data.firstName || "",
+            surname: data.surname || "",
+            phone: data.phone || "",
+            country: data.country || "",
+            profession: data.profession || "",
+            education: data.education || "",
+            degrees: data.degrees || "",
             language: data.language || "en",
-            notifyUploads: data.notifyUploads ?? true,
-            notifyUpdates: data.notifyUpdates ?? false,
+            notificationsEnabled: data.notificationsEnabled !== false,
+            profileImage: data.profileImage || DEFAULT_AVATAR
           });
+
+          setPreview(data.profileImage || DEFAULT_AVATAR);
+        } catch (err) {
+          console.error("Failed to load user data:", err);
+          toast.error("Failed to load saved data.");
         }
-        setLoading(false);
-      };
-      fetchSettings();
-    }
+      }
+    };
+
+    fetchUserData();
   }, [user]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
+
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: val
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await setDoc(doc(db, "users", user.email), form, { merge: true });
-      i18n.changeLanguage(form.language);
-      toast.success(t("settings.success", { defaultValue: "Settings updated successfully" }));
-    } catch (err) {
-      toast.error(t("settings.error", { defaultValue: "Failed to update settings" }));
+  const handleSave = async () => {
+    if (user?.email) {
+      try {
+        await setDoc(doc(db, "users", user.email), form, { merge: true });
+        toast.success("Changes saved successfully.");
+      } catch (err) {
+        console.error(err);
+        toast.error("Failed to save changes.");
+      }
     }
   };
 
-  if (loading) return <div className="p-4">Loading...</div>;
+  const handleExport = () => {
+    exportToCSV(
+      {
+        Email: user.email,
+        FirstName: form.firstName,
+        Surname: form.surname,
+        Phone: form.phone,
+        Country: form.country,
+        Profession: form.profession,
+        Education: form.education,
+        Degrees: form.degrees,
+        Language: form.language,
+        Notifications: form.notificationsEnabled ? "Yes" : "No"
+      },
+      "profile_export"
+    );
+  };
+
+  const handleDelete = () => {
+    alert("To delete your account, please contact support.");
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageSrc(reader.result);
+      setCropModalOpen(true);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleCropComplete = (_, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const handleCropSave = async () => {
+    try {
+      if (!croppedAreaPixels) return;
+
+      const croppedBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
+      const previewUrl = URL.createObjectURL(croppedBlob);
+      setPreview(previewUrl);
+      setUploading(true);
+
+      const formData = new FormData();
+      formData.append("file", croppedBlob);
+      formData.append("upload_preset", "superkay");
+
+      const res = await axios.post(
+        "https://api.cloudinary.com/v1_1/dmuvs05yp/image/upload",
+        formData
+      );
+
+      const uploadedUrl = res.data.secure_url;
+      setPreview(uploadedUrl);
+      setForm((prev) => ({ ...prev, profileImage: uploadedUrl }));
+
+      toast.success("Profile image updated!");
+    } catch (err) {
+      console.error(err);
+      toast.error("Image crop/upload failed");
+    } finally {
+      setUploading(false);
+      setCropModalOpen(false);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setPreview(DEFAULT_AVATAR);
+    setForm((prev) => ({ ...prev, profileImage: "" }));
+    toast.success("Image removed. Click save to persist.");
+  };
+
+  const handleResetToDefault = () => {
+    setPreview(DEFAULT_AVATAR);
+    setForm((prev) => ({ ...prev, profileImage: DEFAULT_AVATAR }));
+    toast.success("Default avatar restored. Click save to persist.");
+  };
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-8 space-y-8">
-      <h2 className="text-2xl font-bold text-[#0b0b5c]">
-        {t("settings.title", { defaultValue: "Client Settings" })}
-      </h2>
+    <div className="max-w-4xl mx-auto px-4 py-10">
+      <h1 className="text-2xl font-bold text-[#0b0b5c] mb-6">
+        {t("client_settings.title")}
+      </h1>
 
-      {/* General Info */}
-      <section className="bg-white shadow-md rounded p-5">
-        <h3 className="text-lg font-semibold mb-4">👤 {t("settings.general", { defaultValue: "General Account Info" })}</h3>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">{t("settings.fullName")}</label>
+      <div className="flex flex-col md:flex-row gap-6">
+        {/* Profile Image Section */}
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative w-32 h-32">
+            <div
+              className={`w-full h-full rounded-full overflow-hidden border border-gray-300 ${uploading ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}
+              onClick={() => !uploading && fileInputRef.current?.click()}
+              title="Click to change image"
+            >
+              {preview ? (
+                <img
+                  src={preview}
+                  alt="Profile"
+                  className="object-cover w-full h-full"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setFullImageModalOpen(true);
+                  }}
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center text-sm text-gray-500">
+                  No image
+                </div>
+              )}
+            </div>
+
+            {/* Camera Overlay */}
+            {!uploading && (
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  fileInputRef.current?.click();
+                }}
+                className="absolute bottom-1 right-1 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition"
+                title="Change Image"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 text-gray-700"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 10l4.553-4.553a1 1 0 011.414 0l1.586 1.586a1 1 0 010 1.414L18 13m-3 2H6a2 2 0 01-2-2V7a2 2 0 012-2h3.586a1 1 0 01.707.293l1.414 1.414a1 1 0 00.707.293H17a2 2 0 012 2v3"
+                  />
+                </svg>
+              </button>
+            )}
+
             <input
-              type="text"
-              name="fullName"
-              value={form.fullName}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              className="hidden"
+              onChange={handleFileChange}
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="text"
-              value={user.email}
-              disabled
-              className="w-full border border-gray-200 p-2 bg-gray-100 rounded"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Country</label>
-            <input
-              type="text"
-              value={user.countryCode || "-"}
-              disabled
-              className="w-full border border-gray-200 p-2 bg-gray-100 rounded"
-            />
-          </div>
+
+          {uploading && <p className="text-xs text-blue-500">{t("client_settings.uploading")}</p>}
+
+          {!uploading && (
+            <div className="flex flex-col items-center gap-1">
+              <button
+                onClick={handleRemoveImage}
+                className="text-xs text-red-500 hover:underline"
+              >
+                Remove Image
+              </button>
+              <button
+                onClick={handleResetToDefault}
+                className="text-xs text-blue-600 hover:underline"
+              >
+                Reset to Default Avatar
+              </button>
+            </div>
+          )}
         </div>
-      </section>
 
-      {/* Language & Region */}
-      <section className="bg-white shadow-md rounded p-5">
-        <h3 className="text-lg font-semibold mb-4">🌐 {t("settings.languageSection", { defaultValue: "Language & Region" })}</h3>
-        <select
-          name="language"
-          value={form.language}
-          onChange={handleChange}
-          className="w-full border border-gray-300 p-2 rounded"
-        >
-          <option value="en">English</option>
-          <option value="fr">Français</option>
-          <option value="pt">Português</option>
-        </select>
-      </section>
+        {/* Profile Form */}
+        <div className="flex-1 space-y-4">
+          {[
+            { label: "First Name", name: "firstName" },
+            { label: "Surname", name: "surname" },
+            { label: "Phone", name: "phone" },
+            { label: "Country", name: "country" },
+            { label: "Profession", name: "profession" },
+            { label: "Education", name: "education" },
+            { label: "Degrees", name: "degrees" }
+          ].map((field) => (
+            <div key={field.name}>
+              <label className="text-sm text-gray-700">{field.label}</label>
+              <input
+                type="text"
+                name={field.name}
+                value={form[field.name]}
+                onChange={handleChange}
+                className="w-full border p-2 rounded mt-1"
+              />
+            </div>
+          ))}
 
-      {/* Notifications */}
-      <section className="bg-white shadow-md rounded p-5">
-        <h3 className="text-lg font-semibold mb-4">🔔 {t("settings.notifications", { defaultValue: "Notifications" })}</h3>
-        <div className="space-y-2">
+          <div>
+            <label className="text-sm text-gray-700">Language</label>
+            <select
+              name="language"
+              value={form.language}
+              onChange={handleChange}
+              className="w-full border p-2 rounded mt-1"
+            >
+              <option value="en">English</option>
+              <option value="fr">Français</option>
+              <option value="pt">Português</option>
+            </select>
+          </div>
+
           <div className="flex items-center gap-2">
             <input
               type="checkbox"
-              name="notifyUploads"
-              checked={form.notifyUploads}
+              name="notificationsEnabled"
+              checked={form.notificationsEnabled}
               onChange={handleChange}
-              id="uploads"
             />
-            <label htmlFor="uploads">{t("settings.notifyUploads")}</label>
+            <label>Enable Notifications</label>
           </div>
-          <div className="flex items-center gap-2">
-            <input
-              type="checkbox"
-              name="notifyUpdates"
-              checked={form.notifyUpdates}
-              onChange={handleChange}
-              id="updates"
-            />
-            <label htmlFor="updates">{t("settings.notifyUpdates")}</label>
+
+          <div className="flex items-center gap-4 pt-4 flex-wrap">
+            <button
+              onClick={handleSave}
+              className="bg-green-600 text-white px-4 py-2 rounded text-sm"
+            >
+              Save Changes
+            </button>
+            <button
+              onClick={handleExport}
+              className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
+            >
+              Export Data
+            </button>
+            <button
+              onClick={handleDelete}
+              className="bg-red-500 text-white px-4 py-2 rounded text-sm"
+            >
+              Delete Account
+            </button>
           </div>
         </div>
-      </section>
-
-      {/* Your Info */}
-      <section className="bg-white shadow-md rounded p-5">
-        <h3 className="text-lg font-semibold mb-4">📂 {t("settings.yourInfo", { defaultValue: "Your Information" })}</h3>
-        <div className="flex flex-col gap-4">
-          <button type="button" className="border px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 text-sm">
-            ⬇️ {t("settings.exportData", { defaultValue: "Export my activity (CSV)" })}
-          </button>
-          <button type="button" className="border px-4 py-2 rounded bg-red-100 hover:bg-red-200 text-sm">
-            🗑️ {t("settings.requestDeletion", { defaultValue: "Request data deletion" })}
-          </button>
-        </div>
-      </section>
-
-      {/* Help & Support */}
-      <section className="bg-white shadow-md rounded p-5">
-        <h3 className="text-lg font-semibold mb-4">🛠️ {t("settings.help", { defaultValue: "Help & Support" })}</h3>
-        <div className="flex flex-col gap-2 text-sm">
-          <a href="/help" className="text-blue-600 underline">❓ {t("settings.visitHelp", { defaultValue: "Visit Help Page" })}</a>
-          <a href="mailto:d4d2025t@data4decision.org" className="text-blue-600 underline">📧 d4d2025t@data4decision.org</a>
-          <a href="https://wa.me/2349040009930" className="text-green-600 underline">💬 +234 904 000 9930 (WhatsApp)</a>
-        </div>
-      </section>
-
-      {/* Submit */}
-      <div className="text-right">
-        <button
-          onClick={handleSubmit}
-          className="bg-[#0b0b5c] text-white px-6 py-2 rounded hover:bg-[#2d2d8a]"
-        >
-          {t("settings.save", { defaultValue: "Save Changes" })}
-        </button>
       </div>
+
+      {/* Crop Modal */}
+      <Modal
+        isOpen={cropModalOpen}
+        onRequestClose={() => setCropModalOpen(false)}
+        contentLabel="Crop Image"
+        className="bg-white p-6 max-w-md mx-auto mt-20 rounded shadow-lg"
+      >
+        <h2 className="text-lg font-bold mb-4">Crop Image</h2>
+        <div className="relative w-full h-64 bg-gray-100">
+          <Cropper
+            image={imageSrc}
+            crop={crop}
+            zoom={zoom}
+            aspect={1}
+            onCropChange={setCrop}
+            onZoomChange={setZoom}
+            onCropComplete={handleCropComplete}
+          />
+        </div>
+        <div className="flex justify-end gap-2 mt-4">
+          <button onClick={() => setCropModalOpen(false)} className="px-3 py-1 text-sm border rounded">Cancel</button>
+          <button onClick={handleCropSave} className="px-3 py-1 bg-blue-600 text-white text-sm rounded">Save</button>
+        </div>
+      </Modal>
+
+      {/* Full Image Modal */}
+     <Modal
+  isOpen={fullImageModalOpen}
+  onRequestClose={() => setFullImageModalOpen(false)}
+  contentLabel="Full Image"
+  className="bg-white p-4 w-[50%] sm:w-[80%] md:max-w-[30%] mx-auto mt-20 rounded shadow-lg"
+>
+  <h2 className="text-lg font-semibold mb-2">Full Image Preview</h2>
+  <img src={preview} alt="Full Profile" className="w-full h-auto rounded" />
+  <div className="flex justify-end mt-4">
+    <button
+      onClick={() => setFullImageModalOpen(false)}
+      className="px-4 py-2 bg-gray-200 text-sm rounded"
+    >
+      Close
+    </button>
+  </div>
+</Modal>
+
     </div>
   );
 }

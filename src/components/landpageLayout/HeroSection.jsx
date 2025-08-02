@@ -33,7 +33,7 @@ export default function HeroSection() {
           </a>
           
           {/* Translatable button text */}
-          <a href="#flag" className="border border-white px-6 py-3 rounded hover:bg-white hover:text-primary transition duration-300">
+          <a href="#flag_grid" className="border border-white px-6 py-3 rounded hover:bg-white hover:text-primary transition duration-300">
             {t('explore_countries')} {/* Translated text */}
           </a>
           
