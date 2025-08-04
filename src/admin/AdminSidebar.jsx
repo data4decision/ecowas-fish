@@ -30,7 +30,7 @@ export default function AdminSidebar({
     { key: "dashboard", icon: Home, to: "/admin/dashboard" },
     { key: "upload_data", icon: Upload, to: "/admin/upload" },
     { key: "download_data", icon: Download, to: "/admin/downloads" },
-    { key: "monthly_trends", icon: LineChart, to: "/admin/trends" },
+    { key: "yearly_trends", icon: LineChart, to: "/admin/trends" },
     { key: "kpi_analysis", icon: BarChart2, to: "/admin/kpi-analysis" },
     { key: "report_history", icon: FileText, to: "/admin/reports" },
     { key: "notifications", icon: Bell, to: "/admin/notifications" },
@@ -96,11 +96,10 @@ export default function AdminSidebar({
       {/* Admin Navigation */}
       {isAdmin && (
         <>
-          {!collapsed && (
-            <div className="px-4 mt-6 mb-2 text-xs text-gray-500 uppercase">
-              {t("admin_sidebar.admin_tools")}
-            </div>
-          )}
+          <div className={`px-4 mt-6 mb-2 text-xs text-gray-500 uppercase ${collapsed ? "text-center" : ""}`}>
+  {!collapsed ? t("admin_sidebar.admin_tools") : "⚙️"}
+</div>
+
           <nav className="flex flex-col gap-1 px-2">
             {adminItems.map(({ key, icon: Icon, to }) => (
               <NavLink key={key} to={to} className={linkClass}>

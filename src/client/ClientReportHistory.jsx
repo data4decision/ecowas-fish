@@ -42,19 +42,21 @@ export default function ClientReportHistory({ user }) {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold mb-4">{t("upload_table.report_history")}</h2>
+      <h2 className="text-xl font-bold mb-4">
+        {t("uploadhistory_table.report_history")}
+      </h2>
 
       {reports.length === 0 ? (
-        <p className="text-gray-600">{t("upload_table.no_uploads")}</p>
+        <p className="text-gray-600">{t("uploadhistory_table.no_uploads")}</p>
       ) : (
         <div className="overflow-x-auto border rounded">
           <table className="min-w-full divide-y divide-gray-200 text-sm">
             <thead className="bg-gray-100 text-left text-[#0b0b5c]">
               <tr>
-                <th className="p-2">{t("upload_table.title")}</th>
-                <th className="p-2">{t("upload_table.status")}</th>
-                <th className="p-2">{t("upload_table.date")}</th>
-                <th className="p-2">{t("upload_table.file")}</th>
+                <th className="p-2">{t("uploadhistory_table.title")}</th>
+                <th className="p-2">{t("uploadhistory_table.status")}</th>
+                <th className="p-2">{t("uploadhistory_table.date")}</th>
+                <th className="p-2">{t("uploadhistory_table.file")}</th>
               </tr>
             </thead>
             <tbody>
@@ -62,8 +64,12 @@ export default function ClientReportHistory({ user }) {
                 <tr key={report.id} className="border-t">
                   <td className="p-2">{report.title}</td>
                   <td className="p-2">
-                    <span className={`px-2 py-1 rounded text-xs ${getStatusBadge(report.status)}`}>
-                      {t(`upload_table.${report.status}`)}
+                    <span
+                      className={`px-2 py-1 rounded text-xs ${getStatusBadge(
+                        report.status
+                      )}`}
+                    >
+                      {t(`uploadhistory_table.${report.status}`)}
                     </span>
                   </td>
                   <td className="p-2">
@@ -78,7 +84,7 @@ export default function ClientReportHistory({ user }) {
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:underline"
                     >
-                      {t("upload_table.view")}
+                      {t("uploadhistory_table.view")}
                     </a>
                   </td>
                 </tr>

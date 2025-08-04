@@ -7,29 +7,28 @@ import {
   AccordionContent,
 } from "../components/ui/accordion";
 
-
 export default function ClientHelp({ user }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
   const COUNTRY_NAMES = {
-  NG: "Nigeria",
-  GH: "Ghana",
-  BJ: "Benin",
-  TG: "Togo",
-  CI: "Côte d'Ivoire",
-  GM: "Gambia",
-  GN: "Guinea",
-  GW: "Guinea-Bissau",
-  LR: "Liberia",
-  ML: "Mali",
-  NE: "Niger",
-  SL: "Sierra Leone",
-  SN: "Senegal",
-  BF: "Burkina Faso",
-};
+    NG: "Nigeria",
+    GH: "Ghana",
+    BJ: "Benin",
+    TG: "Togo",
+    CI: "Côte d'Ivoire",
+    GM: "Gambia",
+    GN: "Guinea",
+    GW: "Guinea-Bissau",
+    LR: "Liberia",
+    ML: "Mali",
+    NE: "Niger",
+    SL: "Sierra Leone",
+    SN: "Senegal",
+    BF: "Burkina Faso",
+  };
 
-const countryCode = user?.country || user?.countryCode;
-const country = COUNTRY_NAMES[countryCode] || countryCode || "Your Country";
-
+  const countryCode = user?.country || user?.countryCode;
+  const country = COUNTRY_NAMES[countryCode] || countryCode || t("help.your_country", { defaultValue: "Your Country" });
 
   const supportEmail = "d4d2025t@data4decision.org";
   const whatsappLink = "https://wa.me/2349040009930";
@@ -37,41 +36,23 @@ const country = COUNTRY_NAMES[countryCode] || countryCode || "Your Country";
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="text-2xl md:text-3xl font-bold text-[#0b0b5c] mb-6">
-  {t("help.intro", {
-    country,
-    defaultValue: `Welcome, ${country} Fisheries Team`,
-  })}
-</h1>
-
+        {t("help.intro", {
+          country,
+          defaultValue: `Welcome, ${country} Fisheries Team`,
+        })}
+      </h1>
 
       <Accordion type="single" collapsible className="w-full">
         {/* Dashboard Help */}
         <AccordionItem value="dashboard">
           <AccordionTrigger className="font-semibold text-left text-[#0b0b5c]">
-            {t("help.dashboard.heading", {
-              defaultValue: "Understanding the Dashboard",
-            })}
+            {t("help.dashboard.heading")}
           </AccordionTrigger>
           <AccordionContent className="text-gray-700 text-sm">
             <ul className="list-disc pl-5 space-y-2">
-              <li>
-                {t("help.dashboard.kpi", {
-                  defaultValue:
-                    "Learn how to read KPI cards and what each metric means.",
-                })}
-              </li>
-              <li>
-                {t("help.dashboard.trends", {
-                  defaultValue:
-                    "Explore how to interact with the yearly trends chart.",
-                })}
-              </li>
-              <li>
-                {t("help.dashboard.filtering", {
-                  defaultValue:
-                    "Understand how the dashboard displays only data related to your country.",
-                })}
-              </li>
+              <li>{t("help.dashboard.kpi")}</li>
+              <li>{t("help.dashboard.trends")}</li>
+              <li>{t("help.dashboard.filtering")}</li>
             </ul>
           </AccordionContent>
         </AccordionItem>
@@ -79,24 +60,12 @@ const country = COUNTRY_NAMES[countryCode] || countryCode || "Your Country";
         {/* Downloads Help */}
         <AccordionItem value="downloads">
           <AccordionTrigger className="font-semibold text-left text-[#0b0b5c]">
-            {t("help.download.heading", {
-              defaultValue: "How to Download Reports",
-            })}
+            {t("help.download.heading")}
           </AccordionTrigger>
           <AccordionContent className="text-gray-700 text-sm">
             <ul className="list-disc pl-5 space-y-2">
-              <li>
-                {t("help.download.steps", {
-                  defaultValue:
-                    "Navigate to the Downloads section and click the download icon beside each report.",
-                })}
-              </li>
-              <li>
-                {t("help.download.status", {
-                  defaultValue:
-                    "Approved reports are available to download; pending ones are under review.",
-                })}
-              </li>
+              <li>{t("help.download.steps")}</li>
+              <li>{t("help.download.status")}</li>
             </ul>
           </AccordionContent>
         </AccordionItem>
@@ -104,29 +73,20 @@ const country = COUNTRY_NAMES[countryCode] || countryCode || "Your Country";
         {/* Glossary */}
         <AccordionItem value="glossary">
           <AccordionTrigger className="font-semibold text-left text-[#0b0b5c]">
-            {t("help.glossary.heading", {
-              defaultValue: "Glossary of Key Indicators",
-            })}
+            {t("help.glossary.heading")}
           </AccordionTrigger>
           <AccordionContent className="text-gray-700 text-sm space-y-2">
             <p>
-              <strong>Total Fish Catch:</strong>{" "}
-              {t("indicators.total_fish_catch", {
-                defaultValue: "Total weight of fish caught annually.",
-              })}
+              <strong>{t("indicators.total_fish_catch_label", { defaultValue: "Total Fish Catch" })}:</strong>{" "}
+              {t("indicators.total_fish_catch")}
             </p>
             <p>
-              <strong>Fisher Income:</strong>{" "}
-              {t("indicators.average_income", {
-                defaultValue: "Average annual income of fishers.",
-              })}
+              <strong>{t("indicators.average_income_label", { defaultValue: "Fisher Income" })}:</strong>{" "}
+              {t("indicators.average_income")}
             </p>
             <p>
-              <strong>Vessels Registered:</strong>{" "}
-              {t("indicators.fishing_vessels", {
-                defaultValue:
-                  "Number of officially registered fishing vessels.",
-              })}
+              <strong>{t("indicators.fishing_vessels_label", { defaultValue: "Vessels Registered" })}:</strong>{" "}
+              {t("indicators.fishing_vessels")}
             </p>
           </AccordionContent>
         </AccordionItem>
@@ -134,41 +94,16 @@ const country = COUNTRY_NAMES[countryCode] || countryCode || "Your Country";
         {/* FAQs */}
         <AccordionItem value="faqs">
           <AccordionTrigger className="font-semibold text-left text-[#0b0b5c]">
-            {t("help.faqs.heading", {
-              defaultValue: "Frequently Asked Questions",
-            })}
+            {t("help.faqs.heading")}
           </AccordionTrigger>
           <AccordionContent className="text-gray-700 text-sm space-y-3">
             <div>
-              <p>
-                <strong>Q:</strong>{" "}
-                {t("help.faqs.q1", {
-                  defaultValue: "Why can’t I see other countries’ data?",
-                })}
-              </p>
-              <p>
-                <strong>A:</strong>{" "}
-                {t("help.faqs.a1", {
-                  defaultValue:
-                    "For data privacy and relevance, users only see data related to their own country.",
-                })}
-              </p>
+              <p><strong>Q:</strong> {t("help.faqs.q1")}</p>
+              <p><strong>A:</strong> {t("help.faqs.a1")}</p>
             </div>
-
             <div>
-              <p>
-                <strong>Q:</strong>{" "}
-                {t("help.faqs.q2", {
-                  defaultValue: "How do I get the latest reports?",
-                })}
-              </p>
-              <p>
-                <strong>A:</strong>{" "}
-                {t("help.faqs.a2", {
-                  defaultValue:
-                    "Approved reports are automatically listed in your downloads section. Check regularly for updates.",
-                })}
-              </p>
+              <p><strong>Q:</strong> {t("help.faqs.q2")}</p>
+              <p><strong>A:</strong> {t("help.faqs.a2")}</p>
             </div>
           </AccordionContent>
         </AccordionItem>
@@ -176,17 +111,12 @@ const country = COUNTRY_NAMES[countryCode] || countryCode || "Your Country";
         {/* Support Contact */}
         <AccordionItem value="support">
           <AccordionTrigger className="font-semibold text-left text-[#0b0b5c]">
-            {t("help.support.heading", {
-              defaultValue: "Contact Support",
-            })}
+            {t("help.support.heading")}
           </AccordionTrigger>
           <AccordionContent className="text-gray-700 text-sm space-y-2">
             <p>
               <strong>Email:</strong>{" "}
-              <a
-                href={`mailto:${supportEmail}`}
-                className="text-blue-600 underline"
-              >
+              <a href={`mailto:${supportEmail}`} className="text-blue-600 underline">
                 {supportEmail}
               </a>
             </p>

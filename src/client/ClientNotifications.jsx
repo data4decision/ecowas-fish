@@ -10,11 +10,13 @@ import {
 } from "firebase/firestore";
 import { useTranslation } from "react-i18next";
 import { FaTrash, FaCheckCircle } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 
 export default function ClientNotifications({ user }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
+  const lang = i18n.language?.split("-")[0] || "en"; // Normalize language
 
   useEffect(() => {
     if (!user) return;
@@ -35,7 +37,6 @@ export default function ClientNotifications({ user }) {
             const type = noti.type;
 
             if (readBy.includes(`${userEmail}_deleted`)) return false;
-
             if (recipient === "all") return true;
 
             if (type === "user" && recipient === userEmail) return true;
@@ -104,13 +105,13 @@ export default function ClientNotifications({ user }) {
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
       <h2 className="text-2xl font-semibold text-[#0b0b5c] mb-4">
-        {t("notifications.title", { defaultValue: "Notifications" })}
+        {t("notifications_table.title")}
       </h2>
 
       {loading ? (
-        <p>{t("notifications.loading", { defaultValue: "Loading notifications..." })}</p>
+        <p>{t("notifications_table.loading")}</p>
       ) : notifications.length === 0 ? (
-        <p>{t("notifications.none", { defaultValue: "No notifications yet." })}</p>
+        <p>{t("notifications_table.none")}</p>
       ) : (
         <ul className="space-y-4">
           {notifications.map((noti) => (
@@ -125,7 +126,7 @@ export default function ClientNotifications({ user }) {
                   <button
                     onClick={() => handleMarkAsRead(noti.id)}
                     className="text-green-600 hover:text-green-800"
-                    title="Mark as Read"
+                    title={t("notifications_table.mark_as_read")}
                   >
                     <FaCheckCircle />
                   </button>
@@ -133,16 +134,28 @@ export default function ClientNotifications({ user }) {
                 <button
                   onClick={() => handleDelete(noti.id)}
                   className="text-red-500 hover:text-red-700"
-                  title="Delete Notification"
+                  title={t("notifications_table.delete")}
                 >
                   <FaTrash />
                 </button>
               </div>
-              <h4 className="text-lg font-semibold text-[#0b0b5c]">{noti.title}</h4>
-              <p className="text-gray-700 text-sm">{noti.message}</p>
-              <p className="text-xs text-gray-500 mt-1">
-                {new Date(noti.timestamp).toLocaleString()}
+
+              <h4 className="text-lg font-semibold text-[#0b0b5c]">
+                {typeof noti.title === "string"
+                  ? noti.title
+                  : noti.title?.[lang] || noti.title?.en || t("notifications_table.no_title")}
+              </h4>
+
+              <p className="text-gray-700 text-sm">
+                {typeof noti.message === "string"
+                  ? noti.message
+                  : noti.message?.[lang] || noti.message?.en || t("notifications_table.no_message")}
               </p>
+
+              <p className="text-xs text-gray-500 mt-1">
+  {(noti.timestamp?.toDate?.() || new Date()).toLocaleString()}
+</p>
+
             </li>
           ))}
         </ul>

@@ -3,7 +3,6 @@ import { db } from "../firebase/firebase";
 import { addDoc, collection } from "firebase/firestore";
 import AdminLayout from "./AdminLayout";
 
-// Country name + code mapping
 const ECOWAS_COUNTRIES = [
   { name: "Nigeria", code: "NG" },
   { name: "Ghana", code: "GH" },
@@ -22,8 +21,8 @@ const ECOWAS_COUNTRIES = [
 ];
 
 export default function AdminNotificationForm() {
-  const [title, setTitle] = useState("");
-  const [message, setMessage] = useState("");
+  const [title, setTitle] = useState({ en: "", fr: "", pt: "" });
+  const [message, setMessage] = useState({ en: "", fr: "", pt: "" });
   const [recipientType, setRecipientType] = useState("all");
   const [selectedCountries, setSelectedCountries] = useState([]);
   const [recipientEmail, setRecipientEmail] = useState("");
@@ -32,11 +31,17 @@ export default function AdminNotificationForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !message || (recipientType === "country" && selectedCountries.length === 0)) {
-      return alert("Please fill in all required fields.");
+    const hasEmptyField =
+      !title.en || !message.en || !title.fr || !message.fr || !title.pt || !message.pt;
+
+    if (
+      hasEmptyField ||
+      (recipientType === "country" && selectedCountries.length === 0)
+    ) {
+      return alert("Please complete all title and message fields in each language.");
     }
 
-    const timestamp = new Date().toISOString();
+    const timestamp = new Date();
 
     try {
       if (recipientType === "all") {
@@ -74,8 +79,8 @@ export default function AdminNotificationForm() {
       }
 
       setStatus("✅ Notification sent successfully.");
-      setTitle("");
-      setMessage("");
+      setTitle({ en: "", fr: "", pt: "" });
+      setMessage({ en: "", fr: "", pt: "" });
       setSelectedCountries([]);
       setRecipientEmail("");
     } catch (err) {
@@ -88,26 +93,41 @@ export default function AdminNotificationForm() {
     <AdminLayout>
       <div className="max-w-3xl mx-auto p-6 bg-white shadow rounded mt-10">
         <h2 className="text-2xl font-semibold text-[#0b0b5c] mb-4">
-          Post New Notification
+          Post New Notification (Multilingual)
         </h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Title"
-            className="w-full border px-3 py-2 rounded"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-          <textarea
-            placeholder="Message"
-            className="w-full border px-3 py-2 rounded"
-            rows={4}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            required
-          />
 
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Title Fields */}
+          <div className="grid md:grid-cols-3 gap-4">
+            {["en", "fr", "pt"].map((lang) => (
+              <input
+                key={lang}
+                type="text"
+                placeholder={`Title (${lang.toUpperCase()})`}
+                className="w-full border px-3 py-2 rounded"
+                value={title[lang]}
+                onChange={(e) => setTitle({ ...title, [lang]: e.target.value })}
+                required
+              />
+            ))}
+          </div>
+
+          {/* Message Fields */}
+          <div className="grid md:grid-cols-3 gap-4">
+            {["en", "fr", "pt"].map((lang) => (
+              <textarea
+                key={lang}
+                placeholder={`Message (${lang.toUpperCase()})`}
+                className="w-full border px-3 py-2 rounded"
+                rows={3}
+                value={message[lang]}
+                onChange={(e) => setMessage({ ...message, [lang]: e.target.value })}
+                required
+              />
+            ))}
+          </div>
+
+          {/* Recipient Type */}
           <div>
             <label className="block text-sm font-medium mb-1 text-gray-700">Recipient Type</label>
             <select
@@ -125,6 +145,7 @@ export default function AdminNotificationForm() {
             </select>
           </div>
 
+          {/* Country Selector */}
           {recipientType === "country" && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -149,6 +170,7 @@ export default function AdminNotificationForm() {
             </div>
           )}
 
+          {/* User Email Field */}
           {recipientType === "user" && (
             <input
               type="email"

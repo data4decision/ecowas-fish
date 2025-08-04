@@ -78,5 +78,48 @@
       "access_denied": "Acesso negado. Papel não autorizado.",
       "not_found": "Usuário não encontrado."
     }
+  },
+  "admin_trends_page": {
+  "title": "Painel de Tendências Anuais",
+  "description": "Selecione países e indicadores para analisar as tendências anuais na região da CEDEAO. Essas tendências ajudam os tomadores de decisão a alocar recursos, detectar progressos ou identificar problemas na governança pesqueira.",
+  "select_countries": "Selecionar países",
+  "select_indicators": "Selecionar indicadores",
+  "generate": "Gerar Tendências",
+  "export_csv": "Exportar CSV",
+  "export_pdf": "Exportar PDF",
+  "chart_type": "Tipo de gráfico",
+  "line": "Gráfico de linhas",
+  "bar": "Gráfico de barras",
+  "indicators": {
+    "Total Fish Catch (Tonnes)": "Captura total de peixe (toneladas)",
+    "Fishing Effort (Trips)": "Esforço de pesca (viagens)",
+    "Fishers Income (USD)": "Renda dos pescadores (USD)",
+    "Vessels Count": "Número de embarcações",
+    "Cooperatives": "Cooperativas",
+    "Food Security Index": "Índice de segurança alimentar",
+    "Sustainable Fishing %": "Pesca sustentável %",
+    "Export Volume": "Volume de exportação",
+    "Illegal Fishing Cases": "Casos de pesca ilegal",
+    "Processing Facilities": "Instalações de processamento",
+    "Fishing Zones": "Zonas de pesca",
+    "Gear Types": "Tipos de equipamentos",
+    "Fuel Consumption (Litres)": "Consumo de combustível (litros)",
+    "Hatcheries": "Hatcheries",
+    "Female Participation %": "Participação feminina %",
+    "Market Access Score": "Pontuação de acesso ao mercado",
+    "Cold Storage Capacity (Tonnes)": "Capacidade de armazenamento a frio (toneladas)",
+    "Training Sessions": "Sessões de treinamento",
+    "Aquaculture Output (Tonnes)": "Produção aquícola (toneladas)",
+    "Licensing Rate %": "Taxa de licenciamento %",
+    "Community Engagement Score": "Pontuação de envolvimento comunitário",
+    "Surveillance Missions": "Missões de vigilância",
+    "Biodiversity Score": "Pontuação de biodiversidade",
+    "Subsidies Provided (USD)": "Subsídios fornecidos (USD)",
+    "Sanctions Enforced": "Sanções aplicadas",
+    "Climate Impact Score": "Pontuação de impacto climático",
+    "Research Publications": "Publicações científicas",
+    "Youth Engagement %": "Participação juvenil %"
   }
+}
+
 }

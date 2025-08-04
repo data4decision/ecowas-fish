@@ -286,7 +286,7 @@
   "dashboard": "Painel de controle",
   "upload_data": "Carregar dados",
   "download_data": "Baixar dados",
-  "monthly_trends": "Tendências mensais",
+  "yearly_trends": "Tendências Anuais",
   "kpi_analysis": "Análise de KPIs",
   "report_history": "Histórico de relatórios",
   "notifications": "Notificações",
@@ -299,10 +299,111 @@
   "master_reports": "Baixar relatórios mestres",
   "admin_tools": "Ferramentas administrativas",
   "logout": "Sair"
+},
+"uploadhistory_table": {
+    "report_history": "Histórico de Relatórios",
+    "no_uploads": "Nenhum relatório enviado ainda.",
+    "title": "Título",
+    "status": "Status",
+    "date": "Data",
+    "file": "Arquivo",
+    "view": "Visualizar",
+    "approved": "Aprovado",
+    "pending": "Pendente",
+    "rejected": "Rejeitado"
+  },
+  "notifications_table": {
+    "title": "Notificações",
+    "loading": "Carregando notificações...",
+    "none": "Nenhuma notificação até agora.",
+    "mark_as_read": "Marcar como lida",
+    "delete": "Excluir notificação",
+    "no_title": "Sem título",
+    "no_message": "Sem mensagem"
+  },
+  "admin_notification_form": {
+    "post_title": "Publicar Nova Notificação",
+    "title_placeholder": "Título ({{lang}})",
+    "message_placeholder": "Mensagem ({{lang}})",
+    "recipient_type": "Tipo de Destinatário",
+    "all_users": "Todos os usuários",
+    "country": "Um ou mais países",
+    "user": "Email de usuário específico",
+    "select_countries": "Selecionar País(es)",
+    "select_hint": "Segure Ctrl (Windows) ou ⌘ (Mac) para selecionar vários.",
+    "recipient_email": "Email do destinatário",
+    "send_button": "Enviar Notificação",
+    "success": "✅ Notificação enviada com sucesso.",
+    "error": "❌ Erro ao enviar a notificação.",
+    "validation_alert": "Por favor, preencha todos os campos de título e mensagem em cada idioma."
+  },
+  "help": {
+    "intro": "Bem-vinda, Equipe de Pesca de {{country}}",
+    "dashboard": {
+      "heading": "Compreendendo o Painel",
+      "kpi": "Aprenda a ler os cartões de KPI e entender o significado de cada métrica.",
+      "trends": "Explore como interagir com o gráfico de tendências anuais.",
+      "filtering": "Entenda como o painel exibe apenas dados relacionados ao seu país."
+    },
+    "download": {
+      "heading": "Como baixar relatórios",
+      "steps": "Vá para a seção de Downloads e clique no ícone de download ao lado de cada relatório.",
+      "status": "Relatórios aprovados estão disponíveis para download; os pendentes estão em revisão."
+    },
+    "glossary": {
+      "heading": "Glossário de Indicadores-Chave"
+    },
+    "faqs": {
+      "heading": "Perguntas Frequentes",
+      "q1": "Por que não consigo ver dados de outros países?",
+      "a1": "Por questões de privacidade e relevância, você só vê dados relacionados ao seu próprio país.",
+      "q2": "Como posso obter os relatórios mais recentes?",
+      "a2": "Relatórios aprovados são listados automaticamente na sua seção de downloads. Verifique regularmente por atualizações."
+    },
+    "support": {
+      "heading": "Contato com o Suporte"
+    }
+  },
+  "indicators": {
+  "total_fish_catch_label": "Captura Total de Peixe",
+  "total_fish_catch": "Peso total de peixe capturado anualmente.",
+  
+  "average_income_label": "Rendimento dos Pescadores",
+  "average_income": "Rendimento médio anual dos pescadores.",
+  
+  "fishing_vessels_label": "Embarcações Registradas",
+  "fishing_vessels": "Número de embarcações de pesca registradas oficialmente."
+},
+"client_settings": {
+  "title": "Configurações da Conta",
+  "first_name": "Nome",
+  "surname": "Sobrenome",
+  "phone": "Telefone",
+  "country": "País",
+  "profession": "Profissão",
+  "education": "Educação",
+  "degrees": "Diplomas",
+  "language": "Idioma",
+  "enable_notifications": "Ativar notificações",
+  "change_image": "Alterar imagem",
+  "remove_image": "Remover imagem",
+  "reset_avatar": "Redefinir para avatar padrão",
+  "save": "Salvar alterações",
+  "export": "Exportar dados",
+  "delete": "Excluir conta",
+  "uploading": "Enviando...",
+  "profile_updated": "Imagem do perfil atualizada!",
+  "upload_failed": "Falha ao recortar/enviar a imagem",
+  "image_removed": "Imagem removida. Clique em salvar para confirmar.",
+  "avatar_restored": "Avatar padrão restaurado. Clique em salvar para confirmar.",
+  "success": "Alterações salvas com sucesso.",
+  "error": "Falha ao salvar alterações.",
+  "full_preview": "Visualização da imagem completa",
+  "close": "Fechar",
+  "crop_title": "Recortar imagem",
+  "cancel": "Cancelar",
+  "save_image": "Salvar"
 }
-
-
-
 }
 
 

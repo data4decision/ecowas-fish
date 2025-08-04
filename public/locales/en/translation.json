@@ -108,88 +108,7 @@
     "loading": "Loading..."
   },
 
-  "indicators": {
-    "% compliance with licensing": "% compliance with licensing",
-    "% contribution of fisheries to food security": "% contribution of fisheries to food security",
-    "% of catch processed locally": "% of catch processed locally",
-    "% of fishers accessing credit/finance": "% of fishers accessing credit/finance",
-    "% of fishers registered/licensed": "% of fishers registered/licensed",
-    "% of fishers trained on sustainable practices": "% of fishers trained on sustainable practices",
-    "% of fishing trips monitored (MCS coverage)": "% of fishing trips monitored (MCS coverage)",
-    "% of illegal, unreported, unregulated (IUU) catch": "% of illegal, unreported, unregulated (IUU) catch",
-    "% of informal/unregistered fishers": "% of informal/unregistered fishers",
-    "% of sustainable fishing zones enforced": "% of sustainable fishing zones enforced",
-    "% of women in post-harvest/value chain roles": "% of women in post-harvest/value chain roles",
-    "Access to credit/loans for fishers": "Access to credit/loans for fishers",
-    "Access to extension or advisory services": "Access to extension or advisory services",
-    "Access to fish transport/logistics": "Access to fish transport/logistics",
-    "Adoption of climate-smart fishing practices (%)": "Adoption of climate-smart fishing practices (%)",
-    "Algal bloom incidence": "Algal bloom incidence",
-    "Average income of fishers": "Average income of fishers",
-    "Budget allocation to capture fisheries": "Budget allocation to capture fisheries",
-    "CPUE (Catch per Unit Effort)": "CPUE (Catch per Unit Effort)",
-    "Catch of non-target species (bycatch rate)": "Catch of non-target species (bycatch rate)",
-    "Catch per unit effort (CPUE, kg/hour)": "Catch per unit effort (CPUE, kg/hour)",
-    "Certification status of landed fish": "Certification status of landed fish",
-    "Change in catch volume by species/year": "Change in catch volume by species/year",
-    "Changes in migratory species patterns": "Changes in migratory species patterns",
-    "Cold chain access (%)": "Cold chain access (%)",
-    "Community involvement in resource management": "Community involvement in resource management",
-    "Community-based monitoring presence": "Community-based monitoring presence",
-    "Compliance with mesh size regulations (%)": "Compliance with mesh size regulations (%)",
-    "Conflict incidence among user groups": "Conflict incidence among user groups",
-    "Coral reef bleaching events": "Coral reef bleaching events",
-    "Coverage of inland fishing regulations": "Coverage of inland fishing regulations",
-    "Data harmonization with regional platforms": "Data harmonization with regional platforms",
-    "Digital data collection systems in place": "Digital data collection systems in place",
-    "Enforcement capacity score": "Enforcement capacity score",
-    "Existence of national fisheries database": "Existence of national fisheries database",
-    "Fish stock status": "Fish stock status",
-    "Fisheries budget execution rate (%)": "Fisheries budget execution rate (%)",
-    "Fishers' dependency on fisheries (%)": "Fishers' dependency on fisheries (%)",
-    "Fishing days per year (per vessel)": "Fishing days per year (per vessel)",
-    "Flood/drought impact on inland fisheries": "Flood/drought impact on inland fisheries",
-    "Functioning landing sites": "Functioning landing sites",
-    "Funding for co-management initiatives": "Funding for co-management initiatives",
-    "Illegal gear use incidence": "Illegal gear use incidence",
-    "Impact of pollution on inland fisheries": "Impact of pollution on inland fisheries",
-    "Inclusion of gender in fisheries policy": "Inclusion of gender in fisheries policy",
-    "Inland fish consumption per capita (kg/year)": "Inland fish consumption per capita (kg/year)",
-    "Inland fish production (MT/year)": "Inland fish production (MT/year)",
-    "Inland fisheries policy/plan exists": "Inland fisheries policy/plan exists",
-    "Job diversity in fisheries value chain": "Job diversity in fisheries value chain",
-    "Level of illegal activities reported": "Level of illegal activities reported",
-    "Level of participation in fisher organizations": "Level of participation in fisher organizations",
-    "Level of women's participation in management": "Level of women's participation in management",
-    "Local processing infrastructure in place": "Local processing infrastructure in place",
-    "Monitoring of fishing activities": "Monitoring of fishing activities",
-    "Number of fishing cooperatives": "Number of fishing cooperatives",
-    "Number of inland fishing vessels": "Number of inland fishing vessels",
-    "Number of registered fishers": "Number of registered fishers",
-    "Participation of youth in fisheries": "Participation of youth in fisheries",
-    "Post-harvest loss rate (%)": "Post-harvest loss rate (%)",
-    "Presence of extension/advisory services": "Presence of extension/advisory services",
-    "Proportion of women with access to credit/finance": "Proportion of women with access to credit/finance",
-    "Proportion of youth in fisher organizations": "Proportion of youth in fisher organizations",
-    "Proportion of youth with access to credit/finance": "Proportion of youth with access to credit/finance",
-    "Proportion of youth with training": "Proportion of youth with training",
-    "Proportion trained in sustainable practices": "Proportion trained in sustainable practices",
-    "Representation of women in fisher org leadership": "Representation of women in fisher org leadership",
-    "Resource conflict incidents reported": "Resource conflict incidents reported",
-    "Revenue generated from inland fisheries": "Revenue generated from inland fisheries",
-    "River/lake pollution levels": "River/lake pollution levels",
-    "Sex-disaggregated fisher registration": "Sex-disaggregated fisher registration",
-    "Stakeholder consultation frequency": "Stakeholder consultation frequency",
-    "Stock assessment conducted": "Stock assessment conducted",
-    "Total fish catch (MT/year)": "Total fish catch (MT/year)",
-    "Use of ecosystem-based management approaches": "Use of ecosystem-based management approaches",
-    "Use of mobile phones in fisheries": "Use of mobile phones in fisheries",
-    "Use of traditional knowledge in decision making": "Use of traditional knowledge in decision making",
-    "Value chain actors with access to credit": "Value chain actors with access to credit",
-    "Value of inland fish production (USD/year)": "Value of inland fish production (USD/year)",
-    "Water governance index (WGI)": "Water governance index (WGI)",
-    "Water level fluctuation impact": "Water level fluctuation impact"
-  },
+
   "indicator_groups": {
   "All": "All",
   "Economic": "Economic",
@@ -324,7 +243,7 @@
     "dashboard": "Dashboard",
     "upload_data": "Upload Data",
     "download_data": "Download Data",
-    "monthly_trends": "Monthly Trends",
+    "yearly_trends": "Yearly Trends",
     "kpi_analysis": "KPI Analysis",
     "report_history": "Report History",
     "notifications": "Notifications",
@@ -388,9 +307,117 @@
     "country": "Country",
     "regional_average": "🌍 Regional Avg",
     "no_data": "No data available for the selected options"
-  }
-
+  },
+  "uploadhistory_table": {
+    "report_history": "Report History",
+    "no_uploads": "No uploaded reports yet.",
+    "title": "Title",
+    "status": "Status",
+    "date": "Date",
+    "file": "File",
+    "view": "View",
+    "approved": "Approved",
+    "pending": "Pending",
+    "rejected": "Rejected"
+  },
+  "notifications_table": {
+    "title": "Notifications",
+    "loading": "Loading notifications...",
+    "none": "No notifications yet.",
+    "mark_as_read": "Mark as Read",
+    "delete": "Delete Notification",
+    "no_title": "No Title",
+    "no_message": "No Message"
+  },
+  "admin_notification_form": {
+    "post_title": "Post New Notification",
+    "title_placeholder": "Title ({{lang}})",
+    "message_placeholder": "Message ({{lang}})",
+    "recipient_type": "Recipient Type",
+    "all_users": "All Users",
+    "country": "One or More Countries",
+    "user": "Specific User Email",
+    "select_countries": "Select Country/Countries",
+    "select_hint": "Hold Ctrl (Windows) or ⌘ (Mac) to select multiple.",
+    "recipient_email": "Recipient Email",
+    "send_button": "Send Notification",
+    "success": "✅ Notification sent successfully.",
+    "error": "❌ Error sending notification.",
+    "validation_alert": "Please complete all title and message fields in each language."
+  },
+  "help": {
+    "intro": "Welcome, {{country}} Fisheries Team",
+    "dashboard": {
+      "heading": "Understanding the Dashboard",
+      "kpi": "Learn how to read KPI cards and what each metric means.",
+      "trends": "Explore how to interact with the yearly trends chart.",
+      "filtering": "Understand how the dashboard displays only data related to your country."
+    },
+    "download": {
+      "heading": "How to Download Reports",
+      "steps": "Navigate to the Downloads section and click the download icon beside each report.",
+      "status": "Approved reports are available to download; pending ones are under review."
+    },
+    "glossary": {
+      "heading": "Glossary of Key Indicators"
+    },
+    "faqs": {
+      "heading": "Frequently Asked Questions",
+      "q1": "Why can’t I see other countries’ data?",
+      "a1": "For data privacy and relevance, users only see data related to their own country.",
+      "q2": "How do I get the latest reports?",
+      "a2": "Approved reports are automatically listed in your downloads section. Check regularly for updates."
+    },
+    "support": {
+      "heading": "Contact Support"
+    }
+  },
+  "indicators": {
+  "total_fish_catch_label": "Total Fish Catch",
+  "total_fish_catch": "Total weight of fish caught annually.",
+  
+  "average_income_label": "Fisher Income",
+  "average_income": "Average annual income of fishers.",
+  
+  "fishing_vessels_label": "Vessels Registered",
+  "fishing_vessels": "Number of officially registered fishing vessels."
+},
+"client_settings": {
+  "title": "Account Settings",
+  "first_name": "First Name",
+  "surname": "Surname",
+  "phone": "Phone",
+  "country": "Country",
+  "profession": "Profession",
+  "education": "Education",
+  "degrees": "Degrees",
+  "language": "Language",
+  "enable_notifications": "Enable Notifications",
+  "change_image": "Change Image",
+  "remove_image": "Remove Image",
+  "reset_avatar": "Reset to Default Avatar",
+  "save": "Save Changes",
+  "export": "Export Data",
+  "delete": "Delete Account",
+  "uploading": "Uploading...",
+  "profile_updated": "Profile image updated!",
+  "upload_failed": "Image crop/upload failed",
+  "image_removed": "Image removed. Click save to persist.",
+  "avatar_restored": "Default avatar restored. Click save to persist.",
+  "success": "Changes saved successfully.",
+  "error": "Failed to save changes.",
+  "full_preview": "Full Image Preview",
+  "close": "Close",
+  "crop_title": "Crop Image",
+  "cancel": "Cancel",
+  "save_image": "Save"
 }
+
+
+  
+  
+}
+
 
 
   

@@ -64,32 +64,28 @@ export default function ClientSettings() {
           setPreview(data.profileImage || DEFAULT_AVATAR);
         } catch (err) {
           console.error("Failed to load user data:", err);
-          toast.error("Failed to load saved data.");
+          toast.error(t("client_settings.error"));
         }
       }
     };
 
     fetchUserData();
-  }, [user]);
+  }, [user, t]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
-
-    setForm((prev) => ({
-      ...prev,
-      [name]: val
-    }));
+    setForm((prev) => ({ ...prev, [name]: val }));
   };
 
   const handleSave = async () => {
     if (user?.email) {
       try {
         await setDoc(doc(db, "users", user.email), form, { merge: true });
-        toast.success("Changes saved successfully.");
+        toast.success(t("client_settings.success"));
       } catch (err) {
         console.error(err);
-        toast.error("Failed to save changes.");
+        toast.error(t("client_settings.error"));
       }
     }
   };
@@ -113,7 +109,7 @@ export default function ClientSettings() {
   };
 
   const handleDelete = () => {
-    alert("To delete your account, please contact support.");
+    alert(t("client_settings.delete_message"));
   };
 
   const handleFileChange = async (e) => {
@@ -154,10 +150,10 @@ export default function ClientSettings() {
       setPreview(uploadedUrl);
       setForm((prev) => ({ ...prev, profileImage: uploadedUrl }));
 
-      toast.success("Profile image updated!");
+      toast.success(t("client_settings.profile_updated"));
     } catch (err) {
       console.error(err);
-      toast.error("Image crop/upload failed");
+      toast.error(t("client_settings.upload_failed"));
     } finally {
       setUploading(false);
       setCropModalOpen(false);
@@ -167,13 +163,13 @@ export default function ClientSettings() {
   const handleRemoveImage = () => {
     setPreview(DEFAULT_AVATAR);
     setForm((prev) => ({ ...prev, profileImage: "" }));
-    toast.success("Image removed. Click save to persist.");
+    toast.success(t("client_settings.image_removed"));
   };
 
   const handleResetToDefault = () => {
     setPreview(DEFAULT_AVATAR);
     setForm((prev) => ({ ...prev, profileImage: DEFAULT_AVATAR }));
-    toast.success("Default avatar restored. Click save to persist.");
+    toast.success(t("client_settings.avatar_restored"));
   };
 
   return (
@@ -183,13 +179,13 @@ export default function ClientSettings() {
       </h1>
 
       <div className="flex flex-col md:flex-row gap-6">
-        {/* Profile Image Section */}
+        {/* Profile Image */}
         <div className="flex flex-col items-center gap-4">
           <div className="relative w-32 h-32">
             <div
               className={`w-full h-full rounded-full overflow-hidden border border-gray-300 ${uploading ? 'opacity-50 pointer-events-none' : 'cursor-pointer'}`}
               onClick={() => !uploading && fileInputRef.current?.click()}
-              title="Click to change image"
+              title={t("client_settings.change_image")}
             >
               {preview ? (
                 <img
@@ -208,7 +204,6 @@ export default function ClientSettings() {
               )}
             </div>
 
-            {/* Camera Overlay */}
             {!uploading && (
               <button
                 onClick={(e) => {
@@ -216,7 +211,7 @@ export default function ClientSettings() {
                   fileInputRef.current?.click();
                 }}
                 className="absolute bottom-1 right-1 bg-white p-1 rounded-full shadow hover:bg-gray-100 transition"
-                title="Change Image"
+                title={t("client_settings.change_image")}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -248,32 +243,26 @@ export default function ClientSettings() {
 
           {!uploading && (
             <div className="flex flex-col items-center gap-1">
-              <button
-                onClick={handleRemoveImage}
-                className="text-xs text-red-500 hover:underline"
-              >
-                Remove Image
+              <button onClick={handleRemoveImage} className="text-xs text-red-500 hover:underline">
+                {t("client_settings.remove_image")}
               </button>
-              <button
-                onClick={handleResetToDefault}
-                className="text-xs text-blue-600 hover:underline"
-              >
-                Reset to Default Avatar
+              <button onClick={handleResetToDefault} className="text-xs text-blue-600 hover:underline">
+                {t("client_settings.reset_avatar")}
               </button>
             </div>
           )}
         </div>
 
-        {/* Profile Form */}
+        {/* Form Fields */}
         <div className="flex-1 space-y-4">
           {[
-            { label: "First Name", name: "firstName" },
-            { label: "Surname", name: "surname" },
-            { label: "Phone", name: "phone" },
-            { label: "Country", name: "country" },
-            { label: "Profession", name: "profession" },
-            { label: "Education", name: "education" },
-            { label: "Degrees", name: "degrees" }
+            { name: "firstName", label: t("client_settings.first_name") },
+            { name: "surname", label: t("client_settings.surname") },
+            { name: "phone", label: t("client_settings.phone") },
+            { name: "country", label: t("client_settings.country") },
+            { name: "profession", label: t("client_settings.profession") },
+            { name: "education", label: t("client_settings.education") },
+            { name: "degrees", label: t("client_settings.degrees") }
           ].map((field) => (
             <div key={field.name}>
               <label className="text-sm text-gray-700">{field.label}</label>
@@ -288,7 +277,7 @@ export default function ClientSettings() {
           ))}
 
           <div>
-            <label className="text-sm text-gray-700">Language</label>
+            <label className="text-sm text-gray-700">{t("client_settings.language")}</label>
             <select
               name="language"
               value={form.language}
@@ -308,27 +297,18 @@ export default function ClientSettings() {
               checked={form.notificationsEnabled}
               onChange={handleChange}
             />
-            <label>Enable Notifications</label>
+            <label>{t("client_settings.enable_notifications")}</label>
           </div>
 
-          <div className="flex items-center gap-4 pt-4 flex-wrap">
-            <button
-              onClick={handleSave}
-              className="bg-green-600 text-white px-4 py-2 rounded text-sm"
-            >
-              Save Changes
+          <div className="flex gap-4 pt-4 flex-wrap">
+            <button onClick={handleSave} className="bg-green-600 text-white px-4 py-2 rounded text-sm">
+              {t("client_settings.save")}
             </button>
-            <button
-              onClick={handleExport}
-              className="bg-blue-600 text-white px-4 py-2 rounded text-sm"
-            >
-              Export Data
+            <button onClick={handleExport} className="bg-blue-600 text-white px-4 py-2 rounded text-sm">
+              {t("client_settings.export")}
             </button>
-            <button
-              onClick={handleDelete}
-              className="bg-red-500 text-white px-4 py-2 rounded text-sm"
-            >
-              Delete Account
+            <button onClick={handleDelete} className="bg-red-500 text-white px-4 py-2 rounded text-sm">
+              {t("client_settings.delete")}
             </button>
           </div>
         </div>
@@ -338,10 +318,10 @@ export default function ClientSettings() {
       <Modal
         isOpen={cropModalOpen}
         onRequestClose={() => setCropModalOpen(false)}
-        contentLabel="Crop Image"
+        contentLabel={t("client_settings.crop_title")}
         className="bg-white p-6 max-w-md mx-auto mt-20 rounded shadow-lg"
       >
-        <h2 className="text-lg font-bold mb-4">Crop Image</h2>
+        <h2 className="text-lg font-bold mb-4">{t("client_settings.crop_title")}</h2>
         <div className="relative w-full h-64 bg-gray-100">
           <Cropper
             image={imageSrc}
@@ -354,30 +334,30 @@ export default function ClientSettings() {
           />
         </div>
         <div className="flex justify-end gap-2 mt-4">
-          <button onClick={() => setCropModalOpen(false)} className="px-3 py-1 text-sm border rounded">Cancel</button>
-          <button onClick={handleCropSave} className="px-3 py-1 bg-blue-600 text-white text-sm rounded">Save</button>
+          <button onClick={() => setCropModalOpen(false)} className="px-3 py-1 text-sm border rounded">
+            {t("client_settings.cancel")}
+          </button>
+          <button onClick={handleCropSave} className="px-3 py-1 bg-blue-600 text-white text-sm rounded">
+            {t("client_settings.save_image")}
+          </button>
         </div>
       </Modal>
 
       {/* Full Image Modal */}
-     <Modal
-  isOpen={fullImageModalOpen}
-  onRequestClose={() => setFullImageModalOpen(false)}
-  contentLabel="Full Image"
-  className="bg-white p-4 w-[50%] sm:w-[80%] md:max-w-[30%] mx-auto mt-20 rounded shadow-lg"
->
-  <h2 className="text-lg font-semibold mb-2">Full Image Preview</h2>
-  <img src={preview} alt="Full Profile" className="w-full h-auto rounded" />
-  <div className="flex justify-end mt-4">
-    <button
-      onClick={() => setFullImageModalOpen(false)}
-      className="px-4 py-2 bg-gray-200 text-sm rounded"
-    >
-      Close
-    </button>
-  </div>
-</Modal>
-
+      <Modal
+        isOpen={fullImageModalOpen}
+        onRequestClose={() => setFullImageModalOpen(false)}
+        contentLabel={t("client_settings.full_preview")}
+        className="bg-white p-4 w-[50%] sm:w-[80%] md:max-w-[30%] mx-auto mt-20 rounded shadow-lg"
+      >
+        <h2 className="text-lg font-semibold mb-2">{t("client_settings.full_preview")}</h2>
+        <img src={preview} alt="Full Profile" className="w-full h-auto rounded" />
+        <div className="flex justify-end mt-4">
+          <button onClick={() => setFullImageModalOpen(false)} className="px-4 py-2 bg-gray-200 text-sm rounded">
+            {t("client_settings.close")}
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
