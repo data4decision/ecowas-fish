@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import { LineChart, Line, XAxis, YAxis, Tooltip, Legend, CartesianGrid, ResponsiveContainer } from "recharts";
+import {
+  LineChart, Line, XAxis, YAxis, Tooltip, Legend,
+  CartesianGrid, ResponsiveContainer
+} from "recharts";
 import { saveAs } from "file-saver";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { ArrowUpRight, ArrowDownRight, Play, Pause } from "lucide-react";
 import AdminLayout from "./AdminLayout";
 import fisheriesData from "../data/fisheriesData.json";
+import { useTranslation } from "react-i18next";
 
 const allIndicators = Object.keys(fisheriesData[0]).filter(
   (key) => key !== "Country" && key !== "Year" && key !== "Region"
@@ -14,6 +18,7 @@ const years = Array.from(new Set(fisheriesData.map((d) => d.Year))).sort((a, b) 
 const countries = Array.from(new Set(fisheriesData.map((d) => d.Country))).sort();
 
 export default function AdminKPI({ user }) {
+  const { t } = useTranslation();
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [selectedIndicator, setSelectedIndicator] = useState(allIndicators[0]);
   const [compareMode, setCompareMode] = useState(false);
@@ -94,21 +99,23 @@ export default function AdminKPI({ user }) {
       <div className="p-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <div>
-            <label className="text-sm font-medium text-gray-700">Indicator</label>
+            <label className="text-sm font-medium text-gray-700">{t("admin_kpi.indicator")}</label>
             <select
               className="w-full p-2 border rounded"
               value={selectedIndicator}
               onChange={(e) => setSelectedIndicator(e.target.value)}
             >
               {allIndicators.map((ind) => (
-                <option key={ind} value={ind}>{ind}</option>
+                <option key={ind} value={ind}>
+                  {t(ind, { ns: "indicators" })}
+                </option>
               ))}
             </select>
           </div>
 
           <div>
             <label className="text-sm font-medium text-gray-700">
-              {compareMode ? "Select Countries" : "Select Country"}
+              {compareMode ? t("admin_kpi.select_countries") : t("admin_kpi.select_country")}
             </label>
             {!compareMode ? (
               <select
@@ -145,7 +152,7 @@ export default function AdminKPI({ user }) {
                 onChange={(e) => setCompareMode(e.target.checked)}
                 className="mr-2"
               />
-              Compare Multiple Countries
+              {t("admin_kpi.compare_mode")}
             </label>
             <div className="flex gap-2">
               <button
@@ -158,7 +165,7 @@ export default function AdminKPI({ user }) {
                 onClick={handleExportPDF}
                 className="px-3 py-2 bg-[#f47b20] text-white text-sm rounded"
               >
-                Export PDF
+                {t("admin_kpi.export_pdf")}
               </button>
             </div>
           </div>
@@ -168,7 +175,7 @@ export default function AdminKPI({ user }) {
           {!compareMode && (
             <div className="mb-2 flex justify-between items-center">
               <h4 className="font-medium text-gray-700">
-                {selectedCountry} (up to {currentYear})
+                {selectedCountry} ({t("admin_kpi.up_to")} {currentYear})
               </h4>
               {getTrendArrow()}
             </div>
@@ -185,7 +192,7 @@ export default function AdminKPI({ user }) {
                   <Line
                     type="monotone"
                     dataKey="value"
-                    name={selectedIndicator}
+                    name={t(selectedIndicator, { ns: "indicators" })}
                     stroke="#0b0b5c"
                     strokeWidth={2}
                     dot={false}

@@ -107,5 +107,29 @@
   "Number of active fisher cooperatives": "Nombre de coopératives de pêcheurs actives",
   "Coverage of inland fishing regulations": "Couverture des réglementations de la pêche intérieure",
   "% contribution of fisheries to food security": "% de contribution des pêches à la sécurité alimentaire",
-  "Resilience index to climate shocks": "Indice de résilience aux chocs climatiques"
+  "Resilience index to climate shocks": "Indice de résilience aux chocs climatiques",
+
+  
+  "Number of registered fishing vessels": "Nombre de navires de pêche enregistrés",
+  "Number of fishing cooperatives": "Nombre de coopératives de pêche",
+  "Number of fishers employed": "Nombre de pêcheurs employés",
+  "Number of fish processing units": "Nombre d'unités de transformation du poisson",
+  "Total aquaculture production (MT/year)": "Production totale d’aquaculture (MT/an)",
+  "Area under aquaculture (hectares)": "Surface en aquaculture (hectares)",
+  "Number of fish hatcheries": "Nombre d’écloseries de poisson",
+  "Volume of fish exports (MT/year)": "Volume des exportations de poisson (MT/an)",
+  "Value of fish exports (USD/year)": "Valeur des exportations de poisson (USD/an)",
+  "Fish consumption per capita (kg/year)": "Consommation de poisson par habitant (kg/an)",
+  "Fish spoilage rate (%)": "Taux de détérioration du poisson (%)",
+  "Access to cold storage (%)": "Accès au stockage frigorifique (%)",
+  "Post-harvest loss (%)": "Perte post-récolte (%)",
+  "Level of enforcement of sustainable fishing policies": "Niveau d’application des politiques de pêche durable",
+  "Number of reported IUU fishing cases": "Nombre de cas de pêche INN signalés",
+  "Use of modern fishing gear (%)": "Utilisation d'engins de pêche modernes (%)",
+  "Percentage of women in fisheries workforce": "Pourcentage de femmes dans le secteur halieutique",
+  "Training programs conducted for fishers": "Programmes de formation dispensés aux pêcheurs",
+  "Subsidies provided to fisheries sector": "Subventions accordées au secteur de la pêche",
+  "Fish disease outbreak cases": "Cas d'épidémies de maladies du poisson",
+  "Budget allocation to fisheries sector": "Budget alloué au secteur de la pêche"
 }
+

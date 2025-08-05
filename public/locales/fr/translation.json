@@ -51,7 +51,7 @@
   "profile": "Profil",
   "logout": "Déconnexion"
   },
-  "admin_kpi": {
+  "admin_kpi_card": {
     "dashboard_overview": "Aperçu du Tableau de Bord Admin",
     "year": "Année",
     "total_ecowas_countries": "Total des Pays de la CEDEAO",
@@ -384,16 +384,7 @@
       "heading": "Contacter le support"
     }
   },
-  "indicators": {
-  "total_fish_catch_label": "Prise Totale de Poisson",
-  "total_fish_catch": "Poids total du poisson capturé chaque année.",
   
-  "average_income_label": "Revenu des Pêcheurs",
-  "average_income": "Revenu annuel moyen des pêcheurs.",
-  
-  "fishing_vessels_label": "Navires Enregistrés",
-  "fishing_vessels": "Nombre de bateaux de pêche officiellement enregistrés."
-},
 "client_settings": {
   "title": "Paramètres du compte",
   "first_name": "Prénom",
@@ -423,12 +414,68 @@
   "crop_title": "Recadrer l'image",
   "cancel": "Annuler",
   "save_image": "Enregistrer"
+},
+"admin_trends": {
+    "title": "Tableau de bord des tendances halieutiques",
+    "description": "Visualisez et analysez les tendances des données halieutiques dans les pays de la CEDEAO. Sélectionnez des indicateurs, des pays et des années à explorer.",
+    "select_countries": "Sélectionner des pays",
+    "select_years": "Sélectionner des années",
+    "select_indicator": "Sélectionner un indicateur",
+    "choose_countries": "Choisir des pays...",
+    "choose_years": "Choisir des années...",
+    "choose_indicator": "Choisir un indicateur...",
+    "select_all": "Tout sélectionner",
+    "clear": "Réinitialiser",
+    "line_chart": "Graphique en ligne",
+    "bar_chart": "Graphique en barres",
+    "no_data_message": "Aucune donnée disponible pour les filtres sélectionnés.",
+    "export_pdf": "Exporter en PDF",
+    "export_csv": "Exporter en CSV",
+    "export_png": "Exporter en PNG",
+    "average": "Moyenne"
+  },
+  "indicators": {
+    "Capture totale de poisson (MT/an)": "total_fish_catch_mt_year",
+  "Production de capture marine (MT/an)": "marine_capture_production_mt_year",
+  "Production de capture intérieure (MT/an)": "inland_capture_production_mt_year",
+  "Nombre de sorties de pêche par an": "number_of_fishing_trips_per_year",
+  "Revenu moyen des pêcheurs": "average_income_of_fishers",
+  "Valeur du commerce du poisson (national/exportation)": "value_of_fish_trade_domestic_export",
+  "Taux de croissance du revenu chez les pêcheurs (%)": "income_growth_rate_among_fishers_percent",
+  "Contribution au PIB national (%)": "contribution_to_national_gdp_percent",
+  "Impact de la variabilité climatique sur la disponibilité des poissons": "impact_of_climate_variability_on_fish_availability",
+  "Fréquence des événements climatiques extrêmes affectant les captures": "frequency_of_extreme_weather_events_affecting_catch",
+  "Température de surface de la mer (marine)": "sea_surface_temperature_marine",
+  "Nombre de navires de pêche enregistrés": "number_of_registered_fishing_vessels",
+  "Nombre de coopératives de pêche": "number_of_fishing_cooperatives",
+  "Nombre de pêcheurs employés": "number_of_fishers_employed",
+  "Nombre d'unités de transformation du poisson": "number_of_fish_processing_units",
+  "Production aquacole totale (MT/an)": "total_aquaculture_production_mt_year",
+  "Surface en aquaculture (hectares)": "area_under_aquaculture_hectares",
+  "Nombre d'écloseries de poissons": "number_of_fish_hatcheries",
+  "Volume des exportations de poisson (MT/an)": "volume_of_fish_exports_mt_year",
+  "Valeur des exportations de poisson (USD/an)": "value_of_fish_exports_usd_year",
+  "Consommation de poisson par habitant (kg/an)": "fish_consumption_per_capita_kg_year",
+  "Taux de détérioration du poisson (%)": "fish_spoilage_rate_percent",
+  "Accès au stockage frigorifique (%)": "access_to_cold_storage_percent",
+  "Pertes post-récolte (%)": "post_harvest_loss_percent",
+  "Niveau d'application des politiques de pêche durable": "level_of_enforcement_of_sustainable_fishing_policies",
+  "Nombre de cas de pêche INN signalés": "number_of_reported_iuu_fishing_cases",
+  "Utilisation d'engins de pêche modernes (%)": "use_of_modern_fishing_gear_percent",
+  "Pourcentage de femmes dans le secteur de la pêche": "percentage_of_women_in_fisheries_workforce",
+  "Programmes de formation dispensés aux pêcheurs": "training_programs_conducted_for_fishers",
+  "Subventions accordées au secteur de la pêche": "subsidies_provided_to_fisheries_sector",
+  "Cas d'épidémies de maladies des poissons": "fish_disease_outbreak_cases",
+  "Allocation budgétaire au secteur de la pêche": "budget_allocation_to_fisheries_sector"
+  },
+  
+  "admin_kpi": {
+  "indicator": "Indicateur",
+  "select_country": "Sélectionner un pays",
+  "select_countries": "Sélectionner des pays",
+  "compare_mode": "Comparer plusieurs pays",
+  "export_pdf": "Exporter en PDF",
+  "up_to": "jusqu'à"
 }
 
-
 }
-
-
-
-
-

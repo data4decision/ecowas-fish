@@ -58,7 +58,7 @@
   "logout": "Sair"
 },
 
-  "admin_kpi": {
+  "admin_kpi_card": {
     "dashboard_overview": "Visão Geral do Painel Administrativo",
     "year": "Ano",
     "total_ecowas_countries": "Total de Países da CEDEAO",
@@ -364,16 +364,7 @@
       "heading": "Contato com o Suporte"
     }
   },
-  "indicators": {
-  "total_fish_catch_label": "Captura Total de Peixe",
-  "total_fish_catch": "Peso total de peixe capturado anualmente.",
-  
-  "average_income_label": "Rendimento dos Pescadores",
-  "average_income": "Rendimento médio anual dos pescadores.",
-  
-  "fishing_vessels_label": "Embarcações Registradas",
-  "fishing_vessels": "Número de embarcações de pesca registradas oficialmente."
-},
+ 
 "client_settings": {
   "title": "Configurações da Conta",
   "first_name": "Nome",
@@ -403,9 +394,32 @@
   "crop_title": "Recortar imagem",
   "cancel": "Cancelar",
   "save_image": "Salvar"
+},
+"admin_trends": {
+    "title": "Painel de Tendências das Pescas",
+    "description": "Visualize e analise tendências de dados das pescas nos países da CEDEAO. Selecione indicadores, países e anos para explorar.",
+    "select_countries": "Selecionar países",
+    "select_years": "Selecionar anos",
+    "select_indicator": "Selecionar indicador",
+    "choose_countries": "Escolher países...",
+    "choose_years": "Escolher anos...",
+    "choose_indicator": "Escolher um indicador...",
+    "select_all": "Selecionar todos",
+    "clear": "Limpar",
+    "line_chart": "Gráfico de linhas",
+    "bar_chart": "Gráfico de barras",
+    "no_data_message": "Sem dados disponíveis para os filtros selecionados.",
+    "export_pdf": "Exportar como PDF",
+    "export_csv": "Exportar como CSV",
+    "export_png": "Exportar como PNG",
+    "average": "Média"
+  },
+  "admin_kpi": {
+  "indicator": "Indicador",
+  "select_country": "Selecionar país",
+  "select_countries": "Selecionar países",
+  "compare_mode": "Comparar múltiplos países",
+  "export_pdf": "Exportar PDF",
+  "up_to": "até"
 }
 }
-
-
-
-

@@ -58,7 +58,7 @@
   "logout": "Logout"
   },
 
-  "admin_kpi": {
+  "admin_kpi_card": {
     "dashboard_overview": "Admin Dashboard Overview",
     "year": "Year",
     "total_ecowas_countries": "Total ECOWAS Countries",
@@ -71,6 +71,7 @@
     "avg_enforcement_capacity": "Avg Enforcement Capacity Score",
     "avg_budget_execution": "Avg Budget Execution Rate (%)",
     "avg_indicator": "Avg {{indicator}}"
+    
   },
 
   "admin_login_page": {
@@ -372,16 +373,7 @@
       "heading": "Contact Support"
     }
   },
-  "indicators": {
-  "total_fish_catch_label": "Total Fish Catch",
-  "total_fish_catch": "Total weight of fish caught annually.",
   
-  "average_income_label": "Fisher Income",
-  "average_income": "Average annual income of fishers.",
-  
-  "fishing_vessels_label": "Vessels Registered",
-  "fishing_vessels": "Number of officially registered fishing vessels."
-},
 "client_settings": {
   "title": "Account Settings",
   "first_name": "First Name",
@@ -411,18 +403,33 @@
   "crop_title": "Crop Image",
   "cancel": "Cancel",
   "save_image": "Save"
+},
+"admin_trends": {
+    "title": "Admin Trends Dashboard",
+    "description": "Use the dropdowns to filter by country, year, and indicator. You can switch chart types, view average lines, and export data as CSV, PDF, or PNG.",
+    "select_countries": "Select Countries",
+    "select_all": "Select All",
+    "clear_all": "Clear",
+    "select_years": "Select Years",
+    "select_indicator": "Select Indicator",
+    "choose_indicator": "Choose Indicator",
+    "choose_countries": "Choose Countries",
+    "choose_years": "Choose Years",
+    "line_chart": "Line Chart",
+    "bar_chart": "Bar Chart",
+    "no_data": "Please select at least one country and indicator to display trends.",
+    "export_pdf": "Export PDF",
+    "export_csv": "Export CSV",
+    "export_png": "Export PNG",
+    "average_label": "Average (All Countries)"
+  },
+  
+ "admin_kpi": {
+  "indicator": "Indicator",
+  "select_country": "Select Country",
+  "select_countries": "Select Countries",
+  "compare_mode": "Compare Multiple Countries",
+  "export_pdf": "Export PDF",
+  "up_to": "up to"
 }
-
-
-  
-  
 }
-
-
-
-  
-
-
-
-
-
