@@ -52,18 +52,18 @@
   "logout": "Déconnexion"
   },
   "admin_kpi_card": {
-    "dashboard_overview": "Aperçu du Tableau de Bord Admin",
-    "year": "Année",
-    "total_ecowas_countries": "Total des Pays de la CEDEAO",
-    "years_covered": "Années de Données Couverte",
+    "dashboard_overview": "Aperçu du Tableau de Bord",
+    "total_ecowas_countries": "Nombre Total de Pays de la CEDEAO",
+    "years_covered": "Années Couverts",
     "selected_year": "Année Sélectionnée",
-    "avg_total_fish_catch": "Moyenne de la Capture Totale de Poissons (MT/an)",
-    "avg_post_harvest_loss": "Moyenne du Taux de Perte Après Récolte (%)",
-    "total_registered_fishers": "Total des Pêcheurs Inscrits",
-    "digital_reporting": "Pays avec Rapports Numériques (%)",
-    "avg_enforcement_capacity": "Moyenne de la Capacité d'Application",
-    "avg_budget_execution": "Moyenne du Taux d'Exécution du Budget (%)",
-    "avg_indicator": "Moyenne de {{indicator}}"
+    "avg_total_fish_catch": "Captures Totales Moyennes (tonnes/an)",
+    "avg_post_harvest_loss": "Taux Moyen de Pertes Post-Récolte (%)",
+    "total_registered_fishers": "Nombre Total de Pêcheurs Enregistrés",
+    "digital_reporting": "Systèmes de Collecte Numérique en Place (%)",
+    "avg_enforcement_capacity": "Score Moyen de la Capacité d'Application",
+    "avg_budget_execution": "Taux Moyen d’Exécution du Budget Pêche (%)",
+    "avg_indicator": "Moy. {{indicator}}",
+    "year": "Année"
   },
   "admin_login_page": {
     "title": "Connexion Admin",

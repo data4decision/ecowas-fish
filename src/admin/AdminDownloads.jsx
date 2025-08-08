@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { collection, onSnapshot, updateDoc, doc } from "firebase/firestore";
+import { collection, onSnapshot, updateDoc, doc, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import AdminLayout from "./AdminLayout";
 import { sendFCMNotification, sendEmailNotification, logAuditTrail } from "../utils/notifications";
 import PreviewModal from "./PreviewModal";
+import RejectModal from "../components/RejectModal";
 
 export default function AdminUpload({ user }) {
   const [uploads, setUploads] = useState([]);
   const [filter, setFilter] = useState("pending");
   const [search, setSearch] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showRejectModal, setShowRejectModal] = useState(false);
+  const [fileToReject, setFileToReject] = useState(null);
 
   useEffect(() => {
     const unsub = onSnapshot(collection(db, "uploads"), (snapshot) => {
@@ -42,6 +45,19 @@ export default function AdminUpload({ user }) {
       admin: user?.email,
       timestamp: new Date().toISOString()
     });
+
+    // Save approved file to adminReports
+    if (newStatus === "approved") {
+      const fileData = uploads.find((u) => u.id === uploadId);
+      await addDoc(collection(db, "adminReports"), {
+        title,
+        country: fileData?.country || "Unknown",
+        email: recipientEmail,
+        fileUrl: fileData?.url || null,
+        addedBy: user?.email || "Unknown",
+        addedAt: new Date().toISOString()
+      });
+    }
   };
 
   const normalizedFilter = (filter || '').toLowerCase();
@@ -116,21 +132,36 @@ export default function AdminUpload({ user }) {
                   </button>
                   <button
                     className="bg-red-500 text-white px-2 py-1 rounded text-xs"
-                    onClick={() => handleStatusChange(upload.id, "rejected", upload.email, upload.title)}
+                    onClick={() => {
+                      setFileToReject(upload);
+                      setShowRejectModal(true);
+                    }}
                   >
                     Reject
                   </button>
 
                   {upload.url && (
-                    <a
-                      href={upload.url}
-                      download
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <button
                       className="bg-blue-600 text-white px-2 py-1 rounded text-xs"
+                      onClick={async () => {
+                        await addDoc(collection(db, "downloadHistory"), {
+                          title: upload.title,
+                          country: upload.country,
+                          email: upload.email,
+                          downloadedBy: user?.email || "Unknown",
+                          downloadedAt: new Date().toISOString(),
+                          fileUrl: upload.url || null
+                        });
+
+                        const link = document.createElement("a");
+                        link.href = upload.url;
+                        link.download = upload.title || "downloaded-file";
+                        link.target = "_blank";
+                        link.click();
+                      }}
                     >
                       Download
-                    </a>
+                    </button>
                   )}
 
                   <button
@@ -148,6 +179,21 @@ export default function AdminUpload({ user }) {
 
       {selectedFile && (
         <PreviewModal file={selectedFile} onClose={() => setSelectedFile(null)} />
+      )}
+
+      {showRejectModal && (
+        <RejectModal
+          file={fileToReject}
+          onClose={() => {
+            setShowRejectModal(false);
+            setFileToReject(null);
+          }}
+          onConfirm={async (file) => {
+            await handleStatusChange(file.id, "rejected", file.email, file.title);
+            setShowRejectModal(false);
+            setFileToReject(null);
+          }}
+        />
       )}
     </AdminLayout>
   );

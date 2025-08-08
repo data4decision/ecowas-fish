@@ -59,18 +59,18 @@
 },
 
   "admin_kpi_card": {
-    "dashboard_overview": "Visão Geral do Painel Administrativo",
-    "year": "Ano",
+    "dashboard_overview": "Visão Geral do Painel",
     "total_ecowas_countries": "Total de Países da CEDEAO",
     "years_covered": "Anos Abrangidos",
     "selected_year": "Ano Selecionado",
-    "avg_total_fish_catch": "Média da Captura Total de Peixes (MT/ano)",
-    "avg_post_harvest_loss": "Média da Perda Pós-Colheita (%)",
+    "avg_total_fish_catch": "Média da Captura Total de Peixe (toneladas/ano)",
+    "avg_post_harvest_loss": "Taxa Média de Perdas Pós-Colheita (%)",
     "total_registered_fishers": "Total de Pescadores Registrados",
-    "digital_reporting": "Países com Relatórios Digitais (%)",
-    "avg_enforcement_capacity": "Capacidade Média de Fiscalização",
-    "avg_budget_execution": "Média de Execução do Orçamento (%)",
-    "avg_indicator": "Média de {{indicator}}"
+    "digital_reporting": "Sistemas de Relatórios Digitais em Uso (%)",
+    "avg_enforcement_capacity": "Pontuação Média da Capacidade de Fiscalização",
+    "avg_budget_execution": "Taxa Média de Execução Orçamentária das Pescas (%)",
+    "avg_indicator": "Média de {{indicator}}",
+    "year": "Ano"
   },
 
   "admin_login_page": {

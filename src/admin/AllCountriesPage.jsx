@@ -1,10 +1,14 @@
 import AdminLayout from "./AdminLayout";
-
+import FisheriesOverview from "../components/FisheriesOverview";
+import AdvancedComparison from "../components/AdvancedComparison";
+import CountryComparisonChart from "../components/CountryComparisonChart";
 export default function AllCountriesPage({ user }) {
   return (
     <AdminLayout user={user}>
-      <h2 className="text-lg font-bold mb-4">All countries</h2>
-      {/* Add report management content here */}
+      
+      <FisheriesOverview/>
+      <AdvancedComparison/>
+      <CountryComparisonChart/>
     </AdminLayout>
   );
 }

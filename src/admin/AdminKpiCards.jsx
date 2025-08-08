@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import fisheriesData from "../data/fisheriesData.json";
 
 export default function AdminKpiCards() {
-  const { t, i18n } = useTranslation(); // include i18n to track language
+  const { t, i18n } = useTranslation(); 
   const [kpis, setKpis] = useState([]);
   const [selectedYear, setSelectedYear] = useState(null);
   const [yearOptions, setYearOptions] = useState([]);
@@ -42,18 +42,18 @@ export default function AdminKpiCards() {
     const indicatorAvg = avg(data.map(d => d[indicator]));
 
     setKpis([
-      { title: t('admin_kpi.total_ecowas_countries'), value: totalCountries },
-      { title: t('admin_kpi.years_covered'), value: yearsCovered },
-      { title: t('admin_kpi.selected_year'), value: selectedYear },
-      { title: t('admin_kpi.avg_total_fish_catch'), value: formatNumber(totalFishCatch) },
-      { title: t('admin_kpi.avg_post_harvest_loss'), value: `${postHarvestLoss.toFixed(2)}%` },
-      { title: t('admin_kpi.total_registered_fishers'), value: formatNumber(totalRegisteredFishers) },
-      { title: t('admin_kpi.digital_reporting'), value: `${digitalReporting.toFixed(2)}%` },
-      { title: t('admin_kpi.avg_enforcement_capacity'), value: enforcementScore.toFixed(2) },
-      { title: t('admin_kpi.avg_budget_execution'), value: `${budgetExecRate.toFixed(2)}%` },
-      { title: t('admin_kpi.avg_indicator', { indicator }), value: formatNumber(indicatorAvg) }
+      { title: t('admin_kpi_card.total_ecowas_countries'), value: totalCountries },
+      { title: t('admin_kpi_card.years_covered'), value: yearsCovered },
+      { title: t('admin_kpi_card.selected_year'), value: selectedYear },
+      { title: t('admin_kpi_card.avg_total_fish_catch'), value: formatNumber(totalFishCatch) },
+      { title: t('admin_kpi_card.avg_post_harvest_loss'), value: `${postHarvestLoss.toFixed(2)}%` },
+      { title: t('admin_kpi_card.total_registered_fishers'), value: formatNumber(totalRegisteredFishers) },
+      { title: t('admin_kpi_card.digital_reporting'), value: `${digitalReporting.toFixed(2)}%` },
+      { title: t('admin_kpi_card.avg_enforcement_capacity'), value: enforcementScore.toFixed(2) },
+      { title: t('admin_kpi_card.avg_budget_execution'), value: `${budgetExecRate.toFixed(2)}%` },
+      { title: t('admin_kpi_card.avg_indicator', { indicator: t(indicator, { ns: 'indicator' }) }), value: formatNumber(indicatorAvg) }
     ]);
-  }, [selectedYear, indicator, i18n.language]); // ✅ language reactive
+  }, [selectedYear, indicator, i18n.language]);
 
   function avg(arr) {
     const nums = arr.filter(n => typeof n === "number" && !isNaN(n));
@@ -65,14 +65,14 @@ export default function AdminKpiCards() {
   }
 
   function formatNumber(n) {
-    return n?.toLocaleString("en-US", { maximumFractionDigits: 2 }) || "N/A";
+    return n?.toLocaleString(i18n.language === "fr" ? "fr-FR" : i18n.language === "pt" ? "pt-PT" : "en-US", { maximumFractionDigits: 2 }) || "N/A";
   }
 
   return (
     <div className="w-full px-4 py-6">
       {/* Header & Filters */}
       <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
-        <h2 className="text-2xl font-bold text-[#0b0b5c]">{t('admin_kpi.dashboard_overview')}</h2>
+        <h2 className="text-2xl font-bold text-[#0b0b5c]">{t('admin_kpi_card.dashboard_overview')}</h2>
 
         <div className="flex gap-4 flex-wrap">
           <select
@@ -82,7 +82,7 @@ export default function AdminKpiCards() {
           >
             {yearOptions.map((year) => (
               <option key={year} value={year}>
-                {t('admin_kpi.year')}: {year}
+                {t('admin_kpi_card.year')}: {year}
               </option>
             ))}
           </select>

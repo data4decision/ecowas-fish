@@ -59,21 +59,19 @@
   },
 
   "admin_kpi_card": {
-    "dashboard_overview": "Admin Dashboard Overview",
-    "year": "Year",
+    "dashboard_overview": "Dashboard Overview",
     "total_ecowas_countries": "Total ECOWAS Countries",
-    "years_covered": "Years of Data Covered",
+    "years_covered": "Years Covered",
     "selected_year": "Selected Year",
-    "avg_total_fish_catch": "Avg Total Fish Catch (MT/year)",
-    "avg_post_harvest_loss": "Avg Post-Harvest Loss Rate (%)",
+    "avg_total_fish_catch": "Avg. Total Fish Catch (MT/year)",
+    "avg_post_harvest_loss": "Avg. Post-Harvest Loss Rate (%)",
     "total_registered_fishers": "Total Registered Fishers",
-    "digital_reporting": "Countries with Digital Reporting (%)",
-    "avg_enforcement_capacity": "Avg Enforcement Capacity Score",
-    "avg_budget_execution": "Avg Budget Execution Rate (%)",
-    "avg_indicator": "Avg {{indicator}}"
-    
+    "digital_reporting": "Digital Reporting Systems in Place (%)",
+    "avg_enforcement_capacity": "Avg. Enforcement Capacity Score",
+    "avg_budget_execution": "Avg. Fisheries Budget Execution Rate (%)",
+    "avg_indicator": "Avg. {{indicator}}",
+    "year": "Year"
   },
-
   "admin_login_page": {
     "title": "Admin Login",
     "email_placeholder": "Enter admin email",
